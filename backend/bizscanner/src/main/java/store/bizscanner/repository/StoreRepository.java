@@ -13,5 +13,6 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
     @Query("SELECT s.jcategoryName, MAX(s.openStoreCount) FROM Store s WHERE s.careaCode = :careaCode AND s.yearCode = :yearCode")
     Object findMaxOpenStoreCount(@Param("careaCode") String careaCode, @Param("yearCode") String yearCode);
 
-
+    @Query("SELECT s.jcategoryName, MAX(s.closeStoreCount) FROM Store s WHERE s.careaCode = :careaCode AND s.yearCode = :yearCode")
+    Object findMaxCloseStoreCount(@Param("careaCode") String careaCode, @Param("yearCode") String yearCode);
 }

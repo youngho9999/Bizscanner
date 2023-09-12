@@ -25,8 +25,11 @@ public class StoreService {
         String bestOpenStoreCountJcategory = (String) maxOpenStoreObjectArr[0];
 
         //상권 내 가장 폐업을 많이 한 업종 정보
+        Object maxCloseStoreObject = storeRepository.findMaxCloseStoreCount(careaCode, yearCode);
+        Object[] maxCloseStoreObjectArr = (Object[]) maxCloseStoreObject;
+        String bestCloseStoreCountJcategory = (String) maxCloseStoreObjectArr[0];
 
-
+        return new BestJcategory(bestStoreCountJcategory, bestOpenStoreCountJcategory, bestCloseStoreCountJcategory);
     }
 
 }

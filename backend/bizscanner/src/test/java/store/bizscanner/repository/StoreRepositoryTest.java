@@ -32,4 +32,14 @@ class StoreRepositoryTest {
         Assertions.assertThat(jcategoryName).isEqualTo("전자상거래업");
         Assertions.assertThat(maxStoreCount).isEqualTo(3);
     }
+
+    @Test
+    public void bestCloseStoreCountJcategory() {
+        Object result = storeRepository.findMaxCloseStoreCount("2110503", "2023");
+        Object[] row = (Object[]) result;
+        String jcategoryName = (String) row[0];
+        Integer maxStoreCount = (Integer) row[1];
+        Assertions.assertThat(jcategoryName).isEqualTo("전자상거래업");
+        Assertions.assertThat(maxStoreCount).isEqualTo(4);
+    }
 }
