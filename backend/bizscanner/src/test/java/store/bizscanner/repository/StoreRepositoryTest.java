@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import store.bizscanner.entity.Store;
 
 @Transactional
 @SpringBootTest
@@ -22,5 +21,15 @@ class StoreRepositoryTest {
         Integer maxStoreCount = (Integer) row[1];
         Assertions.assertThat(jcategoryName).isEqualTo("전자상거래업");
         Assertions.assertThat(maxStoreCount).isEqualTo(40);
+    }
+
+    @Test
+    public void bestOpenStoreCountJcategory() {
+        Object result = storeRepository.findMaxOpenStoreCount("2110503", "2023");
+        Object[] row = (Object[]) result;
+        String jcategoryName = (String) row[0];
+        Integer maxStoreCount = (Integer) row[1];
+        Assertions.assertThat(jcategoryName).isEqualTo("전자상거래업");
+        Assertions.assertThat(maxStoreCount).isEqualTo(3);
     }
 }
