@@ -6,4 +6,6 @@ import store.bizscanner.entity.Population;
 
 @Repository
 public interface PopulationRepository extends JpaRepository<Population, Long> {
+
+    Population findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(String careaCode);
 }
