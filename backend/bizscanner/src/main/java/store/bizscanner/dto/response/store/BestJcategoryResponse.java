@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter @AllArgsConstructor
-public class BestJcategory {
+public class BestJcategoryResponse {
 
     private String bestStoreCountJcategory;
     private String bestOpenStoreCountJcategory;

@@ -2,8 +2,10 @@ package store.bizscanner.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import store.bizscanner.dto.response.store.BestJcategory;
+import store.bizscanner.dto.response.store.BestJcategoryResponse;
 import store.bizscanner.repository.StoreRepository;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -12,12 +14,11 @@ public class StoreService {
     private final StoreRepository storeRepository;
     private static final String yearCode = "2023";
 
-    public BestJcategory bestJcategory(String careaCode) {
+    public BestJcategoryResponse bestJcategory(String careaCode) {
 
         //상권 내 가장 많은 점포수를 보유한 업종 정보
-        Object maxStoreObject = storeRepository.findMaxStoreCount(careaCode, yearCode);
-        Object[] maxStoreObjectArr = (Object[]) maxStoreObject;
-        String bestStoreCountJcategory = (String) maxStoreObjectArr[0];
+        List<String> maxStoreCounts = storeRepository.findMaxStoreCount(careaCode, yearCode);
+        String bestStoreCountJcategory = maxStoreCounts.get(0);
 
         //상권 내 가장 개업을 많이 한 업종 정보
         Object maxOpenStoreObject = storeRepository.findMaxOpenStoreCount(careaCode, yearCode);
@@ -29,7 +30,7 @@ public class StoreService {
         Object[] maxCloseStoreObjectArr = (Object[]) maxCloseStoreObject;
         String bestCloseStoreCountJcategory = (String) maxCloseStoreObjectArr[0];
 
-        return new BestJcategory(bestStoreCountJcategory, bestOpenStoreCountJcategory, bestCloseStoreCountJcategory);
+        return new BestJcategoryResponse(bestStoreCountJcategory, bestOpenStoreCountJcategory, bestCloseStoreCountJcategory);
     }
 
 }
