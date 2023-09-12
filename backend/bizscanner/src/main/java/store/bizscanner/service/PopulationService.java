@@ -22,6 +22,8 @@ public class PopulationService {
 
     private final PopulationRepository populationRepository;
 
+    // Best 유동인구 반환
+    // DB에서 전체 데이터를 호출 후 각각의 Best 항목을 구해 Response에 맵핑하여 반환
     public BestPopulationResponse bestPopulation(String careaCode) {
         Population population = populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode);
 
@@ -33,6 +35,9 @@ public class PopulationService {
         );
     }
 
+    // Best 항목을 찾기 위한 Inner Class
+    // 여러 Enum Type에 대응하기 위해 Object로 선언
+    // value를 기준으로 정렬하는 규칙 생성
     public static class Best implements Comparable<Best> {
         Integer value;
         Object object;
@@ -47,6 +52,8 @@ public class PopulationService {
         }
     }
 
+    // PriorityQueue를 이용해 유동인구가 가장 많은 항목 추출
+    // Best 성별
     public Object getBestGender(Population population) {
         PriorityQueue<Best> maxPopulation = new PriorityQueue<>();
 
@@ -56,6 +63,7 @@ public class PopulationService {
         return maxPopulation.poll().object;
     }
 
+    // Best 연령대
     public Object getBestAge(Population population) {
         PriorityQueue<Best> maxPopulation = new PriorityQueue<>();
 
@@ -69,6 +77,7 @@ public class PopulationService {
         return maxPopulation.poll().object;
     }
 
+    // Best 요일
     public Object getBestDay(Population population) {
         PriorityQueue<Best> maxPopulation = new PriorityQueue<>();
 
@@ -83,6 +92,7 @@ public class PopulationService {
         return maxPopulation.poll().object;
     }
 
+    // Best 시간대
     public Object getBestTime(Population population) {
         PriorityQueue<Best> maxPopulation = new PriorityQueue<>();
 
@@ -96,6 +106,8 @@ public class PopulationService {
         return maxPopulation.poll().object;
     }
 
+    // 해당하는 상권의 유동인구 정보를 반환
+    // 분기, 요일, 시간대, 성별, 연령대, 남성연령대, 여성연령대 별 유동인구 수를 반환
     public PopulationResponse getPopulation(String careaCode) {
         Population population = populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode);
 
