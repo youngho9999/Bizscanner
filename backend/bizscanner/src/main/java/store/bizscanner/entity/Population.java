@@ -31,11 +31,17 @@ public class Population {
     private Integer fiftiesPopulation;
     private Integer sixtiesPopulation;
 
+    @Column(name = "time_1_population")
     private Integer time1Population;
+    @Column(name = "time_2_population")
     private Integer time2Population;
+    @Column(name = "time_3_population")
     private Integer time3Population;
+    @Column(name = "time_4_population")
     private Integer time4Population;
+    @Column(name = "time_5_population")
     private Integer time5Population;
+    @Column(name = "time_6_population")
     private Integer time6Population;
 
     private Integer mondayPopulation;
@@ -56,10 +62,10 @@ public class Population {
     private Integer femaleFortiesPopulation;
     private Integer maleFiftiesPopulation;
     private Integer femaleFiftiesPopulation;
-    private Integer maleSixtiesPopulation;
-    private Integer femaleSixtiesPopulation;
+    private Integer maleOversixtiesPopulation;
+    private Integer femaleOversixtiesPopulation;
 
-    public Population(String yearCode, String quarterCode, String careaTypeCode, String careaTypeName, String careaCode, String careaName, Integer totalPopulation, Integer malePopulation, Integer femalePopulation, Integer teensPopulation, Integer twentiesPopulation, Integer thirtiesPopulation, Integer fortiesPopulation, Integer fiftiesPopulation, Integer sixtiesPopulation, Integer time1Population, Integer time2Population, Integer time3Population, Integer time4Population, Integer time5Population, Integer time6Population, Integer mondayPopulation, Integer tuesdayPopulation, Integer wednesdayPopulation, Integer thursdayPopulation, Integer fridayPopulation, Integer saturdayPopulation, Integer sundayPopulation, Integer maleTeensPopulation, Integer femaleTeensPopulation, Integer maleTwentiesPopulation, Integer femaleTwentiesPopulation, Integer maleThirtiesPopulation, Integer femaleThirtiesPopulation, Integer maleFortiesPopulation, Integer femaleFortiesPopulation, Integer maleFiftiesPopulation, Integer femaleFiftiesPopulation, Integer maleSixtiesPopulation, Integer femaleSixtiesPopulation) {
+    public Population(String yearCode, String quarterCode, String careaTypeCode, String careaTypeName, String careaCode, String careaName, Integer totalPopulation, Integer malePopulation, Integer femalePopulation, Integer teensPopulation, Integer twentiesPopulation, Integer thirtiesPopulation, Integer fortiesPopulation, Integer fiftiesPopulation, Integer sixtiesPopulation, Integer time1Population, Integer time2Population, Integer time3Population, Integer time4Population, Integer time5Population, Integer time6Population, Integer mondayPopulation, Integer tuesdayPopulation, Integer wednesdayPopulation, Integer thursdayPopulation, Integer fridayPopulation, Integer saturdayPopulation, Integer sundayPopulation, Integer maleTeensPopulation, Integer femaleTeensPopulation, Integer maleTwentiesPopulation, Integer femaleTwentiesPopulation, Integer maleThirtiesPopulation, Integer femaleThirtiesPopulation, Integer maleFortiesPopulation, Integer femaleFortiesPopulation, Integer maleFiftiesPopulation, Integer femaleFiftiesPopulation, Integer maleOversixtiesPopulation, Integer femaleOversixtiesPopulation) {
         this.yearCode = yearCode;
         this.quarterCode = quarterCode;
         this.careaTypeCode = careaTypeCode;
@@ -98,7 +104,7 @@ public class Population {
         this.femaleFortiesPopulation = femaleFortiesPopulation;
         this.maleFiftiesPopulation = maleFiftiesPopulation;
         this.femaleFiftiesPopulation = femaleFiftiesPopulation;
-        this.maleSixtiesPopulation = maleSixtiesPopulation;
-        this.femaleSixtiesPopulation = femaleSixtiesPopulation;
+        this.maleOversixtiesPopulation = maleOversixtiesPopulation;
+        this.femaleOversixtiesPopulation = femaleOversixtiesPopulation;
     }
 }
