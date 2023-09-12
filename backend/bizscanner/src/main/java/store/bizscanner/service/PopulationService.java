@@ -4,12 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import store.bizscanner.dto.response.BestPopulationResponse;
+import store.bizscanner.dto.response.PopulationResponse;
 import store.bizscanner.entity.Population;
 import store.bizscanner.entity.enums.Age;
 import store.bizscanner.entity.enums.Day;
 import store.bizscanner.entity.enums.Gender;
 import store.bizscanner.entity.enums.Time;
 import store.bizscanner.repository.PopulationRepository;
+import store.bizscanner.repository.mapping.TotalPopulationMapping;
 
 import java.util.PriorityQueue;
 
@@ -92,5 +94,56 @@ public class PopulationService {
         maxPopulation.add(new Best(population.getTime6Population(), Time.TIME6));
 
         return maxPopulation.poll().object;
+    }
+
+    public PopulationResponse getPopulation(String careaCode) {
+        Population population = populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode);
+
+        return new PopulationResponse(populationRepository.findByCareaCodeAndYearCodeGreaterThanOrderByYearCodeAscQuarterCodeAsc(careaCode, "2021").stream().map(TotalPopulationMapping::getTotalPopulation).toArray(Integer[]::new),
+                new Integer[] {
+                        population.getMondayPopulation(),
+                        population.getTuesdayPopulation(),
+                        population.getWednesdayPopulation(),
+                        population.getThursdayPopulation(),
+                        population.getFridayPopulation(),
+                        population.getSaturdayPopulation(),
+                        population.getSundayPopulation()
+                },
+                new Integer[] {
+                        population.getTime1Population(),
+                        population.getTime2Population(),
+                        population.getTime3Population(),
+                        population.getTime4Population(),
+                        population.getTime5Population(),
+                        population.getTime6Population(),
+                },
+                new Integer[] {
+                        population.getMalePopulation(),
+                        population.getFemalePopulation()
+                },
+                new Integer[] {
+                        population.getTeensPopulation(),
+                        population.getTwentiesPopulation(),
+                        population.getThirtiesPopulation(),
+                        population.getFortiesPopulation(),
+                        population.getFiftiesPopulation(),
+                        population.getSixtiesPopulation()
+                },
+                new Integer[] {
+                        population.getMaleTeensPopulation(),
+                        population.getMaleTwentiesPopulation(),
+                        population.getMaleThirtiesPopulation(),
+                        population.getMaleFortiesPopulation(),
+                        population.getMaleFiftiesPopulation(),
+                        population.getMaleOversixtiesPopulation()
+                },
+                new Integer[] {
+                        population.getFemaleFortiesPopulation(),
+                        population.getFemaleTwentiesPopulation(),
+                        population.getFemaleThirtiesPopulation(),
+                        population.getFemaleFortiesPopulation(),
+                        population.getFemaleFiftiesPopulation(),
+                        population.getFemaleOversixtiesPopulation()
+                });
     }
 }
