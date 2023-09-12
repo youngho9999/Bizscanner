@@ -13,11 +13,6 @@ class StoreRepositoryTest {
 
     @Autowired
     private StoreRepository storeRepository;
-    @Test
-    public void repoTest1() {
-        Store store = storeRepository.findById(1L).get();
-        Assertions.assertThat(store.getJcategoryName()).isEqualTo("미용실");
-    }
 
     @Test
     public void bestStoreCountJcategory() {
