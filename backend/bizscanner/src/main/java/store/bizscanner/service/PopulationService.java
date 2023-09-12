@@ -13,6 +13,7 @@ import store.bizscanner.entity.enums.Time;
 import store.bizscanner.repository.PopulationRepository;
 import store.bizscanner.repository.mapping.TotalPopulationMapping;
 
+import java.util.List;
 import java.util.PriorityQueue;
 
 @Service
@@ -110,8 +111,10 @@ public class PopulationService {
     // 분기, 요일, 시간대, 성별, 연령대, 남성연령대, 여성연령대 별 유동인구 수를 반환
     public PopulationResponse getPopulation(String careaCode) {
         Population population = populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode);
+        List<TotalPopulationMapping> quarterlyPopulation = populationRepository.findByCareaCodeAndYearCodeGreaterThanOrderByYearCodeAscQuarterCodeAsc(careaCode, "2021");
 
-        return new PopulationResponse(populationRepository.findByCareaCodeAndYearCodeGreaterThanOrderByYearCodeAscQuarterCodeAsc(careaCode, "2021").stream().map(TotalPopulationMapping::getTotalPopulation).toArray(Integer[]::new),
+        return new PopulationResponse(
+                quarterlyPopulation.stream().map(TotalPopulationMapping::getTotalPopulation).toArray(Integer[]::new),
                 new Integer[] {
                         population.getMondayPopulation(),
                         population.getTuesdayPopulation(),
