@@ -46,51 +46,51 @@ public class PopulationService {
     }
 
     public Object getBestGender(Population population) {
-        PriorityQueue<Best> pq = new PriorityQueue<>();
+        PriorityQueue<Best> maxPopulation = new PriorityQueue<>();
 
-        pq.add(new Best(population.getMalePopulation(), Gender.MALE));
-        pq.add(new Best(population.getFemalePopulation(), Gender.FEMALE));
+        maxPopulation.add(new Best(population.getMalePopulation(), Gender.MALE));
+        maxPopulation.add(new Best(population.getFemalePopulation(), Gender.FEMALE));
 
-        return pq.poll().object;
+        return maxPopulation.poll().object;
     }
 
     public Object getBestAge(Population population) {
-        PriorityQueue<Best> pq = new PriorityQueue<>();
+        PriorityQueue<Best> maxPopulation = new PriorityQueue<>();
 
-        pq.add(new Best(population.getTeensPopulation(), Age.TEENS));
-        pq.add(new Best(population.getTwentiesPopulation(), Age.TWENTIES));
-        pq.add(new Best(population.getThirtiesPopulation(), Age.THIRTIES));
-        pq.add(new Best(population.getFortiesPopulation(), Age.FORTIES));
-        pq.add(new Best(population.getFiftiesPopulation(), Age.FIFTIES));
-        pq.add(new Best(population.getSixtiesPopulation(), Age.SIXTIES));
+        maxPopulation.add(new Best(population.getTeensPopulation(), Age.TEENS));
+        maxPopulation.add(new Best(population.getTwentiesPopulation(), Age.TWENTIES));
+        maxPopulation.add(new Best(population.getThirtiesPopulation(), Age.THIRTIES));
+        maxPopulation.add(new Best(population.getFortiesPopulation(), Age.FORTIES));
+        maxPopulation.add(new Best(population.getFiftiesPopulation(), Age.FIFTIES));
+        maxPopulation.add(new Best(population.getSixtiesPopulation(), Age.SIXTIES));
 
-        return pq.poll().object;
+        return maxPopulation.poll().object;
     }
 
     public Object getBestDay(Population population) {
-        PriorityQueue<Best> pq = new PriorityQueue<>();
+        PriorityQueue<Best> maxPopulation = new PriorityQueue<>();
 
-        pq.add(new Best(population.getMondayPopulation(), Day.MONDAY));
-        pq.add(new Best(population.getTuesdayPopulation(), Day.TUESDAY));
-        pq.add(new Best(population.getWednesdayPopulation(), Day.WEDNESDAY));
-        pq.add(new Best(population.getThursdayPopulation(), Day.THURSDAY));
-        pq.add(new Best(population.getFridayPopulation(), Day.FRIDAY));
-        pq.add(new Best(population.getSaturdayPopulation(), Day.SATURDAY));
-        pq.add(new Best(population.getSundayPopulation(), Day.SUNDAY));
+        maxPopulation.add(new Best(population.getMondayPopulation(), Day.MONDAY));
+        maxPopulation.add(new Best(population.getTuesdayPopulation(), Day.TUESDAY));
+        maxPopulation.add(new Best(population.getWednesdayPopulation(), Day.WEDNESDAY));
+        maxPopulation.add(new Best(population.getThursdayPopulation(), Day.THURSDAY));
+        maxPopulation.add(new Best(population.getFridayPopulation(), Day.FRIDAY));
+        maxPopulation.add(new Best(population.getSaturdayPopulation(), Day.SATURDAY));
+        maxPopulation.add(new Best(population.getSundayPopulation(), Day.SUNDAY));
 
-        return pq.poll().object;
+        return maxPopulation.poll().object;
     }
 
     public Object getBestTime(Population population) {
-        PriorityQueue<Best> pq = new PriorityQueue<>();
+        PriorityQueue<Best> maxPopulation = new PriorityQueue<>();
 
-        pq.add(new Best(population.getTime1Population(), Time.TIME1));
-        pq.add(new Best(population.getTime2Population(), Time.TIME2));
-        pq.add(new Best(population.getTime3Population(), Time.TIME3));
-        pq.add(new Best(population.getTime4Population(), Time.TIME4));
-        pq.add(new Best(population.getTime5Population(), Time.TIME5));
-        pq.add(new Best(population.getTime6Population(), Time.TIME6));
+        maxPopulation.add(new Best(population.getTime1Population(), Time.TIME1));
+        maxPopulation.add(new Best(population.getTime2Population(), Time.TIME2));
+        maxPopulation.add(new Best(population.getTime3Population(), Time.TIME3));
+        maxPopulation.add(new Best(population.getTime4Population(), Time.TIME4));
+        maxPopulation.add(new Best(population.getTime5Population(), Time.TIME5));
+        maxPopulation.add(new Best(population.getTime6Population(), Time.TIME6));
 
-        return pq.poll().object;
+        return maxPopulation.poll().object;
     }
 }
