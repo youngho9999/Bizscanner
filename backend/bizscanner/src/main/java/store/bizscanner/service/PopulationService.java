@@ -14,7 +14,7 @@ import store.bizscanner.repository.PopulationRepository;
 import java.util.PriorityQueue;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PopulationService {
 
