@@ -15,9 +15,15 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
             "WHERE s2.careaCode = :careaCode AND s2.yearCode = :yearCode)")
     List<String> findMaxStoreCount(@Param("careaCode") String careaCode, @Param("yearCode") String yearCode);
 
-    @Query("SELECT s.jcategoryName, MAX(s.openStoreCount) FROM Store s WHERE s.careaCode = :careaCode AND s.yearCode = :yearCode")
-    Object findMaxOpenStoreCount(@Param("careaCode") String careaCode, @Param("yearCode") String yearCode);
+    @Query("SELECT s.jcategoryName FROM Store s " +
+            "WHERE s.careaCode = :careaCode AND s.yearCode = :yearCode " +
+            "AND s.openStoreCount = (SELECT MAX(s2.openStoreCount) FROM Store s2 " +
+            "WHERE s2.careaCode = :careaCode AND s2.yearCode = :yearCode)")
+    List<String> findMaxOpenStoreCount(@Param("careaCode") String careaCode, @Param("yearCode") String yearCode);
 
-    @Query("SELECT s.jcategoryName, MAX(s.closeStoreCount) FROM Store s WHERE s.careaCode = :careaCode AND s.yearCode = :yearCode")
-    Object findMaxCloseStoreCount(@Param("careaCode") String careaCode, @Param("yearCode") String yearCode);
+    @Query("SELECT s.jcategoryName FROM Store s " +
+            "WHERE s.careaCode = :careaCode AND s.yearCode = :yearCode " +
+            "AND s.closeStoreCount = (SELECT MAX(s2.closeStoreCount) FROM Store s2 " +
+            "WHERE s2.careaCode = :careaCode AND s2.yearCode = :yearCode)")
+    List<String> findMaxCloseStoreCount(@Param("careaCode") String careaCode, @Param("yearCode") String yearCode);
 }

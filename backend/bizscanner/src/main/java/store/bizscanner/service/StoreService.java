@@ -21,14 +21,12 @@ public class StoreService {
         String bestStoreCountJcategory = maxStoreCounts.get(0);
 
         //상권 내 가장 개업을 많이 한 업종 정보
-        Object maxOpenStoreObject = storeRepository.findMaxOpenStoreCount(careaCode, yearCode);
-        Object[] maxOpenStoreObjectArr = (Object[]) maxOpenStoreObject;
-        String bestOpenStoreCountJcategory = (String) maxOpenStoreObjectArr[0];
+        List<String> maxOpenStoreCounts = storeRepository.findMaxOpenStoreCount(careaCode, yearCode);
+        String bestOpenStoreCountJcategory = maxOpenStoreCounts.get(0);
 
         //상권 내 가장 폐업을 많이 한 업종 정보
-        Object maxCloseStoreObject = storeRepository.findMaxCloseStoreCount(careaCode, yearCode);
-        Object[] maxCloseStoreObjectArr = (Object[]) maxCloseStoreObject;
-        String bestCloseStoreCountJcategory = (String) maxCloseStoreObjectArr[0];
+        List<String> maxCloseStoreCounts = storeRepository.findMaxCloseStoreCount(careaCode, yearCode);
+        String bestCloseStoreCountJcategory = maxCloseStoreCounts.get(0);
 
         return new BestJcategoryResponse(bestStoreCountJcategory, bestOpenStoreCountJcategory, bestCloseStoreCountJcategory);
     }
