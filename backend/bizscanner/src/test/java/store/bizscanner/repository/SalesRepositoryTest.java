@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import store.bizscanner.entity.Sales;
+import store.bizscanner.global.exception.CustomException;
+import store.bizscanner.global.exception.ErrorCode;
 
 import java.util.List;
 
@@ -22,7 +24,8 @@ class SalesRepositoryTest {
     public void getBestSalesGender() {
 
 
-        String bestSalesGender = salesRepository.findBestSalesGender(careaCode);
+        String bestSalesGender = salesRepository.findBestSalesGender(careaCode)
+                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
 
         Assertions.assertThat(bestSalesGender).isEqualTo("male");
 
@@ -32,25 +35,30 @@ class SalesRepositoryTest {
     @Test
     public void getBestSalesAge() {
 
-        String bestSalesAge = salesRepository.findBestSalesAge(careaCode);
+        String bestSalesAge = salesRepository.findBestSalesAge(careaCode)
+                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
         Assertions.assertThat(bestSalesAge).isEqualTo("thirty");
     }
 
     @Test
     public void getBestSalesDay() {
-        String bestSalesDay = salesRepository.findBestSalesDay(careaCode);
+        String bestSalesDay = salesRepository.findBestSalesDay(careaCode)
+                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
         Assertions.assertThat(bestSalesDay).isEqualTo("saturday");
     }
 
     @Test
     public void getBestSalesTime() {
-        String bestSalesTime = salesRepository.findBestSalesTime(careaCode);
+        String bestSalesTime = salesRepository.findBestSalesTime(careaCode)
+                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
         Assertions.assertThat(bestSalesTime).isEqualTo("time_5");
     }
 
     @Test
     public void getBestJcategory() {
-        String bestJcategory = salesRepository.findTopByCareaCodeOrderByQuarterSalesAmountDesc(careaCode).getJcategoryName();
+        String bestJcategory = salesRepository.findTopByCareaCodeOrderByQuarterSalesAmountDesc(careaCode)
+                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND))
+                .getJcategoryName();
         Assertions.assertThat(bestJcategory).isEqualTo("양식음식점");
     }
 
