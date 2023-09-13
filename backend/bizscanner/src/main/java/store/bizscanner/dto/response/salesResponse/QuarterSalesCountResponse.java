@@ -3,11 +3,14 @@ package store.bizscanner.dto.response.salesResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 public class QuarterSalesCountResponse {
 
-    private List<Long> quarterSalesCount;
+    private String yearCode;
+
+    private String quarterCode;
+
+    private Long quarterSalesCount;
 }

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import store.bizscanner.dto.response.BestPopulationResponse;
+import store.bizscanner.dto.response.salesResponse.QuarterSalesCountListResponse;
 import store.bizscanner.dto.response.salesResponse.QuarterSalesCountResponse;
 import store.bizscanner.dto.response.store.BestJcategoryResponse;
 import store.bizscanner.dto.response.PopulationResponse;
@@ -45,7 +46,7 @@ public class ReportController {
     }
 
     @GetMapping("sales/count/{careaCode}/{jcategoryCode}")
-    public ResponseEntity<QuarterSalesCountResponse> getQuarterSalesCount(@PathVariable String careaCode, @PathVariable String jcategoryCode) {
+    public ResponseEntity<QuarterSalesCountListResponse> getQuarterSalesCount(@PathVariable String careaCode, @PathVariable String jcategoryCode) {
         return new ResponseEntity<>(salesService.getQuarterSalesCount(careaCode, jcategoryCode), HttpStatus.OK);
     }
 }

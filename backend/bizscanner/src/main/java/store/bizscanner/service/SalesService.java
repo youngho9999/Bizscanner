@@ -4,14 +4,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import store.bizscanner.dto.response.salesResponse.BestSalesResponse;
+import store.bizscanner.dto.response.salesResponse.QuarterSalesCountListResponse;
 import store.bizscanner.dto.response.salesResponse.QuarterSalesCountResponse;
 import store.bizscanner.entity.Sales;
 import store.bizscanner.global.exception.CustomException;
 import store.bizscanner.global.exception.ErrorCode;
 import store.bizscanner.repository.SalesRepository;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @Transactional(readOnly = true)
@@ -41,14 +45,14 @@ public class SalesService {
         return new BestSalesResponse(bestSalesGender, bestSalesAge, bestSalesDay, bestSalesTime, bestJcategoryName);
     }
 
-    public QuarterSalesCountResponse getQuarterSalesCount(String careaCode, String jcategoryCode) {
+    public QuarterSalesCountListResponse getQuarterSalesCount(String careaCode, String jcategoryCode) {
         List<Sales> quarterSalesCountList = salesRepository.findByCareaCodeAndJcategoryCodeOrderByYearCodeAscQuarterCodeAsc(careaCode, jcategoryCode);
-        List<Long> result = new ArrayList<>();
 
-        for (Sales quarterSalesCount: quarterSalesCountList) {
-            result.add(quarterSalesCount.getQuarterSalesCount());
-        }
-
-        return new QuarterSalesCountResponse(result);
+        return new QuarterSalesCountListResponse(quarterSalesCountList.stream()
+                .map(currQuarterSalesCount -> new QuarterSalesCountResponse(
+                        currQuarterSalesCount.getYearCode(),
+                        currQuarterSalesCount.getQuarterCode(),
+                        currQuarterSalesCount.getQuarterSalesCount()))
+                .collect(Collectors.toList()));
     }
 }
