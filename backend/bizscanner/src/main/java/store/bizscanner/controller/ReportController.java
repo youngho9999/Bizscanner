@@ -4,17 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import store.bizscanner.dto.response.BestPopulationResponse;
 import store.bizscanner.dto.response.salesResponse.QuarterSalesCountListResponse;
-import store.bizscanner.dto.response.salesResponse.QuarterSalesCountResponse;
+import store.bizscanner.dto.response.population.BestPopulationResponse;
+import store.bizscanner.dto.response.rent.RentResponse;
 import store.bizscanner.dto.response.store.BestJcategoryResponse;
-import store.bizscanner.dto.response.PopulationResponse;
+import store.bizscanner.dto.response.store.QuarterlyOpenStoreResponse;
+import store.bizscanner.dto.response.store.QuarterlyStoreResponse;
+import store.bizscanner.dto.response.population.PopulationResponse;
 import store.bizscanner.dto.response.salesResponse.BestSalesResponse;
-import store.bizscanner.service.PopulationService;
-import store.bizscanner.service.SalesService;
-import store.bizscanner.service.StoreService;
-
-import java.util.List;
+import store.bizscanner.service.*;
 
 @RestController
 @CrossOrigin("*")
@@ -24,6 +22,7 @@ public class ReportController {
     private final PopulationService populationService;
     private final SalesService salesService;
     private final StoreService storeService;
+    private final RentService rentService;
 
     @GetMapping("/best-population/{careaCode}")
     public ResponseEntity<BestPopulationResponse> bestPopulation(@PathVariable String careaCode) {
@@ -40,6 +39,11 @@ public class ReportController {
         return new ResponseEntity<>(populationService.getPopulation(careaCode), HttpStatus.OK);
     }
 
+    @GetMapping("/stores/{careaCode}/{jcategoryCode}")
+    public ResponseEntity<QuarterlyStoreResponse> getQuarterlyStore(@PathVariable String careaCode, @PathVariable String jcategoryCode) {
+        return new ResponseEntity<>(storeService.getQuarterlyStore(careaCode,jcategoryCode), HttpStatus.OK);
+    }
+
     @GetMapping("best-sales-amount/{careaCode}")
     public ResponseEntity<BestSalesResponse> getBestSales(@PathVariable String careaCode) {
         return new ResponseEntity<>(salesService.getBestSales(careaCode), HttpStatus.OK);
@@ -48,5 +52,15 @@ public class ReportController {
     @GetMapping("sales/count/{careaCode}/{jcategoryCode}")
     public ResponseEntity<QuarterSalesCountListResponse> getQuarterSalesCount(@PathVariable String careaCode, @PathVariable String jcategoryCode) {
         return new ResponseEntity<>(salesService.getQuarterSalesCount(careaCode, jcategoryCode), HttpStatus.OK);
+    }
+
+    @GetMapping("/rent/{careaCode}")
+    public ResponseEntity<RentResponse> getRent(@PathVariable String careaCode) {
+        return new ResponseEntity<>(rentService.getRent(careaCode), HttpStatus.OK);
+    }
+
+    @GetMapping("/stores/open-status/{careaCode}/{jcategoryCode}")
+    public ResponseEntity<QuarterlyOpenStoreResponse> getQuarterlyOpenStore(@PathVariable String careaCode, @PathVariable String jcategoryCode) {
+        return new ResponseEntity<>(storeService.getQuarterlyOpenStore(careaCode,jcategoryCode), HttpStatus.OK);
     }
 }

@@ -6,24 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import store.bizscanner.global.exception.CustomException;
-@SpringBootTest @Transactional
-class StoreServiceTest {
+
+@SpringBootTest
+@Transactional
+class PopulationServiceTest {
 
     @Autowired
-    private StoreService storeService;
+    private PopulationService populationService;
 
     @Test
-    public void BestJcategory_EmptyCheck() {
-        Assertions.assertThatThrownBy(() -> storeService.bestJcategory("123"))
+    void Population_EmptyCheck() {
+        Assertions.assertThatThrownBy(() -> populationService.getPopulation("123"))
                 .isInstanceOf(CustomException.class)
                 .hasMessage("Report Resource not exists");
     }
 
     @Test
-    public void store_EmptyCheck() {
-        Assertions.assertThatThrownBy(() -> storeService.getQuarterlyStore("2020", "123"))
+    void BestPopulation_EmptyCheck() {
+        Assertions.assertThatThrownBy(() -> populationService.bestPopulation("123"))
                 .isInstanceOf(CustomException.class)
                 .hasMessage("Report Resource not exists");
     }
-
 }
