@@ -25,7 +25,7 @@ public class StoreService {
 
     /**
      * @param careaCode 상권코드
-     * Best 업종
+     * Best 업종 API
      */
     public BestJcategoryResponse bestJcategory(String careaCode) {
 
