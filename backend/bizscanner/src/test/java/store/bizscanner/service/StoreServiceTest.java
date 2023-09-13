@@ -13,7 +13,7 @@ class StoreServiceTest {
     private StoreService storeService;
 
     @Test
-    public void Best업종Empty체크() {
+    public void BestJcategory_EmptyCheck() {
         Assertions.assertThatThrownBy(() -> storeService.bestJcategory("123"))
                 .isInstanceOf(CustomException.class);
     }
