@@ -42,7 +42,7 @@ public class StoreService {
         return new BestJcategoryResponse(bestStoreCountJcategory, bestOpenStoreCountJcategory, bestCloseStoreCountJcategory);
     }
 
-    public QuarterlyStoreResponse getQuarterlyScore(String careaCode, String jcategoryCode) {
+    public QuarterlyStoreResponse getQuarterlyStore(String careaCode, String jcategoryCode) {
         List<TotalStoreMapping> quarterlyStore = storeRepository.findByCareaCodeAndJcategoryCodeAndYearCodeGreaterThan(careaCode, jcategoryCode, QUARTER_YEAR);
         if(quarterlyStore.size() < REQUIRED_RESULT_COUNT) {
             throw new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND);
