@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import store.bizscanner.dto.response.store.BestJcategoryResponse;
+import store.bizscanner.dto.response.store.QuarterlyStoreResponse;
 import store.bizscanner.global.exception.CustomException;
 import store.bizscanner.global.exception.ErrorCode;
 import store.bizscanner.repository.StoreRepository;
@@ -40,8 +41,9 @@ public class StoreService {
         return new BestJcategoryResponse(bestStoreCountJcategory, bestOpenStoreCountJcategory, bestCloseStoreCountJcategory);
     }
 
-    public void getQuarterlyScore(String careaCode, String jcategoryCode) {
+    public QuarterlyStoreResponse getQuarterlyScore(String careaCode, String jcategoryCode) {
         List<TotalStoreMapping> quarterlyStore = storeRepository.findByCareaCodeAndJcategoryCodeAndYearCodeGreaterThan(careaCode, jcategoryCode, quarterYear);
+        return new QuarterlyStoreResponse(quarterlyStore);
     }
 
 }

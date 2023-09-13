@@ -34,11 +34,4 @@ class StoreRepositoryTest {
         Assertions.assertThat(maxCloseStoreCounts.get(0)).isEqualTo("한식음식점");
     }
 
-    @Test
-    public void totalStore() {
-        List<TotalStoreMapping> stores
-                = storeRepository.findByCareaCodeAndJcategoryCodeAndYearCodeGreaterThan
-                ("2130324", "CS300043", "2022");
-        stores.forEach(x -> System.out.println(x.getStoreCount()));
-    }
 }
