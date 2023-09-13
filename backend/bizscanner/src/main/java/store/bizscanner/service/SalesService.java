@@ -33,7 +33,7 @@ public class SalesService {
         return new BestSalesResponse(bestSalesGender, bestSalesAge, bestSalesDay, bestSalesTime, bestJcategoryName);
     }
 
-    public List<Long> getQuarterSalesCount(String careaCode, String jcategoryCode) {
+    public QuarterSalesCountResponse getQuarterSalesCount(String careaCode, String jcategoryCode) {
         List<Sales> quarterSalesCountList = salesRepository.findByCareaCodeAndJcategoryCodeOrderByYearCodeAscQuarterCodeAsc(careaCode, jcategoryCode);
         List<Long> result = new ArrayList<>();
 
@@ -41,6 +41,6 @@ public class SalesService {
             result.add(quarterSalesCount.getQuarterSalesCount());
         }
 
-        return result;
+        return new QuarterSalesCountResponse(result);
     }
 }

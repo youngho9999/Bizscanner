@@ -9,5 +9,5 @@ import java.util.List;
 @AllArgsConstructor
 public class QuarterSalesCountResponse {
 
-    private List<Integer> quarterSalesCount;
+    private List<Long> quarterSalesCount;
 }
