@@ -7,7 +7,7 @@ import store.bizscanner.dto.response.salesResponse.BestSalesResponse;
 import store.bizscanner.repository.SalesRepository;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class SalesService {
 
