@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import store.bizscanner.dto.response.population.BestPopulationResponse;
 import store.bizscanner.dto.response.rent.RentResponse;
 import store.bizscanner.dto.response.store.BestJcategoryResponse;
-import store.bizscanner.dto.response.PopulationResponse;
 import store.bizscanner.dto.response.store.QuarterlyStoreResponse;
 import store.bizscanner.dto.response.population.PopulationResponse;
 import store.bizscanner.dto.response.salesResponse.BestSalesResponse;
