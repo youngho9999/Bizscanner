@@ -22,22 +22,20 @@ class StoreRepositoryTest {
     }
 
     @Test
+    public void bestStoreCountJcategoryIsEmpty() {
+        List<String> maxStoreCount = storeRepository.findMaxStoreCount("21100", "2023");
+
+    }
+
+    @Test
     public void bestOpenStoreCountJcategory() {
-        Object result = storeRepository.findMaxOpenStoreCount("2110503", "2023");
-        Object[] row = (Object[]) result;
-        String jcategoryName = (String) row[0];
-        Integer maxStoreCount = (Integer) row[1];
-        Assertions.assertThat(jcategoryName).isEqualTo("전자상거래업");
-        Assertions.assertThat(maxStoreCount).isEqualTo(3);
+        List<String> maxOpenStoreCounts = storeRepository.findMaxOpenStoreCount("2130128", "2023");
+        Assertions.assertThat(maxOpenStoreCounts.get(0)).isEqualTo("한식음식점");
     }
 
     @Test
     public void bestCloseStoreCountJcategory() {
-        Object result = storeRepository.findMaxCloseStoreCount("2110503", "2023");
-        Object[] row = (Object[]) result;
-        String jcategoryName = (String) row[0];
-        Integer maxStoreCount = (Integer) row[1];
-        Assertions.assertThat(jcategoryName).isEqualTo("전자상거래업");
-        Assertions.assertThat(maxStoreCount).isEqualTo(4);
+        List<String> maxCloseStoreCounts = storeRepository.findMaxCloseStoreCount("1001495", "2023");
+        Assertions.assertThat(maxCloseStoreCounts.get(0)).isEqualTo("한식음식점");
     }
 }
