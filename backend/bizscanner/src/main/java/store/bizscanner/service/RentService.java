@@ -17,15 +17,7 @@ public class RentService {
     private final CareaService careaService;
 
     public RentResponse getRent(String careaCode) {
-        Rent rent = rentRepository.findById(careaService.findByCareaCode(careaCode).getRentId())
-                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
-
-        return new RentResponse(
-                rent.getRentAmount(),
-                rent.getRentIncreaseRate(),
-                rent.getDepositAmount(),
-                rent.getMonthlyAmount(),
-                rent.getMaintenanceAmount(),
-                rent.getFirstInvestmentAmount());
+        return new RentResponse(rentRepository.findById(careaService.findByCareaCode(careaCode).getRentId())
+                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND)));
     }
 }

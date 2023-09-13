@@ -115,8 +115,6 @@ public class PopulationService {
     // 해당하는 상권의 유동인구 정보를 반환
     // 분기, 요일, 시간대, 성별, 연령대, 남성연령대, 여성연령대 별 유동인구 수를 반환
     public PopulationResponse getPopulation(String careaCode) {
-        Population population = populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode)
-                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
         List<TotalPopulationMapping> quarterlyPopulation = populationRepository.findByCareaCodeAndYearCodeGreaterThanOrderByYearCodeAscQuarterCodeAsc(careaCode, "2021");
 
         return new PopulationResponse(
@@ -125,50 +123,7 @@ public class PopulationService {
                         totalPopulationMapping.getQuarterCode(),
                         totalPopulationMapping.getTotalPopulation()))
                         .collect(Collectors.toList()),
-                new Integer[] {
-                        population.getMondayPopulation(),
-                        population.getTuesdayPopulation(),
-                        population.getWednesdayPopulation(),
-                        population.getThursdayPopulation(),
-                        population.getFridayPopulation(),
-                        population.getSaturdayPopulation(),
-                        population.getSundayPopulation()
-                },
-                new Integer[] {
-                        population.getTime1Population(),
-                        population.getTime2Population(),
-                        population.getTime3Population(),
-                        population.getTime4Population(),
-                        population.getTime5Population(),
-                        population.getTime6Population(),
-                },
-                new Integer[] {
-                        population.getMalePopulation(),
-                        population.getFemalePopulation()
-                },
-                new Integer[] {
-                        population.getTeensPopulation(),
-                        population.getTwentiesPopulation(),
-                        population.getThirtiesPopulation(),
-                        population.getFortiesPopulation(),
-                        population.getFiftiesPopulation(),
-                        population.getSixtiesPopulation()
-                },
-                new Integer[] {
-                        population.getMaleTeensPopulation(),
-                        population.getMaleTwentiesPopulation(),
-                        population.getMaleThirtiesPopulation(),
-                        population.getMaleFortiesPopulation(),
-                        population.getMaleFiftiesPopulation(),
-                        population.getMaleOversixtiesPopulation()
-                },
-                new Integer[] {
-                        population.getFemaleFortiesPopulation(),
-                        population.getFemaleTwentiesPopulation(),
-                        population.getFemaleThirtiesPopulation(),
-                        population.getFemaleFortiesPopulation(),
-                        population.getFemaleFiftiesPopulation(),
-                        population.getFemaleOversixtiesPopulation()
-                });
+                populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode)
+                        .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND)));
     }
 }
