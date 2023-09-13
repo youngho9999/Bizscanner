@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import store.bizscanner.repository.mapping.TotalStoreMapping;
 
 import java.util.List;
 
@@ -31,5 +32,13 @@ class StoreRepositoryTest {
     public void bestCloseStoreCountJcategory() {
         List<String> maxCloseStoreCounts = storeRepository.findMaxCloseStoreCount("1001495", "2023");
         Assertions.assertThat(maxCloseStoreCounts.get(0)).isEqualTo("한식음식점");
+    }
+
+    @Test
+    public void totalStore() {
+        List<TotalStoreMapping> stores
+                = storeRepository.findByCareaCodeAndJcategoryCodeAndYearCodeGreaterThan
+                ("2130324", "CS300043", "2022");
+        stores.forEach(x -> System.out.println(x.getStoreCount()));
     }
 }
