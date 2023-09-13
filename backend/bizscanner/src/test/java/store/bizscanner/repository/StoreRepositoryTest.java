@@ -22,12 +22,6 @@ class StoreRepositoryTest {
     }
 
     @Test
-    public void bestStoreCountJcategoryIsEmpty() {
-        List<String> maxStoreCount = storeRepository.findMaxStoreCount("21100", "2023");
-
-    }
-
-    @Test
     public void bestOpenStoreCountJcategory() {
         List<String> maxOpenStoreCounts = storeRepository.findMaxOpenStoreCount("2130128", "2023");
         Assertions.assertThat(maxOpenStoreCounts.get(0)).isEqualTo("한식음식점");
