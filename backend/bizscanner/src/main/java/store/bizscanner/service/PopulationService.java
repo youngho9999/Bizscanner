@@ -3,8 +3,9 @@ package store.bizscanner.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import store.bizscanner.dto.response.BestPopulationResponse;
-import store.bizscanner.dto.response.PopulationResponse;
+import store.bizscanner.dto.response.population.BestPopulationResponse;
+import store.bizscanner.dto.response.population.PopulationResponse;
+import store.bizscanner.dto.response.population.QuarterlyPopulationResponse;
 import store.bizscanner.entity.Population;
 import store.bizscanner.entity.enums.Age;
 import store.bizscanner.entity.enums.Day;
@@ -15,6 +16,7 @@ import store.bizscanner.repository.mapping.TotalPopulationMapping;
 
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -114,7 +116,11 @@ public class PopulationService {
         List<TotalPopulationMapping> quarterlyPopulation = populationRepository.findByCareaCodeAndYearCodeGreaterThanOrderByYearCodeAscQuarterCodeAsc(careaCode, "2021");
 
         return new PopulationResponse(
-                quarterlyPopulation.stream().map(TotalPopulationMapping::getTotalPopulation).toArray(Integer[]::new),
+                quarterlyPopulation.stream().map(totalPopulationMapping -> new QuarterlyPopulationResponse(
+                        totalPopulationMapping.getYearCode(),
+                        totalPopulationMapping.getQuarterCode(),
+                        totalPopulationMapping.getTotalPopulation()))
+                        .collect(Collectors.toList()),
                 new Integer[] {
                         population.getMondayPopulation(),
                         population.getTuesdayPopulation(),

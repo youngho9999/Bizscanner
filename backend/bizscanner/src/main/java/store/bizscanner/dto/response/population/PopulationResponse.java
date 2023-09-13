@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PopulationResponse {
-    private Integer[] quarterlyPopulation;
+    private List<QuarterlyPopulationResponse> quarterlyPopulation;
     private Integer[] dayPopulation;
     private Integer[] timePopulation;
     private Integer[] genderPopulation;
