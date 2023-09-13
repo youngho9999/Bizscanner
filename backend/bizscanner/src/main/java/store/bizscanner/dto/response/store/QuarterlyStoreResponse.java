@@ -7,9 +7,9 @@ import java.util.List;
 
 @Getter
 public class QuarterlyStoreResponse {
-    private final Integer[] quarterlyStore;
+    private final Long[] quarterlyStore;
 
     public QuarterlyStoreResponse(List<TotalStoreMapping> quarterlyStoreList) {
-        quarterlyStore = quarterlyStoreList.stream().map(TotalStoreMapping::getStoreCount).toArray(Integer[]::new);
+        quarterlyStore = quarterlyStoreList.stream().map(TotalStoreMapping::getStoreCount).toArray(Long[]::new);
     }
 }
