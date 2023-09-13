@@ -1,7 +1,6 @@
 package store.bizscanner.global.exception;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public class CustomException extends RuntimeException{

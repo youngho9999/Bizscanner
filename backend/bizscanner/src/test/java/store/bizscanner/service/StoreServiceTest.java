@@ -15,7 +15,8 @@ class StoreServiceTest {
     @Test
     public void BestJcategory_EmptyCheck() {
         Assertions.assertThatThrownBy(() -> storeService.bestJcategory("123"))
-                .isInstanceOf(CustomException.class);
+                .isInstanceOf(CustomException.class)
+                .hasMessage("Report Resource not exists");
     }
 
 }
