@@ -96,7 +96,7 @@ public class Sales {
 
     private int wednesdaySalesCount;
 
-    private int thrusdaySalesCount;
+    private int thursdaySalesCount;
 
     private int fridaySalesCount;
 
