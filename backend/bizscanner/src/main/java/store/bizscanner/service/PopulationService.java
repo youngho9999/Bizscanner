@@ -11,6 +11,8 @@ import store.bizscanner.entity.enums.Age;
 import store.bizscanner.entity.enums.Day;
 import store.bizscanner.entity.enums.Gender;
 import store.bizscanner.entity.enums.Time;
+import store.bizscanner.global.exception.CustomException;
+import store.bizscanner.global.exception.ErrorCode;
 import store.bizscanner.repository.PopulationRepository;
 import store.bizscanner.repository.mapping.TotalPopulationMapping;
 
@@ -28,7 +30,8 @@ public class PopulationService {
     // Best 유동인구 반환
     // DB에서 전체 데이터를 호출 후 각각의 Best 항목을 구해 Response에 맵핑하여 반환
     public BestPopulationResponse bestPopulation(String careaCode) {
-        Population population = populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode);
+        Population population = populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode)
+                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
 
         return new BestPopulationResponse(
                 (Gender) getBestGender(population),
@@ -112,7 +115,8 @@ public class PopulationService {
     // 해당하는 상권의 유동인구 정보를 반환
     // 분기, 요일, 시간대, 성별, 연령대, 남성연령대, 여성연령대 별 유동인구 수를 반환
     public PopulationResponse getPopulation(String careaCode) {
-        Population population = populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode);
+        Population population = populationRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode)
+                .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
         List<TotalPopulationMapping> quarterlyPopulation = populationRepository.findByCareaCodeAndYearCodeGreaterThanOrderByYearCodeAscQuarterCodeAsc(careaCode, "2021");
 
         return new PopulationResponse(
