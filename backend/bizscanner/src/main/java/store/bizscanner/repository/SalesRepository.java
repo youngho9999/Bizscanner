@@ -6,6 +6,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import store.bizscanner.entity.Sales;
 
+import java.util.List;
+
 @Repository
 public interface SalesRepository extends JpaRepository<Sales, Long> {
 
@@ -119,5 +121,8 @@ public interface SalesRepository extends JpaRepository<Sales, Long> {
 
 
     Sales findTopByCareaCodeOrderByQuarterSalesAmountDesc(String careaCode);
+
+    List<Sales> findByCareaCodeAndJcategoryCodeOrderByYearCodeAscQuarterCodeAsc(String careaCode, String jcategoryCode);
+
 
 }

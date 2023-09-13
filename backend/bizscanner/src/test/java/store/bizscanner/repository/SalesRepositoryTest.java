@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import store.bizscanner.entity.Sales;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+
 
 @SpringBootTest
 class SalesRepositoryTest {
@@ -15,6 +16,7 @@ class SalesRepositoryTest {
     SalesRepository salesRepository;
 
     private static String careaCode = "1001491";
+    private static String jcategoryCode = "CS100007";
 
     @Test
     public void getBestSalesGender() {
@@ -50,6 +52,15 @@ class SalesRepositoryTest {
     public void getBestJcategory() {
         String bestJcategory = salesRepository.findTopByCareaCodeOrderByQuarterSalesAmountDesc(careaCode).getJcategoryName();
         Assertions.assertThat(bestJcategory).isEqualTo("양식음식점");
+    }
+
+    @Test
+    public void getQuarterSalesCount() {
+        List<Sales> result = salesRepository.findByCareaCodeAndJcategoryCodeOrderByYearCodeAscQuarterCodeAsc(careaCode, jcategoryCode);
+
+        for (int i = 0; i < result.size(); ++i) {
+            System.out.println(result.get(i).getQuarterSalesCount());
+        }
     }
 
 

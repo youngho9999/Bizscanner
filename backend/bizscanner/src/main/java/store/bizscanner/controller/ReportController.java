@@ -12,6 +12,8 @@ import store.bizscanner.service.PopulationService;
 import store.bizscanner.service.SalesService;
 import store.bizscanner.service.StoreService;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/report")
@@ -39,5 +41,10 @@ public class ReportController {
     @GetMapping("best-sales-amount/{careaCode}")
     public ResponseEntity<BestSalesResponse> getBestSales(@PathVariable String careaCode) {
         return new ResponseEntity<>(salesService.getBestSales(careaCode), HttpStatus.OK);
+    }
+
+    @GetMapping("sales/count/{careaCode}/{jcategoryCode}")
+    public ResponseEntity<List<Long>> getQuarterSalesCount(@PathVariable String careaCode, @PathVariable String jcategoryCode) {
+        return new ResponseEntity<>(salesService.getQuarterSalesCount(careaCode, jcategoryCode), HttpStatus.OK);
     }
 }
