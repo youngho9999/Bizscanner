@@ -27,7 +27,7 @@ class SalesRepositoryTest {
         String bestSalesGender = salesRepository.findBestSalesGender(careaCode)
                 .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
 
-        Assertions.assertThat(bestSalesGender).isEqualTo("male");
+        Assertions.assertThat(bestSalesGender).isEqualTo("MALE");
 
 
     }
@@ -60,15 +60,6 @@ class SalesRepositoryTest {
                 .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND))
                 .getJcategoryName();
         Assertions.assertThat(bestJcategory).isEqualTo("양식음식점");
-    }
-
-    @Test
-    public void getQuarterSalesCount() {
-        List<Sales> result = salesRepository.findByCareaCodeAndJcategoryCodeOrderByYearCodeAscQuarterCodeAsc(careaCode, jcategoryCode);
-
-        for (int i = 0; i < result.size(); ++i) {
-            System.out.println(result.get(i).getQuarterSalesCount());
-        }
     }
 
 
