@@ -14,7 +14,11 @@ import store.bizscanner.repository.CchangeRepository;
 public class CchangeService {
     private final CchangeRepository cchangeRepository;
 
-    // 상권의 최신 상권변화지표
+    /**
+     * 상권 변화지표 API
+     * @param careaCode
+     * @return 상권의 가장 최신 상권변화지표
+     */
     public CchangeResponse findBycareaCode(String careaCode){
         return new CchangeResponse(cchangeRepository.findTopByCareaCodeOrderByYearCodeDescQuarterCodeDesc(careaCode)
                 .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND)));

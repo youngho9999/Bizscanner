@@ -15,7 +15,11 @@ public class RentService {
     private final RentRepository rentRepository;
     private final CareaService careaService;
 
-    // careaCode로 임대료 테이블 조회
+    /**
+     * 임대료
+     * @param careaCode
+     * @return 해당 상권의 임대료 정보 반환
+     */
     public RentResponse getRent(String careaCode) {
         return new RentResponse(rentRepository.findById(careaService.findByCareaCode(careaCode).getRentId())
                 .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND)));
