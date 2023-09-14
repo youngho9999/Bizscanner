@@ -37,21 +37,21 @@ class SalesRepositoryTest {
 
         String bestSalesAge = salesRepository.findBestSalesAge(careaCode)
                 .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
-        Assertions.assertThat(bestSalesAge).isEqualTo("thirty");
+        Assertions.assertThat(bestSalesAge).isEqualTo("THIRTIES");
     }
 
     @Test
     public void getBestSalesDay() {
         String bestSalesDay = salesRepository.findBestSalesDay(careaCode)
                 .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
-        Assertions.assertThat(bestSalesDay).isEqualTo("saturday");
+        Assertions.assertThat(bestSalesDay).isEqualTo("SATURDAY");
     }
 
     @Test
     public void getBestSalesTime() {
         String bestSalesTime = salesRepository.findBestSalesTime(careaCode)
                 .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
-        Assertions.assertThat(bestSalesTime).isEqualTo("time_5");
+        Assertions.assertThat(bestSalesTime).isEqualTo("TIME5");
     }
 
     @Test
