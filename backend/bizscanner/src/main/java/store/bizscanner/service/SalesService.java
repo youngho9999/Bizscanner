@@ -95,7 +95,7 @@ public class SalesService {
         // 성별 매출액 데이터 (male, female 순서)
         List<Long> genderSalesAmountResponseList = new ArrayList<>();
         genderSalesAmountResponseList.add(selectedSalesData.getMaleSalesAmount());
-        genderSalesAmountResponseList.add(selectedSalesData.getMaleSalesAmount());
+        genderSalesAmountResponseList.add(selectedSalesData.getFemaleSalesAmount());
 
         // 나이별 매출액 데이터
         List<Long> ageSalesAmountResponseList = new ArrayList<>();
