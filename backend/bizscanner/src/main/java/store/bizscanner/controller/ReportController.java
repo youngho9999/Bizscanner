@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import store.bizscanner.dto.response.cchange.CchangeResponse;
 import store.bizscanner.dto.response.population.BestPopulationResponse;
 import store.bizscanner.dto.response.rent.RentResponse;
 import store.bizscanner.dto.response.store.BestJcategoryResponse;
@@ -23,6 +24,7 @@ public class ReportController {
     private final SalesService salesService;
     private final StoreService storeService;
     private final RentService rentService;
+    private final CchangeService cchangeService;
 
     @GetMapping("/best-population/{careaCode}")
     public ResponseEntity<BestPopulationResponse> bestPopulation(@PathVariable String careaCode) {
@@ -62,5 +64,10 @@ public class ReportController {
     @GetMapping("/stores/close-status/{careaCode}/{jcategoryCode}")
     public ResponseEntity<QuarterlyCloseStoreResponse> getQuarterlyCloseStore(@PathVariable String careaCode, @PathVariable String jcategoryCode) {
         return new ResponseEntity<>(storeService.getQuarterlyCloseStore(careaCode,jcategoryCode), HttpStatus.OK);
+    }
+
+    @GetMapping("/cchange/{careaCode}")
+    public ResponseEntity<CchangeResponse> getCareaChange(@PathVariable String careaCode){
+        return new ResponseEntity<>(cchangeService.findBycareaCode(careaCode), HttpStatus.OK);
     }
 }
