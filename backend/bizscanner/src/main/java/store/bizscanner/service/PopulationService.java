@@ -27,6 +27,9 @@ public class PopulationService {
 
     private final PopulationRepository populationRepository;
 
+    private static final String QUARTER_YEAR = "2021";
+    private static final int REQUIRED_LEAST_RESULT_COUNT = 2;
+
     // Best 유동인구 반환
     // DB에서 전체 데이터를 호출 후 각각의 Best 항목을 구해 Response에 맵핑하여 반환
     public BestPopulationResponse bestPopulation(String careaCode) {
@@ -115,10 +118,13 @@ public class PopulationService {
     // 해당하는 상권의 유동인구 정보를 반환
     // 분기, 요일, 시간대, 성별, 연령대, 남성연령대, 여성연령대 별 유동인구 수를 반환
     public PopulationResponse getPopulation(String careaCode) {
-        List<TotalPopulationMapping> quarterlyPopulation = populationRepository.findByCareaCodeAndYearCodeGreaterThanOrderByYearCodeAscQuarterCodeAsc(careaCode, "2021");
-
+        List<TotalPopulationMapping> quarterlyPopulation = populationRepository.findByCareaCodeAndYearCodeGreaterThanOrderByYearCodeAscQuarterCodeAsc(careaCode, QUARTER_YEAR);
+        if(quarterlyPopulation.size() < REQUIRED_LEAST_RESULT_COUNT){
+            throw new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND);
+        }
         return new PopulationResponse(
-                quarterlyPopulation.stream().map(totalPopulationMapping -> new QuarterlyPopulationResponse(
+                quarterlyPopulation.stream()
+                        .map(totalPopulationMapping -> new QuarterlyPopulationResponse(
                         totalPopulationMapping.getYearCode(),
                         totalPopulationMapping.getQuarterCode(),
                         totalPopulationMapping.getTotalPopulation()))

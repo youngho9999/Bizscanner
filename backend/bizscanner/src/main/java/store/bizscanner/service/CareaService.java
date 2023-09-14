@@ -14,6 +14,7 @@ import store.bizscanner.repository.CareaRepository;
 public class CareaService {
     private final CareaRepository careaRepository;
 
+    // carea 코드로 carea를 조회
     public Carea findByCareaCode(String careaCode){
         return careaRepository.findByCareaCode(careaCode).orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND));
     }
