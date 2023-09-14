@@ -3,6 +3,6 @@
 import { store } from "./store";
 import { Provider } from "react-redux";
 
-export function Provider({ children }) {
+export function ProviderWrapper({ children }) {
   return <Provider store={store}>{children}</Provider>;
 }
