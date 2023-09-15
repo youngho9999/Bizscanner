@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface EarningExpenditureRepository extends JpaRepository<EarningExpenditure,Long> {
 
     @Query("SELECT new store.bizscanner.dto.response.earningexpenditure.ConsumptionTrendResponse(e.totalExpenditure, e.groceryExpenditure, e.clothExpenditure, e.householdExpenditure, e.medicalExpenditure, e.transportationExpenditure, e.leisureExpenditure, e.cultureExpenditure, e.educationExpenditure, e.pleasureExpenditure, e.earningDecile)" +
-            " FROM EarningExpenditure e WHERE e.careaCode = :careaCode AND e.yearCode = :yearCode")
-    Optional<ConsumptionTrendResponse> getConsumptionTrend(@Param("careaCode") String careaCode, @Param("yearCode") String yearCode);
+            " FROM EarningExpenditure e WHERE e.careaCode = :careaCode AND e.yearCode = '2022' AND e.quarterCode = '4' ")
+    Optional<ConsumptionTrendResponse> getConsumptionTrend(@Param("careaCode") String careaCode);
 
 }

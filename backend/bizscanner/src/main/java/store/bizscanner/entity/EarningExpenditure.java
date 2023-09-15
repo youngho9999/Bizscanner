@@ -14,6 +14,7 @@ public class EarningExpenditure {
     @Id
     private Long earningExpenditureId;
     private String yearCode;
+    private String quarterCode;
     private String careaTypeCode;
     private String careaTypeName;
     private String careaCode;
