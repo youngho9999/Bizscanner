@@ -128,6 +128,13 @@ public interface SalesRepository extends JpaRepository<Sales, Long> {
 
     Optional<Sales> findTopByCareaCodeAndJcategoryCode(String careaCode, String jcategoryCode);
 
+    /**
+     * 업종 추천 시 사용되는 쿼리
+     * @param careaCode
+     * @return 상권 내 전체 업종의 예상 매출액
+     *
+     * 2023 1분기 매출액과 2022 1분기 매출액을 이용하여 변화율을 산출 후 예상 매출액 산정
+     */
     @Query("SELECT s.careaCode as careaCode, " +
             "s.jcategoryCode as jcategoryCode, " +
             "s.quarterSalesAmount as quarterSalesAmount, " +
