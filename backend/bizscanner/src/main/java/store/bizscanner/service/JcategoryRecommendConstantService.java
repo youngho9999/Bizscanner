@@ -37,6 +37,10 @@ public class JcategoryRecommendConstantService {
     public JcategoryRecommendResponse getJcategoryRecommend(String careaCode){
         List<JcategoryRecommendMapping> recommendList = salesRepository.getJcategoryRecommend(careaCode);
 
+        if(recommendList.isEmpty()){
+            throw new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND);
+        }
+
         for(JcategoryRecommendMapping jcategoryRecommendMapping : recommendList){
             Integer closeRate = storeRepository.findTopByCareaCodeAndJcategoryCodeOrderByYearCodeDescQuarterCodeDesc(careaCode, jcategoryRecommendMapping.getJcategoryCode())
                     .orElseThrow(() -> new CustomException(ErrorCode.REPORT_RESOURCE_NOT_FOUND)).getCloseRate();
