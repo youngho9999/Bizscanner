@@ -1,7 +1,7 @@
 import './globals.css';
 import localFont from 'next/font/local';
 import { ProviderWrapper } from '@/redux/ProviderWrapper';
-import Navigation from './Navigation';
+import Header from './Header';
 
 const tMoney = localFont({
   src: [
@@ -27,6 +27,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko" className={tMoney.className}>
+      <body>
+        <Header></Header>
         <ProviderWrapper>{children}</ProviderWrapper>
       </body>
     </html>
