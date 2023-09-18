@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import store.bizscanner.entity.Sales;
+import store.bizscanner.repository.mapping.JcategoryRecommendMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -126,4 +127,15 @@ public interface SalesRepository extends JpaRepository<Sales, Long> {
     List<Sales> findByCareaCodeAndJcategoryCodeOrderByYearCodeAscQuarterCodeAsc(String careaCode, String jcategoryCode);
 
     Optional<Sales> findTopByCareaCodeAndJcategoryCode(String careaCode, String jcategoryCode);
+
+    @Query("SELECT s.careaCode as careaCode, " +
+            "s.jcategoryCode as jcategoryCode, " +
+            "s.quarterSalesAmount as quarterSalesAmount, " +
+            "ROUND(((s.quarterSalesAmount - l.quarterSalesAmount) / l.quarterSalesAmount + 1) * s.quarterSalesAmount) AS expectAmount " +
+            "FROM Sales s " +
+            "JOIN Sales l ON s.careaCode = l.careaCode AND s.jcategoryCode = l.jcategoryCode " +
+            "WHERE s.yearCode = '2023' AND s.careaCode = :careaCode " +
+            "AND l.yearCode = '2022' AND l.quarterCode = '1' " +
+            "ORDER BY expectAmount DESC")
+    List<JcategoryRecommendMapping> getJcategoryRecommend(@Param("careaCode") String careaCode);
 }
