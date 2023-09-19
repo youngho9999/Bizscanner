@@ -28,7 +28,7 @@ function Button({ text, width, height, variant, radius }) {
         ${buttonConfig[variant].bgColor} 
         ${buttonConfig[variant].color} 
         ${buttonConfig[radius]}`}
-        style={{ width: `${width}px`, height: `${height}px` }}
+        style={{ width: `${width}`, height: `${height}` }}
         onClick={handleButtonClick}
       >
         {text}
