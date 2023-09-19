@@ -13,7 +13,6 @@ const tMoney = localFont({
     {
       path: '../../public/fonts/TmoneyRoundWindExtraBold.ttf',
       weight: '700',
-
       style: 'normal',
     },
   ],
