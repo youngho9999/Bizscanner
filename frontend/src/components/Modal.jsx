@@ -20,7 +20,7 @@ function ModalContainer({ children, bgColor, width, height }) {
 
   return (
     <div
-      className={`${backGround[bgColor]} p-10 fixed top-1/2 left-1/2 w-1/2 bg- translate-x-[-50%] translate-y-[-50%] rounded-large`}
+      className={`${backGround[bgColor]} p-10 fixed top-1/2 left-1/2 w-1/2 translate-x-[-50%] translate-y-[-50%] rounded-large`}
       style={{
         width,
         height,
