@@ -28,6 +28,8 @@ public class CareaRecommendNormalized {
     private Double salesAmountRateNormalized;
     private Double populationNormalized;
     private Double careaChangeNormalized;
+    private Integer totalPopulation;
+    private String careaChange;
 
     public Long getProfit(Long storeArea) {
         return this.monthlySalesAmount - this.rentAmount * storeArea;
