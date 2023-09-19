@@ -33,7 +33,7 @@ function Button({ label, width, height, color, radius }) {
     <div>
       <button
         className={colorStyle + ' ' + borderStyle}
-        style={{ width: `${width}px`, height: `${height}px` }}
+        style={{ color: 'white', width: `${width}px`, height: `${height}px` }}
         onClick={handleButtonClick}
       >
         {label}
