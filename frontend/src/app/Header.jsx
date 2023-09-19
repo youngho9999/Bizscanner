@@ -5,7 +5,7 @@ import React from 'react';
 
 function Header() {
   return (
-    <nav className="bg-background w-full p-4 flex justify-between">
+    <nav className="bg-background w-full p-4 flex justify-between items-center">
       <Link href="/">
         <img src="icons/logo.svg" />
       </Link>
