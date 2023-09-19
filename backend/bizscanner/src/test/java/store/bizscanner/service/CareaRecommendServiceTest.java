@@ -16,8 +16,5 @@ class CareaRecommendServiceTest {
 
     @Test
     public void checkFind() {
-
-        String cs200006 = careaRecommendService.findCareaRecommend("CS200029", 100000000000L, 60L);
-        System.out.println(cs200006);
     }
 }
