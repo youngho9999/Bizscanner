@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import store.bizscanner.entity.Sales;
+import store.bizscanner.repository.mapping.SumSalesMapping;
 import store.bizscanner.repository.mapping.JcategoryRecommendMapping;
 
 import java.util.List;
@@ -145,4 +146,30 @@ public interface SalesRepository extends JpaRepository<Sales, Long> {
             "AND l.yearCode = '2022' AND l.quarterCode = '1' " +
             "ORDER BY expectAmount DESC")
     List<JcategoryRecommendMapping> getJcategoryRecommend(@Param("careaCode") String careaCode);
+
+    @Query("SELECT sum(s.mondaySalesAmount) as mondaySalesAmount," +
+            "sum (s.tuesdaySalesAmount) as tuesdaySalesAmount, " +
+            "sum (s.wednesdaySalesAmount) as wednesdaySalesAmount, " +
+            "sum (s.thursdaySalesAmount) as thursdaySalesAmount, " +
+            "sum (s.fridaySalesAmount) as fridaySalesAmount, " +
+            "sum (s.saturdaySalesAmount) as saturdaySalesAmount, " +
+            "sum (s.sundaySalesAmount) as sundaySalesAmount, " +
+            "sum (s.time1SalesAmount) as time1SalesAmount, " +
+            "sum (s.time2SalesAmount) as time2SalesAmount, " +
+            "sum (s.time3SalesAmount) as time3SalesAmount, " +
+            "sum (s.time4SalesAmount) as time4SalesAmount, " +
+            "sum (s.time5SalesAmount) as time5SalesAmount, " +
+            "sum (s.time6SalesAmount) as time6SalesAmount, " +
+            "sum (s.maleSalesAmount) as maleSalesAmount, " +
+            "sum (s.femaleSalesAmount) as femaleSalesAmount, " +
+            "sum (s.teensSalesAmount) as teensSalesAmount, " +
+            "sum (s.twentiesSalesAmount) as twentiesSalesAmount, " +
+            "sum (s.thirtiesSalesAmount) as thirtiesSalesAmount, " +
+            "sum (s.fortiesSalesAmount) as fortiesSalesAmount, " +
+            "sum (s.fiftiesSalesAmount) as fiftiesSalesAmount, " +
+            "sum (s.sixtiesSalesAmount) as sixtiesSalesAmount " +
+            "FROM Sales s " +
+            "WHERE s.careaCode = :careaCode " +
+            "GROUP BY s.careaCode")
+    Optional<SumSalesMapping> findSumSalesDay(@Param("careaCode") String careaCode);
 }
