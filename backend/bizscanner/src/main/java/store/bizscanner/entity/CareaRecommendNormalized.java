@@ -2,6 +2,7 @@ package store.bizscanner.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,6 +22,7 @@ public class CareaRecommendNormalized {
     private String careaCode;
     private Long monthlySalesAmount;
     private Integer rentAmount;
+    private Long firstInvestmentAmount;
     private Double salesAmountRate;
     private Double salesAmountRateNormalized;
     private Double populationNormalized;
