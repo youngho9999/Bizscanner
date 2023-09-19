@@ -2,41 +2,36 @@
 
 import React from 'react';
 
-function Button({ label, width, height, color, radius }) {
-  let colorStyle;
-  let borderStyle;
-
-  switch (color) {
-    case 'primary':
-      colorStyle = 'bg-primary';
-      break;
-    case 'disabled':
-      colorStyle = 'bg-disabled';
-      break;
-  }
-
-  switch (radius) {
-    case 'large':
-      borderStyle = 'rounded-large';
-      break;
-    case 'medium':
-      borderStyle = 'rounded-medium';
-      break;
-    case 'small':
-      borderStyle = 'rounded-small';
-      break;
-  }
+function Button({ text, width, height, variant, radius }) {
+  const buttonConfig = {
+    // Colors
+    primary: {
+      bgColor: 'bg-primary',
+      color: 'text-white',
+    },
+    disabled: {
+      bgColor: 'bg-disabled',
+      color: 'text-white',
+    },
+    //Border-radius
+    small: 'rounded-small',
+    medium: 'rounded-medium',
+    large: 'rounded-large',
+  };
 
   const handleButtonClick = () => {};
 
   return (
     <div>
       <button
-        className={colorStyle + ' ' + borderStyle}
-        style={{ color: 'white', width: `${width}px`, height: `${height}px` }}
+        className={`
+        ${buttonConfig[variant].bgColor} 
+        ${buttonConfig[variant].color} 
+        ${buttonConfig[radius]}`}
+        style={{ width: `${width}px`, height: `${height}px` }}
         onClick={handleButtonClick}
       >
-        {label}
+        {text}
       </button>
     </div>
   );
