@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-function Button({ text, width, height, variant, radius }) {
+function Button({ width, height, variant, radius, onClick, children }) {
   const buttonConfig = {
     // Colors
     primary: {
@@ -19,8 +19,6 @@ function Button({ text, width, height, variant, radius }) {
     large: 'rounded-large',
   };
 
-  const handleButtonClick = () => {};
-
   return (
     <div>
       <button
@@ -29,9 +27,9 @@ function Button({ text, width, height, variant, radius }) {
         ${buttonConfig[variant].color} 
         ${buttonConfig[radius]}`}
         style={{ width: `${width}`, height: `${height}` }}
-        onClick={handleButtonClick}
+        onClick={onClick}
       >
-        {text}
+        {children}
       </button>
     </div>
   );
