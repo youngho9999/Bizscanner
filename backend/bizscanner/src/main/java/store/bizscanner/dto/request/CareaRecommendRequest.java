@@ -1,9 +1,8 @@
 package store.bizscanner.dto.request;
 
 import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+@Getter
 public class CareaRecommendRequest {
     private String jcategoryCode;
     private Long firstInvestmentAmount;
