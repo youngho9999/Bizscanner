@@ -23,9 +23,7 @@ class CareaRecommendServiceTest {
     @Test
     public void checkFind() {
         List<String> distinctJcategory = salesRepository.findDistinctJcategory();
-
         List<String> collect = distinctJcategory.stream().map(x -> careaRecommendService.findCareaRecommend(x, 100000000000L, 60L).getCareaCode())
                 .collect(Collectors.toList());
-        collect.forEach(System.out::println);
     }
 }
