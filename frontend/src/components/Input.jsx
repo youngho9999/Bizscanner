@@ -1,12 +1,12 @@
 import React from 'react';
 
-function Input({ width, height }) {
+function Input({ width, height, label }) {
   return (
     <div className="w-full h-full bg-white rounded-medium" style={{ width, height }}>
       <div className="relative flex justify-between	px-6">
         <div className="w-full h-full flex flex-col pt-8 pb-2.5">
           <label className="absolute top-1 left-6 text-disabled text-small font-semibold">
-            닉네임
+            {label}
           </label>
           <input
             className="w-full bg-transparent text-black text-xl font-bold placeholder-lightgray focus:outline-0"
