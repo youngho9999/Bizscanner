@@ -7,10 +7,9 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 public class CareaRecommendRequest {
-    @NotBlank
     private String jcategoryCode;
     @Min(value = 30_000_000)
     private Long firstInvestmentAmount;
-    @Min(value = 100, message = "kkkk")
+    @Min(value = 1)
     private Integer storeArea;
 }
