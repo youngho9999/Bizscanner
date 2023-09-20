@@ -5,7 +5,7 @@ import ArrowDown from '@/assets/icons/arrowDown.svg';
 
 const DropdownContext = createContext(null);
 
-function DropdownContainer({ children, className }) {
+function DropdownProvider({ children, className }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const onChange = () => {
@@ -19,9 +19,13 @@ function DropdownContainer({ children, className }) {
         onChange,
       }}
     >
-      <div className={classnames(className)}>{children}</div>
+      {children}
     </DropdownContext.Provider>
   );
+}
+
+function DropdownContainer({ children, className }) {
+  return <div className={classnames('z-10 relative', className)}>{children}</div>;
 }
 
 function DropdownLabel({ children }) {
@@ -40,7 +44,7 @@ function DropdownTrigger({ children }) {
   return (
     <button
       className={classnames(
-        'flex justify-between w-full text-left border-b-2',
+        'flex justify-between w-full text-left border-b-2 ',
         isOpen ? 'border-primary' : 'border-underline',
       )}
       onClick={onClick}
@@ -87,9 +91,23 @@ function DropdownOption({ children, onSelect, ...props }) {
   );
 }
 
-export const Dropdown = Object.assign(DropdownContainer, {
+function DropdownBackground() {
+  const dropdownContext = useContext(DropdownContext);
+
+  const { onChange, isOpen } = dropdownContext;
+
+  const onClick = () => {
+    onChange();
+  };
+
+  return isOpen && <div className="fixed top-0 left-0 w-[100vw] h-[100vh]" onClick={onClick}></div>;
+}
+
+export const Dropdown = Object.assign(DropdownProvider, {
   Trigger: DropdownTrigger,
   OptionContainer: DropdownOptionContainer,
   Option: DropdownOption,
   Label: DropdownLabel,
+  Background: DropdownBackground,
+  Container: DropdownContainer,
 });
