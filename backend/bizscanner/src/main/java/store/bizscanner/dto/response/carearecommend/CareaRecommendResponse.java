@@ -5,6 +5,7 @@ import store.bizscanner.entity.CareaRecommendNormalized;
 
 @Getter
 public class CareaRecommendResponse {
+    private final String careaCode;
     private final Long averageNetProfitByJcategory;
     private final Long recommendedNetProfit;
     private final Double averageSalesAmountRateByJcategory;
@@ -14,6 +15,7 @@ public class CareaRecommendResponse {
     private final String careaChange;
 
     public CareaRecommendResponse(Long averageNetProfitByJcategory, Long recommendedNetProfit, Double averageSalesAmountRateByJcategory, CareaRecommendNormalized careaRecommended) {
+        this.careaCode = careaRecommended.getCareaCode();
         this.averageNetProfitByJcategory = averageNetProfitByJcategory;
         this.recommendedNetProfit = recommendedNetProfit;
         this.averageSalesAmountRateByJcategory = averageSalesAmountRateByJcategory;
