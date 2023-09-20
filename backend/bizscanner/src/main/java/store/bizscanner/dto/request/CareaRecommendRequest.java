@@ -2,9 +2,15 @@ package store.bizscanner.dto.request;
 
 import lombok.Getter;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 @Getter
 public class CareaRecommendRequest {
+    @NotBlank
     private String jcategoryCode;
+    @Min(value = 30_000_000)
     private Long firstInvestmentAmount;
+    @Min(value = 100, message = "kkkk")
     private Integer storeArea;
 }
