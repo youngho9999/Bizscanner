@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Input({ width, height, label }) {
+function Input({ width, height, label, type, placeholder, value, onChange }) {
   return (
     <div className="w-full h-full bg-white rounded-medium" style={{ width, height }}>
       <div className="relative flex justify-between	px-6">
@@ -10,8 +10,10 @@ function Input({ width, height, label }) {
           </label>
           <input
             className="w-full bg-transparent text-black text-xl font-bold placeholder-lightgray focus:outline-0"
-            type="text"
-            placeholder="입력하세요"
+            type={type}
+            placeholder={placeholder}
+            onChange={onChange}
+            value={value}
           />
         </div>
       </div>
