@@ -37,9 +37,9 @@ public class CareaRecommendNormalized {
 
     public Double getScore(Long minProfit, Long maxProfit, Long storeArea) {
         //scoring 가중치 계수
-        double c1 = 0.55;
-        double c2 = 0.1;
-        double c3 = 0.3;
+        double c1 = 0.65;
+        double c2 = 0.15;
+        double c3 = 0.15;
         double c4 = 0.05;
 
         //순이익 정규화
