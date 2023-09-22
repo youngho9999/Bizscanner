@@ -5,14 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import store.bizscanner.dto.request.ScrapRequest;
 import store.bizscanner.dto.response.scrap.ScrapResponse;
+import store.bizscanner.dto.response.scrap.ScrapResponses;
+import store.bizscanner.dto.response.scrap.ScrapValidResponse;
 import store.bizscanner.entity.Member;
 import store.bizscanner.entity.Scrap;
 import store.bizscanner.global.exception.CustomException;
 import store.bizscanner.global.exception.ErrorCode;
-import store.bizscanner.repository.CareaRepository;
 import store.bizscanner.repository.ScrapRepository;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,17 +42,17 @@ public class ScrapService {
                 .orElseThrow(() -> new CustomException(ErrorCode.SCRAP_NOT_FOUND));
     }
 
-    public boolean isScrapped(String careaCode, String jcategoryCode, Member member) {
-        return scrapRepository.existsByMemberAndCareaCodeAndJcategoryCode(
-                member, careaCode, jcategoryCode);
+    public ScrapValidResponse isScrapped(String careaCode, String jcategoryCode, Member member) {
+        return new ScrapValidResponse(scrapRepository.existsByMemberAndCareaCodeAndJcategoryCode(
+                member, careaCode, jcategoryCode));
     }
 
-    public List<ScrapResponse> getScrapResponses(Member member) {
-        return scrapRepository.findAllByMember(member).stream().map(
-                scrap -> new ScrapResponse(scrap.getCareaCode(),
-                        careaService.findByCareaCode(scrap.getCareaCode()).getCareaName(),
-                        scrap.getJcategoryCode(),
-                        scrap.getCreatedAt()))
-                .collect(Collectors.toList());
+    public ScrapResponses getScrapResponses(Member member) {
+        return new ScrapResponses(scrapRepository.findAllByMember(member).stream().map(
+                        scrap -> new ScrapResponse(scrap.getCareaCode(),
+                                careaService.findByCareaCode(scrap.getCareaCode()).getCareaName(),
+                                scrap.getJcategoryCode(),
+                                scrap.getCreatedAt()))
+                .collect(Collectors.toList()));
     }
 }

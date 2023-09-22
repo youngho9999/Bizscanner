@@ -1,7 +1,6 @@
 package store.bizscanner.dto.response.scrap;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
