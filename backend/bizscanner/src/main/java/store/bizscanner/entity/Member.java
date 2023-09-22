@@ -16,12 +16,9 @@ public class Member extends BaseTime {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String nickname;
 
-    @Column(nullable = false)
     private String provider;
 }
