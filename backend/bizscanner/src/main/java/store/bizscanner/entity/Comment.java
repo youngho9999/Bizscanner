@@ -32,4 +32,9 @@ public class Comment extends BaseTime {
         this.contents = contents;
         this.member = member;
     }
+
+    public Comment update(String contents) {
+        this.contents = contents;
+        return this;
+    }
 }
