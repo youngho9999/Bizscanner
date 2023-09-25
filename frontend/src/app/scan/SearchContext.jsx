@@ -37,6 +37,7 @@ function reducer(state, action) {
       return {
         ...state,
         bizCode: action.bizCode,
+        bizName: action.bizName,
       };
 
     default:
