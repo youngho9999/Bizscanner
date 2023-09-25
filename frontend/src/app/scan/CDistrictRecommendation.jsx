@@ -4,6 +4,18 @@ import React from 'react';
 import { Modal } from '@/components/Modal';
 import Button from '@/components/Button';
 import { Reason } from './Reason';
+import LocationIcon from '@/assets/icons/location_on.svg'
+
+function Guide() {
+  return (
+    <div className='flex flex-col items-center mt-2 font-bold text-disabled'>
+      <p>LL : 다이나믹</p>
+      <p>LH : 상권확장</p>
+      <p>HL : 상권축소</p>
+      <p>HH : 정체</p>
+    </div>
+  )
+}
 
 function CDistrictRecommendation() {
   const warning = "해당 정보는 추정 데이터를 기반으로 하고 있어 정확하지 않을 수 있기에 사용자의 책임하에 활용하시기 바랍니다."
@@ -18,6 +30,7 @@ function CDistrictRecommendation() {
             <Modal.Title>추천 상권</Modal.Title>
             <div className='text-sm text-center text-red-600'>{warning}</div>
             <div className='flex flex-row justify-center my-3'>
+              <LocationIcon className="mr-1 fill-primary" style={{ width: '30px', height: '30px' }} />
               <p className='text-2xl'>{CDistrict}</p>
             </div>
             <div className='flex flex-row justify-center w-[900px] h-[340px] bg-white mt-3 rounded-large'>
@@ -59,6 +72,7 @@ function CDistrictRecommendation() {
                 <Reason.Container className="text-white bg-primary">
                   <p>LH</p>
                 </Reason.Container>
+                <Guide />
               </Reason>
             </div>
             <Modal.ButtonList>
