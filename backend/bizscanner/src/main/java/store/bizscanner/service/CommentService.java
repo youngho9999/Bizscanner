@@ -30,9 +30,9 @@ public class CommentService {
                 .build());
     }
 
-    public CommentListResponse getComment(String careaCode, String jcategoryCode) {
+    public CommentListResponse getComment(String careaCode) {
         return new CommentListResponse(
-                commentRepository.findByCareaCodeAndJcategoryCode(careaCode, jcategoryCode).stream()
+                commentRepository.findByCareaCode(careaCode).stream()
                         .map(comment -> new CommentResponse(
                                 comment.getMember().getNickname(),
                                 comment.getContents(),

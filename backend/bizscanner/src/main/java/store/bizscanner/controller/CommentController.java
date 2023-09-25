@@ -26,9 +26,9 @@ public class CommentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/{careaCode}/{jcategoryCode}")
-    public ResponseEntity<CommentListResponse> getComment(@PathVariable String careaCode, @PathVariable String jcategoryCode) {
-        return new ResponseEntity<>(commentService.getComment(careaCode, jcategoryCode), HttpStatus.OK);
+    @GetMapping("/{careaCode}")
+    public ResponseEntity<CommentListResponse> getComment(@PathVariable String careaCode) {
+        return new ResponseEntity<>(commentService.getComment(careaCode), HttpStatus.OK);
     }
 
     @PatchMapping("/{commentId}")
