@@ -13,7 +13,6 @@ const initialState = {
 };
 
 function reducer(state, action) {
-    
   switch (action.type) {
     case 'SET_SIGUNGU':
       console.log(action);
