@@ -10,14 +10,16 @@ function CDistrictSelection() {
   const { dongCode } = useSearchState();
 
   const fetchData = async () => {
-    const {data : {dongInfoResponseList}} = await axios.get(`/jcategory-recommend/dong/${dongCode}`);
-    setCDistricts(dongInfoResponseList)
+    const {
+      data: { dongInfoResponseList },
+    } = await axios.get(`/jcategory-recommend/dong/${dongCode}`);
+    setCDistricts(dongInfoResponseList);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-  
+
   return (
     <div>
       <ControllerTitle title="상권을 선택해주세요" />
@@ -27,7 +29,7 @@ function CDistrictSelection() {
             return (
               <button
                 key={careaCode}
-                className="w-[130px] h-[50px] rounded-small border-disabled text-disabled border-2 hover:border-primary hover:text-white hover:bg-primary"
+                className="text-ellipsis overflow-hidden whitespace-nowrap w-[130px] h-[50px] rounded-small border-disabled text-disabled border-2 hover:border-primary hover:text-white hover:bg-primary"
               >
                 {careaName}
               </button>
