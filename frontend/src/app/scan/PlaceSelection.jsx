@@ -28,8 +28,8 @@ function PlaceSelection({ onChangeStage }) {
   };
 
   const onClickNext = () => {
-    onChangeStage("CDISTRICT")
-  }
+    onChangeStage('CDISTRICT');
+  };
 
   return (
     <div>
@@ -60,7 +60,7 @@ function PlaceSelection({ onChangeStage }) {
           <Dropdown.Trigger>{dongName}</Dropdown.Trigger>
           <Dropdown.OptionContainer>
             {dong[sigunguCode].map(({ code, name }) => (
-              <Dropdown.Option id={code} code={code} name={name} onSelect={onSelectDong}>
+              <Dropdown.Option id={code} code={code} name={name} onSelect={onSelectDong} key={code}>
                 {name}
               </Dropdown.Option>
             ))}
