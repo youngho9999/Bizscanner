@@ -3,7 +3,7 @@
 import React from 'react';
 import { Modal } from '@/components/Modal';
 import Button from '@/components/Button';
-import { Reason } from './Reason';
+import { RecommendationIndicator } from './RecommendationIndicator';
 import LocationIcon from '@/assets/icons/location_on.svg'
 
 function Guide() {
@@ -34,46 +34,46 @@ function CDistrictRecommendation() {
               <p className='text-2xl'>{CDistrict}</p>
             </div>
             <div className='flex flex-row justify-center w-[900px] h-[340px] bg-white mt-3 rounded-large'>
-              <Reason>
-                <Reason.Title>추정 순이익</Reason.Title>
-                <Reason.Container className="text-white bg-primary">
+              <RecommendationIndicator>
+                <RecommendationIndicator.Title>추정 순이익</RecommendationIndicator.Title>
+                <RecommendationIndicator.Container className="text-white bg-primary">
                   <p>추천 상권</p>
                   <p>XXXXX 원</p>
-                </Reason.Container>
-                <Reason.Container className="bg-background">
+                </RecommendationIndicator.Container>
+                <RecommendationIndicator.Container className="bg-background">
                   <p>평균 추정 순이익</p>
                   <p>XXXXX 원</p>
-                </Reason.Container>
-              </Reason>
-              <Reason>
-                <Reason.Title>평균 매출액 변화율</Reason.Title>
-                <Reason.Container className="text-white bg-primary">
+                </RecommendationIndicator.Container>
+              </RecommendationIndicator>
+              <RecommendationIndicator>
+                <RecommendationIndicator.Title>평균 매출액 변화율</RecommendationIndicator.Title>
+                <RecommendationIndicator.Container className="text-white bg-primary">
                   <p>추천 상권</p>
                   <p>XX %</p>
-                </Reason.Container>
-                <Reason.Container className="bg-background">
+                </RecommendationIndicator.Container>
+                <RecommendationIndicator.Container className="bg-background">
                   <p>전체 상권</p>
                   <p>XX %</p>
-                </Reason.Container>
-              </Reason>
-              <Reason>
-                <Reason.Title>평균 유동인구</Reason.Title>
-                <Reason.Container className="text-white bg-primary">
+                </RecommendationIndicator.Container>
+              </RecommendationIndicator>
+              <RecommendationIndicator>
+                <RecommendationIndicator.Title>평균 유동인구</RecommendationIndicator.Title>
+                <RecommendationIndicator.Container className="text-white bg-primary">
                   <p>추천 상권</p>
                   <p>XXXXX 명</p>
-                </Reason.Container>
-                <Reason.Container className="bg-background">
+                </RecommendationIndicator.Container>
+                <RecommendationIndicator.Container className="bg-background">
                   <p>전체 상권</p>
                   <p>XXXXX 명</p>
-                </Reason.Container>
-              </Reason>
-              <Reason>
-                <Reason.Title>상권 변화지표</Reason.Title>
-                <Reason.Container className="text-white bg-primary">
+                </RecommendationIndicator.Container>
+              </RecommendationIndicator>
+              <RecommendationIndicator>
+                <RecommendationIndicator.Title>상권 변화지표</RecommendationIndicator.Title>
+                <RecommendationIndicator.Container className="text-white bg-primary">
                   <p>LH</p>
-                </Reason.Container>
+                </RecommendationIndicator.Container>
                 <Guide />
-              </Reason>
+              </RecommendationIndicator>
             </div>
             <Modal.ButtonList>
               <Button className="text-xl tracking-wide text-white bg-primary rounded-small" width="400px" height="50px">리포트 보기</Button>
