@@ -6,6 +6,13 @@ function JobSelection({ onChangeStage, searchType }) {
   const { bizCode, bizName } = useSearchState();
   const jList = jdata[bizCode];
 
+  const onClickJob = () => {
+    if (mode === 'BIZ') {
+      onChangeStage({ cur: 'PLACE' });
+      return;
+    }
+  };
+
   return (
     <div className="flex flex-col">
       <div className="py-4 text-2xl text-center">{bizName} 내 세부 업종을 선택해주세요.</div>
@@ -16,6 +23,7 @@ function JobSelection({ onChangeStage, searchType }) {
               <button
                 key={idx}
                 className="w-[130px] h-[50px] rounded-small border-disabled text-disabled border-2 hover:border-primary hover:text-white hover:bg-primary"
+                onClick={() => onClickJob()}
               >
                 {job.name}
               </button>
