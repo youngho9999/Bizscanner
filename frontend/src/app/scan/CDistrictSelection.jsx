@@ -4,7 +4,7 @@ import { useSearchState } from './SearchContext';
 import axios from '@/api/index';
 import ControllerTitle from './ControllerTitle';
 
-function CDistrictSelection({ onChangeStage }) {
+function CDistrictSelection({ onChangeStage, mode }) {
   const [cDistricts, setCDistricts] = useState([]);
 
   const { dongCode } = useSearchState();
