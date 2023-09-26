@@ -4,7 +4,7 @@ import { useSearchState } from './SearchContext';
 import axios from '@/api/index';
 import ControllerTitle from './ControllerTitle';
 
-function CDistrictSelection() {
+function CDistrictSelection({ onChangeStage }) {
   const [cDistricts, setCDistricts] = useState([]);
 
   const { dongCode } = useSearchState();
@@ -14,6 +14,13 @@ function CDistrictSelection() {
       data: { dongInfoResponseList },
     } = await axios.get(`/jcategory-recommend/dong/${dongCode}`);
     setCDistricts(dongInfoResponseList);
+  };
+
+  const onClickCDistrict = () => {
+    if (mode === 'PLACE') {
+      onChangeStage({ cur: 'BIZ' });
+      return;
+    }
   };
 
   useEffect(() => {
@@ -32,6 +39,7 @@ function CDistrictSelection() {
                   <button
                     key={careaCode}
                     className="text-ellipsis overflow-hidden whitespace-nowrap w-[130px] h-[50px] rounded-small border-disabled text-disabled border-2 hover:border-primary hover:text-white hover:bg-primary"
+                    onClick={() => onClickCDistrict()}
                   >
                     {careaName}
                   </button>
