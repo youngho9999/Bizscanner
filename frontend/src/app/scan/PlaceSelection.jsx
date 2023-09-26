@@ -5,9 +5,11 @@ import { Dropdown } from '@/components/Dropdown';
 import sigunguData from '../../../public/시군구.json';
 import dongData from '../../../public/행정동.json';
 import { useSearchDispatch, useSearchState } from './SearchContext';
+import RecommendButton from './RecommendButton';
 import NextButton from './NextButton';
+import { searchMode } from './constant';
 
-function PlaceSelection({ onChangeStage }) {
+function PlaceSelection({ onChangeStage, mode }) {
   const { dongName, sigunguCode, sigunguName } = useSearchState();
   const dispatch = useSearchDispatch();
 
@@ -68,7 +70,18 @@ function PlaceSelection({ onChangeStage }) {
           </Dropdown.OptionContainer>
         </Dropdown.Container>
       </Dropdown>
-      <NextButton onClick={onClickNext} />
+      <div className="flex flex-row align-center">
+        {mode === searchMode.BIZ ? (
+          <>
+            <RecommendButton title={'추천받기'} className="w-1/2 h-full p-3 mx-1 mt-0" />
+            <NextButton onClick={onClickNext} className="w-1/2 h-full p-3 mx-1 mt-0" />
+          </>
+        ) : (
+          <>
+            <NextButton onClick={onClickNext} className="inline-block float-right w-3/4 p-3 ml-auto" />
+          </>
+        )}
+      </div>
     </div>
   );
 }

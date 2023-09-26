@@ -42,7 +42,7 @@ function BizSelection({ onChangeStage, mode }) {
           );
         })}
       </div>
-      {mode === searchMode.PLACE && <RecommendButton title={'추천받기'} />}
+      {mode === searchMode.PLACE && <RecommendButton title={'추천받기'} className='w-full p-4 mt-4' />}
     </div>
   );
 }
