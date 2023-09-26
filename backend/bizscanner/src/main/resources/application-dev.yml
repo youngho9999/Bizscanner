@@ -17,6 +17,15 @@ spring:
     port: ${REDIS_PORT}
     password: ${REDIS_PASSWORD}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  server:
+    port: ${PROMETHEUS_PORT}
+    base-path: ${PROMETHEUS_PATH}
+
 server:
   servlet:
     context-path: /api/v1
