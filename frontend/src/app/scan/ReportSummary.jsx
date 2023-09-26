@@ -31,7 +31,6 @@ function ReportSummary() {
   const fetchBestJob = async () => {
     const { data } = await axios.get(`/report/best-jcategory/${careaCode}`);
     setBestJob(data);
-    console.log(data);
   };
 
   const fetchBestSales = async () => {
