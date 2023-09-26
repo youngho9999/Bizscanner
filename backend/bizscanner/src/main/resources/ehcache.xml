@@ -9,7 +9,7 @@
         <key-type>java.lang.String</key-type>
         <expiry>
             <!-- 캐시 만료 시간 -->
-            <ttl unit="seconds">30</ttl>
+            <ttl unit="seconds">600</ttl>
         </expiry>
         <resources>
             <!-- JVM heap 메모리 LRU strategy-->
