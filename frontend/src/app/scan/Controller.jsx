@@ -13,11 +13,12 @@ const Stage = {
   PLACE: PlaceSelection,
   BIZ: BizSelection,
   JOB: JobSelection,
-  CDISTRICT: CDistrictSelection
+  CDISTRICT: CDistrictSelection,
 };
 
 function Controller() {
   const [searchType, setSearchType] = useState({
+    mode: '',
     cur: 'INIT',
     history: [],
   });
@@ -26,8 +27,9 @@ function Controller() {
 
   const onChangeStage = (nextStage) => {
     setSearchType((prev) => ({
-      cur: nextStage,
+      ...prev,
       history: [...prev.history, prev.cur],
+      ...nextStage,
     }));
   };
 
@@ -46,7 +48,7 @@ function Controller() {
             <BackIcon width="48" height="48" />
           </button>
         ) : null}
-        <CurStage onChangeStage={onChangeStage} />
+        <CurStage onChangeStage={onChangeStage} mode={searchType.mode} />
       </div>
     </SearchProvider>
   );

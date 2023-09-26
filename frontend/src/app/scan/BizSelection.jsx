@@ -21,7 +21,7 @@ function BizSelection({ onChangeStage }) {
 
   const onClickBiz = ({ name, code }) => {
     dispatch({ type: 'SET_BIZ', bizCode: code, bizName: name });
-    onChangeStage('JOB');
+    onChangeStage({ cur: 'JOB' });
   };
 
   return (

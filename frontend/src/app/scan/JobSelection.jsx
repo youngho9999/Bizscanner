@@ -2,7 +2,7 @@ import React from 'react';
 import jdata from '../../../public/jcategory.json';
 import { useSearchState } from './SearchContext';
 
-function JobSelection({ onChangeStage }) {
+function JobSelection({ onChangeStage, searchType }) {
   const { bizCode, bizName } = useSearchState();
   const jList = jdata[bizCode];
 

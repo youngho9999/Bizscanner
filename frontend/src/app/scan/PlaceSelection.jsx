@@ -29,7 +29,7 @@ function PlaceSelection({ onChangeStage }) {
   };
 
   const onClickNext = () => {
-    onChangeStage('CDISTRICT');
+    onChangeStage({ cur: 'CDISTRICT' });
   };
 
   return (
