@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import store.bizscanner.dto.request.MemberSignupRequest;
 import store.bizscanner.entity.Member;
 import store.bizscanner.entity.enums.Role;
+import store.bizscanner.global.exception.CustomException;
+import store.bizscanner.global.exception.ErrorCode;
 import store.bizscanner.repository.MemberRepository;
 
 @Service
@@ -38,5 +40,13 @@ public class MemberService {
         member.passwordEncode(passwordEncoder);
         memberRepository.save(member);
     }
+
+    @Transactional
+    public void updateNickname(String email, String nickname) {
+        memberRepository.findByEmail(email)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND))
+                .setNickname(nickname);
+    }
+
 
 }
