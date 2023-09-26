@@ -63,9 +63,9 @@ public class SecurityConfig {
 
                 // 아이콘, css, js 관련
                 // 기본 페이지, css, image, js 하위 폴더에 있는 자료들은 모두 접근 가능, h2-console에 접근 가능
-                .antMatchers("/**").permitAll() // 임시
+//                .antMatchers("/**").permitAll() // 임시 전체 허용
                 .antMatchers("/","/css/**","/images/**","/js/**","/favicon.ico","/h2-console/**").permitAll()
-                .antMatchers("/sign-up").permitAll() // 회원가입 접근 가능
+                .antMatchers("/member/**", "ouath2/**", "/sign-up", "/report/**", "/carea-recommend", "/jcategory-recommend/**").permitAll() // 회원가입 접근 가능
                 .anyRequest().authenticated() // 위의 경로 이외에는 모두 인증된 사용자만 접근 가능
                 .and()
                 //== 소셜 로그인 설정 ==//
