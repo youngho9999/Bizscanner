@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchState } from './SearchContext';
 import axios from '@/api/index';
 import ControllerTitle from './ControllerTitle';
+import RecommendButton from './RecommendButton';
 
 function CDistrictSelection({ onChangeStage, mode }) {
   const [cDistricts, setCDistricts] = useState([]);
@@ -51,6 +52,7 @@ function CDistrictSelection({ onChangeStage, mode }) {
       ) : (
         <div className="mt-8 mb-8 text-2xl font-bold text-center">상권이 존재하지 않아요!</div>
       )}
+      {mode === 'BIZ' && <RecommendButton title={'추천받기'} />}
     </div>
   );
 }

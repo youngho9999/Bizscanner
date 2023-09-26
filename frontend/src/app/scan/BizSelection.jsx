@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSearchDispatch } from './SearchContext';
+import RecommendButton from './RecommendButton';
 
-function BizSelection({ onChangeStage }) {
+function BizSelection({ onChangeStage, mode }) {
   const Jtype = [
     {
       name: '외식업',
@@ -40,6 +41,7 @@ function BizSelection({ onChangeStage }) {
           );
         })}
       </div>
+      {mode === 'PLACE' && <RecommendButton title={'추천받기'} />}
     </div>
   );
 }

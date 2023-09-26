@@ -1,8 +1,9 @@
 import React from 'react';
 import jdata from '../../../public/jcategory.json';
 import { useSearchState } from './SearchContext';
+import RecommendButton from './RecommendButton';
 
-function JobSelection({ onChangeStage, searchType }) {
+function JobSelection({ onChangeStage, mode }) {
   const { bizCode, bizName } = useSearchState();
   const jList = jdata[bizCode];
 
@@ -31,6 +32,7 @@ function JobSelection({ onChangeStage, searchType }) {
           })}
         </div>
       </div>
+      {mode === 'PLACE' && <RecommendButton title={'추천받기'} />}
     </div>
   );
 }
