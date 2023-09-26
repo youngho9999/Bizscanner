@@ -2,7 +2,7 @@ import useHover from '@/hooks/useHover';
 import classnames from 'classnames';
 import React from 'react';
 
-function SearchSelectButton({ text, Icon, onClick }) {
+function SearchSelectButton({ text, Icon, onClick, className }) {
   const [ref, hover] = useHover();
 
   return (
@@ -13,7 +13,7 @@ function SearchSelectButton({ text, Icon, onClick }) {
       ref={ref}
       onClick={onClick}
     >
-      <Icon className={classnames('mb-2 fill-disabled', hover ? 'fill-primary' : '')} />
+      <Icon className={classnames('mb-2 fill-disabled', hover ? 'fill-primary' : '', className)} />
       {text}
     </button>
   );
