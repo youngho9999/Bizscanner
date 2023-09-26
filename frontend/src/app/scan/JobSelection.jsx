@@ -1,15 +1,20 @@
 import React from 'react';
 import jdata from '../../../public/jcategory.json';
-import { useSearchState } from './SearchContext';
+import { useSearchState, useSearchDispatch } from './SearchContext';
 import RecommendButton from './RecommendButton';
 import { searchMode } from './constant';
 
 function JobSelection({ onChangeStage, mode }) {
   const { bizCode, bizName } = useSearchState();
   const jList = jdata[bizCode];
+  const dispatch = useSearchDispatch();
 
-  const onClickJob = () => {
+  const onClickJob = (jcategoryCode) => {
     if (mode === searchMode.BIZ) {
+      dispatch({
+        type: 'SET_JCATEGORY',
+        jcategoryCode: jcategoryCode,
+      });
       onChangeStage({ cur: 'PLACE' });
       return;
     }
@@ -25,7 +30,7 @@ function JobSelection({ onChangeStage, mode }) {
               <button
                 key={idx}
                 className="w-[130px] h-[50px] rounded-small border-disabled text-disabled border-2 hover:border-primary hover:text-white hover:bg-primary"
-                onClick={() => onClickJob()}
+                onClick={() => onClickJob(job.code)}
               >
                 {job.name}
               </button>
