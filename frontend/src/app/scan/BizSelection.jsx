@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSearchDispatch } from './SearchContext';
 import RecommendButton from './RecommendButton';
+import { searchMode } from './constant';
 
 function BizSelection({ onChangeStage, mode }) {
   const Jtype = [
@@ -41,7 +42,7 @@ function BizSelection({ onChangeStage, mode }) {
           );
         })}
       </div>
-      {mode === 'PLACE' && <RecommendButton title={'추천받기'} />}
+      {mode === searchMode.PLACE && <RecommendButton title={'추천받기'} />}
     </div>
   );
 }

@@ -2,13 +2,14 @@ import React from 'react';
 import jdata from '../../../public/jcategory.json';
 import { useSearchState } from './SearchContext';
 import RecommendButton from './RecommendButton';
+import { searchMode } from './constant';
 
 function JobSelection({ onChangeStage, mode }) {
   const { bizCode, bizName } = useSearchState();
   const jList = jdata[bizCode];
 
   const onClickJob = () => {
-    if (mode === 'BIZ') {
+    if (mode === searchMode.BIZ) {
       onChangeStage({ cur: 'PLACE' });
       return;
     }
@@ -32,7 +33,7 @@ function JobSelection({ onChangeStage, mode }) {
           })}
         </div>
       </div>
-      {mode === 'PLACE' && <RecommendButton title={'추천받기'} />}
+      {mode === searchMode.PLACE && <RecommendButton title={'추천받기'} />}
     </div>
   );
 }

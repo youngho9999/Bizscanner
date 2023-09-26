@@ -4,14 +4,15 @@ import SelectButton from './SearchSelectButton';
 import LocationIcon from '@/assets/icons/location_on.svg';
 import StoreIcon from '@/assets/icons/local_convenience_store.svg';
 import ControllerTitle from './ControllerTitle';
+import { searchMode } from './constant';
 
 function SearchSelection({ onChangeStage }) {
   const onClickPlace = () => {
-    onChangeStage({ cur: 'PLACE', mode: 'PLACE' });
+    onChangeStage({ cur: 'PLACE', mode: searchMode.PLACE });
   };
 
   const onClickBiz = () => {
-    onChangeStage({ cur: 'BIZ', mode: 'BIZ' });
+    onChangeStage({ cur: 'BIZ', mode: searchMode.BIZ });
   };
 
   return (
