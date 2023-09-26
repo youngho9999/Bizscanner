@@ -38,4 +38,5 @@ public class MemberService {
         member.passwordEncode(passwordEncoder);
         memberRepository.save(member);
     }
+
 }
