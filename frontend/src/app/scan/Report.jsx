@@ -9,7 +9,7 @@ function Report() {
       <Tab />
       <div className="w-full h-full p-8 ">
         <div className="flex items-center mb-8 text-4xl font-bold">
-          <LocationIcon className="fill-primary"></LocationIcon>
+          <LocationIcon className="fill-primary" width="48" height="48"></LocationIcon>
           한식 | 강남 마이스 관광 특구
         </div>
       </div>
