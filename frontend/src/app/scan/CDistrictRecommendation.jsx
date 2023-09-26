@@ -31,7 +31,7 @@ function CDistrictRecommendation() {
             <div className='text-sm text-center text-red-600'>{warning}</div>
             <div className='flex flex-row justify-center my-3'>
               <LocationIcon className="mr-1 fill-primary" style={{ width: '30px', height: '30px' }} />
-              <p className='text-2xl'>{CDistrict}</p>
+              <p className='text-xl'>{CDistrict}</p>
             </div>
             <div className='flex flex-row justify-center w-[900px] h-[340px] bg-white mt-3 rounded-large'>
               <RecommendationIndicator>
