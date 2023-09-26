@@ -85,7 +85,7 @@ function ReportStoreCount() {
           `해당 상권에서 운영 중인 한식 점포수 전년 동분기 대비 ${getLastYearDiff()}개 ${getLastYearDiffText()}
       하였으며,전분기 대비 ${getPrevQuaterDiff()}개 ${getPrevQuaterDiffText()}하였습니다.`}
       </SummaryText>
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center">
         <div className="w-3/4">
           <Bar options={options} data={data} />
         </div>

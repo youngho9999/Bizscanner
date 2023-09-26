@@ -34,7 +34,7 @@ function Tab() {
     <div className="bg-primary h-full w-[300px] p-3">
       <Logo className="mt-5 mb-9 fill-white" />
       {tabMenu.map(({ title, icon }) => (
-        <TabButton Icon={icon} title={title} key={title}/>
+        <TabButton Icon={icon} title={title} key={title} />
       ))}
     </div>
   );
