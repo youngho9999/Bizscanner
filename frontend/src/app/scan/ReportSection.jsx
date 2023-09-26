@@ -1,9 +1,10 @@
+import classnames from 'classnames';
 import React from 'react';
 
-function ReportSection({ children, title }) {
+function ReportSection({ children, title, className }) {
   return (
-    <div className="p-8 bg-white rounded-small">
-      {title && <div className="text-2xl font-bold ">{title}</div>}
+    <div className={classnames('p-8 bg-white rounded-small ', className)}>
+      {title && <div className="mb-8 text-2xl font-bold">{title}</div>}
       {children}
     </div>
   );
