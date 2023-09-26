@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import jdata from '../../../public/jcategory.json';
 import { useSearchState, useSearchDispatch } from './SearchContext';
 import RecommendButton from './RecommendButton';
 import { searchMode } from './constant';
+import JobRecommendation from './JobRecommendation';
 
 function JobSelection({ onChangeStage, mode }) {
+  const [showRecommend, setShowRecommend] = useState(false);
   const { bizCode, bizName } = useSearchState();
   const jList = jdata[bizCode];
   const dispatch = useSearchDispatch();
@@ -18,6 +20,10 @@ function JobSelection({ onChangeStage, mode }) {
       onChangeStage({ cur: 'PLACE' });
       return;
     }
+  };
+
+  const onClickRecommend = () => {
+    setShowRecommend(true);
   };
 
   return (
@@ -38,7 +44,14 @@ function JobSelection({ onChangeStage, mode }) {
           })}
         </div>
       </div>
-      {mode === searchMode.PLACE && <RecommendButton title={'추천받기'} className='w-full p-4 mt-4' />}
+      {mode === searchMode.PLACE && (
+        <RecommendButton
+          title={'추천받기'}
+          className="w-full p-4 mt-4"
+          onClick={onClickRecommend}
+        />
+      )}
+      <JobRecommendation isOpen={showRecommend} onClose={() => setShowRecommend(false)} />
     </div>
   );
 }
