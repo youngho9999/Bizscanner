@@ -10,11 +10,11 @@ function JobSelection({ onChangeStage, mode }) {
   const dispatch = useSearchDispatch();
 
   const onClickJob = (jcategoryCode) => {
+    dispatch({
+      type: 'SET_JCATEGORY',
+      jcategoryCode: jcategoryCode,
+    });
     if (mode === searchMode.BIZ) {
-      dispatch({
-        type: 'SET_JCATEGORY',
-        jcategoryCode: jcategoryCode,
-      });
       onChangeStage({ cur: 'PLACE' });
       return;
     }

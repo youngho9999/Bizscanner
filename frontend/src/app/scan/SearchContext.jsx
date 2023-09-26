@@ -51,7 +51,7 @@ function reducer(state, action) {
     case 'SET_JCATEGORY':
     return {
       ...state,
-      jcategoryCode: action.bizCode,
+      jcategoryCode: action.jcategoryCode,
       };
 
     default:

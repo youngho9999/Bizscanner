@@ -19,11 +19,11 @@ function CDistrictSelection({ onChangeStage, mode }) {
   };
 
   const onClickCDistrict = (code) => {
+    dispatch({
+      type: 'SET_CAREA',
+      careaCode: code
+    });
     if (mode === searchMode.PLACE) {
-      dispatch({
-        type: 'SET_CAREA',
-        careaCode: code
-      });
       onChangeStage({ cur: 'BIZ' });
       return;
     }
