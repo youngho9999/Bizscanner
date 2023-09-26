@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import store.bizscanner.dto.request.MemberSignupRequest;
+import store.bizscanner.dto.request.UpdateNicknameRequest;
 import store.bizscanner.service.MemberService;
 
 import javax.validation.Valid;
@@ -22,9 +23,9 @@ public class MemberController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/{email}")
-    public ResponseEntity<Void> updateNickname(@PathVariable String email, @Valid @RequestParam String nickname) {
-        memberService.updateNickname(email, nickname);
+    @PatchMapping()
+    public ResponseEntity<Void> updateNickname(@Valid @RequestBody UpdateNicknameRequest updateNicknameRequest) {
+        memberService.updateNickname(updateNicknameRequest.getEmail(), updateNicknameRequest.getNickname());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
