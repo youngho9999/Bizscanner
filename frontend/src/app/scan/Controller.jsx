@@ -35,6 +35,7 @@ function Controller() {
 
   const onClickPrev = () => {
     setSearchType((prev) => ({
+      ...prev,
       cur: prev.history.pop(),
       history: [...prev.history],
     }));
