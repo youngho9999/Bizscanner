@@ -1,7 +1,12 @@
 import React from 'react';
 
-function ReportSection({ children }) {
-  return <div className="w-3/4 p-8 bg-white rounded-small">{children}</div>;
+function ReportSection({ children, title }) {
+  return (
+    <div className="p-8 bg-white rounded-small">
+      {title && <div className="text-2xl font-bold ">{title}</div>}
+      {children}
+    </div>
+  );
 }
 
 export default ReportSection;
