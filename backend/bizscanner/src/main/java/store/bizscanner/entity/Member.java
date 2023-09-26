@@ -1,16 +1,15 @@
 package store.bizscanner.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import store.bizscanner.entity.enums.Role;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 
 @Entity
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +23,7 @@ public class Member extends BaseTime {
 
     private String password;
 
+    @Pattern(regexp = "^(?![^aeiouAEIOU]*$)[a-zA-Z0-9aeiouAEIOU]{2,16}$", message = "2 ~ 16 글자 이내, 특수문자, 자음 , 모음 제외")
     private String nickname;
 
     private String imageUrl;
