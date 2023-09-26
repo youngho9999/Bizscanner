@@ -32,7 +32,7 @@ const tabMenu = [
 function Tab() {
   return (
     <div className="bg-primary h-full w-[300px] p-3">
-      <Logo className="mt-5 mb-11 fill-white" />
+      <Logo className="mt-5 mb-9 fill-white" />
       {tabMenu.map(({ title, icon }) => (
         <TabButton Icon={icon} title={title} />
       ))}
