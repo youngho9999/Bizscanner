@@ -13,7 +13,8 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
     RECOMMEND_JCATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "추천할 업종이 없습니다"),
     RECOMMEND_CAREA_NOT_FOUND(HttpStatus.NOT_FOUND, "추천할 상권이 없습니다"),
-    SCRAP_NOT_FOUND(HttpStatus.NOT_FOUND, "Scrap Resource not exists");
+    SCRAP_NOT_FOUND(HttpStatus.NOT_FOUND, "Scrap Resource not exists"),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "member not found");
 
     private final HttpStatus httpStatus;
     private final String message;
