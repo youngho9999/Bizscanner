@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSearchDispatch } from './SearchContext';
+import RecommendButton from './RecommendButton';
+import { searchMode } from './constant';
+import JobRecommendation from './JobRecommendation';
 
-function BizSelection({ onChangeStage }) {
+function BizSelection({ onChangeStage, mode }) {
+  const [showRecommend, setShowRecommend] = useState(false);
+
   const Jtype = [
     {
       name: '외식업',
@@ -21,7 +26,11 @@ function BizSelection({ onChangeStage }) {
 
   const onClickBiz = ({ name, code }) => {
     dispatch({ type: 'SET_BIZ', bizCode: code, bizName: name });
-    onChangeStage('JOB');
+    onChangeStage({ cur: 'JOB' });
+  };
+
+  const onClickRecommend = () => {
+    setShowRecommend(true);
   };
 
   return (
@@ -40,6 +49,14 @@ function BizSelection({ onChangeStage }) {
           );
         })}
       </div>
+      {mode === searchMode.PLACE && (
+        <RecommendButton
+          title={'추천받기'}
+          className="w-full p-4 mt-4"
+          onClick={onClickRecommend}
+        />
+      )}
+      <JobRecommendation isOpen={showRecommend} onClose={() => setShowRecommend(false)} />
     </div>
   );
 }

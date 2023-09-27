@@ -5,8 +5,13 @@ import { Dropdown } from '@/components/Dropdown';
 import sigunguData from '../../../public/시군구.json';
 import dongData from '../../../public/행정동.json';
 import { useSearchDispatch, useSearchState } from './SearchContext';
+import RecommendButton from './RecommendButton';
+import NextButton from './NextButton';
+import { searchMode } from './constant';
+import CDistrictRecommendation from './CDistrictRecommendation';
 
-function PlaceSelection() {
+function PlaceSelection({ onChangeStage, mode }) {
+  const [showRecommend, setShowRecommend] = useState(false);
   const { dongName, sigunguCode, sigunguName } = useSearchState();
   const dispatch = useSearchDispatch();
 
@@ -25,6 +30,14 @@ function PlaceSelection() {
 
   const onSelectDong = ({ code, name }) => {
     dispatch({ type: 'SET_DONG', dongCode: code, dongName: name });
+  };
+
+  const onClickNext = () => {
+    onChangeStage({ cur: 'CDISTRICT' });
+  };
+
+  const onClickRecommend = () => {
+    setShowRecommend(true);
   };
 
   return (
@@ -56,13 +69,36 @@ function PlaceSelection() {
           <Dropdown.Trigger>{dongName}</Dropdown.Trigger>
           <Dropdown.OptionContainer>
             {dong[sigunguCode].map(({ code, name }) => (
-              <Dropdown.Option id={code} code={code} name={name} onSelect={onSelectDong}>
+              <Dropdown.Option id={code} code={code} name={name} onSelect={onSelectDong} key={code}>
                 {name}
               </Dropdown.Option>
             ))}
           </Dropdown.OptionContainer>
         </Dropdown.Container>
       </Dropdown>
+      <div className="flex flex-row align-center">
+        {mode === searchMode.BIZ ? (
+          <>
+            <RecommendButton
+              title={'추천받기'}
+              className="w-1/2 h-full p-3 mx-1 mt-0"
+              onClick={onClickRecommend}
+            />
+            <CDistrictRecommendation
+              isOpen={showRecommend}
+              onClose={() => setShowRecommend(false)}
+            />
+            <NextButton onClick={onClickNext} className="w-1/2 h-full p-3 mx-1 mt-0" />
+          </>
+        ) : (
+          <>
+            <NextButton
+              onClick={onClickNext}
+              className="inline-block float-right w-3/4 p-3 ml-auto"
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 }

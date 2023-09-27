@@ -6,16 +6,19 @@ import { SearchProvider } from './SearchContext';
 import JobSelection from './JobSelection';
 import BizSelection from './BizSelection';
 import BackIcon from '@/assets/icons/undo.svg';
+import CDistrictSelection from './CDistrictSelection';
 
 const Stage = {
   INIT: Selection,
   PLACE: PlaceSelection,
   BIZ: BizSelection,
   JOB: JobSelection,
+  CDISTRICT: CDistrictSelection,
 };
 
 function Controller() {
   const [searchType, setSearchType] = useState({
+    mode: '',
     cur: 'INIT',
     history: [],
   });
@@ -24,13 +27,15 @@ function Controller() {
 
   const onChangeStage = (nextStage) => {
     setSearchType((prev) => ({
-      cur: nextStage,
+      ...prev,
       history: [...prev.history, prev.cur],
+      ...nextStage,
     }));
   };
 
   const onClickPrev = () => {
     setSearchType((prev) => ({
+      ...prev,
       cur: prev.history.pop(),
       history: [...prev.history],
     }));
@@ -44,7 +49,7 @@ function Controller() {
             <BackIcon width="48" height="48" />
           </button>
         ) : null}
-        <CurStage onChangeStage={onChangeStage} />
+        <CurStage onChangeStage={onChangeStage} mode={searchType.mode} />
       </div>
     </SearchProvider>
   );
