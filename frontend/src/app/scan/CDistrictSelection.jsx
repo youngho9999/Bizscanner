@@ -18,10 +18,11 @@ function CDistrictSelection({ onChangeStage, mode }) {
     setCDistricts(dongInfoResponseList);
   };
 
-  const onClickCDistrict = (code) => {
+  const onClickCDistrict = ({ careaCode, careaName }) => {
     dispatch({
       type: 'SET_CAREA',
-      careaCode: code
+      careaCode,
+      careaName
     });
     if (mode === searchMode.PLACE) {
       onChangeStage({ cur: 'BIZ' });
@@ -45,7 +46,7 @@ function CDistrictSelection({ onChangeStage, mode }) {
                   <button
                     key={careaCode}
                     className="text-ellipsis overflow-hidden whitespace-nowrap w-[130px] h-[50px] rounded-small border-disabled text-disabled border-2 hover:border-primary hover:text-white hover:bg-primary"
-                    onClick={() => onClickCDistrict(careaCode)}
+                    onClick={() => onClickCDistrict({ careaCode, careaName })}
                   >
                     {careaName}
                   </button>

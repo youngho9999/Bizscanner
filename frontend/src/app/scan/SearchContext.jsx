@@ -11,9 +11,11 @@ const initialState = {
   sigunguCode: 11110,
   sigunguName: '종로구',
   careaCode: '',
+  careaName: '',
   bizCode: '',
   bizName: '',
   jcategoryCode: '',
+  jcategoryName: '',
 };
 
 function reducer(state, action) {
@@ -36,9 +38,11 @@ function reducer(state, action) {
       };
     
     case 'SET_CAREA':
+      console.log(action);
       return {
         ...state,
         careaCode: action.careaCode,
+        careaName: action.careaName,
       };
 
     case 'SET_BIZ':
@@ -49,9 +53,11 @@ function reducer(state, action) {
       };
 
     case 'SET_JCATEGORY':
+      console.log(action);
     return {
       ...state,
       jcategoryCode: action.jcategoryCode,
+      jcategoryName: action.jcategoryName,
       };
 
     default:
