@@ -14,6 +14,13 @@ import {
 import LineGraph from '@/components/Graph/LineGraph';
 import BarGraph from '@/components/Graph/BarGraph';
 import RadioButton from '@/components/RadioButton';
+import SummaryText from './SummaryText';
+import {
+  getLastYearDiff,
+  getLastYearDiffText,
+  getPrevQuaterDiff,
+  getPrevQuaterDiffText,
+} from '@/utils/diff';
 
 const radioButtons = [
   { key: 'QUATER', text: '분기별 매출' },
@@ -89,6 +96,15 @@ function ReportSales() {
 
   return (
     <ReportSection title="매출 현황">
+      <SummaryText>{`해당 상권에서 매출은 전년 동분기 대비 ${getLastYearDiff(
+        salesInfo.quarterlySalesAmountResponses,
+      )}원 ${getLastYearDiffText(
+        salesInfo.quarterlySalesAmountResponses,
+      )} 하였으며, 전분기 대비 ${getPrevQuaterDiff(
+        salesInfo.quarterlySalesAmountResponses,
+      )}원 ${getPrevQuaterDiffText(
+        salesInfo.quarterlySalesAmountResponses,
+      )}하였습니다.`}</SummaryText>
       <div className="flex justify-around gap-2">
         {radioButtons.map(({ key, text }) => (
           <RadioButton
