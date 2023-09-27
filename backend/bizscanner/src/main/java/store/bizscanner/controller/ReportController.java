@@ -34,8 +34,6 @@ public class ReportController {
 
     @GetMapping("/best-population/{careaCode}")
     public ResponseEntity<BestPopulationResponse> bestPopulation(@PathVariable String careaCode) {
-        log.warn("================WARN================");
-        log.error("================ERROR================");
         return new ResponseEntity<>(populationService.bestPopulation(careaCode), HttpStatus.OK);
     }
 
