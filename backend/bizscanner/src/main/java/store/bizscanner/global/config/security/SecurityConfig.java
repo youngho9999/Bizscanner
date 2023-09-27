@@ -26,6 +26,7 @@ import store.bizscanner.global.oauth2.handler.OAuth2LoginSuccessHandler;
 import store.bizscanner.global.oauth2.service.CustomOAuth2UserService;
 import store.bizscanner.repository.MemberRepository;
 import store.bizscanner.service.LoginService;
+import store.bizscanner.service.RefreshTokenService;
 
 /**
  * 인증은 CustomJsonUsernamePasswordAuthenticationFilter에서 authenticate()로 인증된 사용자로 처리
@@ -39,6 +40,7 @@ public class SecurityConfig {
     private final LoginService loginService;
     private final JwtService jwtService;
     private final MemberRepository memberRepository;
+    private final RefreshTokenService refreshTokenService;
     private final ObjectMapper objectMapper;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
     private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
@@ -109,7 +111,7 @@ public class SecurityConfig {
      */
     @Bean
     public LoginSuccessHandler loginSuccessHandler() {
-        return new LoginSuccessHandler(jwtService, memberRepository);
+        return new LoginSuccessHandler(jwtService, memberRepository, refreshTokenService);
     }
 
     /**

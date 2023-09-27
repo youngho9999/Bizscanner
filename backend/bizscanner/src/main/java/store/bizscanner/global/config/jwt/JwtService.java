@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import store.bizscanner.repository.MemberRepository;
+import store.bizscanner.service.RefreshTokenService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +46,7 @@ public class JwtService {
     private static final String BEARER = "Bearer ";
 
     private final MemberRepository memberRepository;
+    private final RefreshTokenService refreshTokenService;
 
     /**
      * AccessToken 생성 메소드
@@ -158,7 +160,8 @@ public class JwtService {
     public void updateRefreshToken(String email, String refreshToken) {
         memberRepository.findByEmail(email)
                 .ifPresentOrElse(
-                        user -> user.updateRefreshToken(refreshToken),
+//                        user -> user.updateRefreshToken(refreshToken),
+                        user -> refreshTokenService.saveOrUpdateRefreshToken(user.getEmail(), refreshToken),
                         () -> new Exception("일치하는 회원이 없습니다.")
                 );
     }

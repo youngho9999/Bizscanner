@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import store.bizscanner.global.config.jwt.JwtService;
 import store.bizscanner.global.oauth2.CustomOAuth2User;
 import store.bizscanner.repository.MemberRepository;
+import store.bizscanner.service.RefreshTokenService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private final JwtService jwtService;
     private final MemberRepository memberRepository;
+    private final RefreshTokenService refreshTokenService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
