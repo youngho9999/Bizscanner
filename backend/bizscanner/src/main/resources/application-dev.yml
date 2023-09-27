@@ -16,6 +16,9 @@ spring:
     host: redis
     port: ${REDIS_PORT}
     password: ${REDIS_PASSWORD}
+  cache:
+    ehcache:
+      config: ehcache.xml
 
 management:
   endpoints:
@@ -29,3 +32,6 @@ management:
 server:
   servlet:
     context-path: /api/v1
+  tomcat:
+    mbeanregistry:
+      enabled: true
