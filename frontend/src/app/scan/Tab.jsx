@@ -20,7 +20,6 @@ const tabMenu = [
   { title: '점포수', icon: StoreIcon },
   { title: '개업 현황', icon: DoorOpenIcon },
   { title: '폐업 현황', icon: DoorClosedIcon },
-  { title: '업종분포 현황', icon: PieIcon },
   { title: '매출액', icon: MoneyIcon },
   { title: '매츨건수', icon: MoneyCountIcon },
   { title: '유동인구 수', icon: PersonIcon },
