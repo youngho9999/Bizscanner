@@ -10,6 +10,7 @@ import {
   getPrevQuaterDiffText,
 } from '@/utils/diff';
 import Bar from '@/components/Graph/BarGraph';
+import { quaterConfig } from '@/components/Graph/constants';
 
 function ReportOpenStore() {
   const [openStoreInfo, setOpenStoreInfo] = useState([]);
@@ -33,7 +34,7 @@ function ReportOpenStore() {
       )}개 ${getPrevQuaterDiffText(openStoreInfo)}하였습니다.`}</SummaryText>
       <div className="flex items-center justify-center">
         <div className="w-3/4">
-          <Bar graphData={openStoreInfo} title="개업 현황" />
+          <Bar graphData={openStoreInfo} title="개업 현황" config={quaterConfig} />
         </div>
       </div>
     </ReportSection>

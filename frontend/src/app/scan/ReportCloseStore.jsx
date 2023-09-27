@@ -10,6 +10,7 @@ import {
   getPrevQuaterDiffText,
 } from '@/utils/diff';
 import Bar from '@/components/Graph/BarGraph';
+import { quaterConfig } from '@/components/Graph/constants';
 
 function ReportCloseStore() {
   const [closeStoreInfo, setCloseStoreInfo] = useState([]);
@@ -34,7 +35,7 @@ function ReportCloseStore() {
       )}개 ${getPrevQuaterDiffText(closeStoreInfo)}하였습니다.`}</SummaryText>
       <div className="flex items-center justify-center">
         <div className="w-3/4">
-          <Bar graphData={closeStoreInfo} title="폐업 현황" />
+          <Bar graphData={closeStoreInfo} title="폐업 현황" config={quaterConfig} />
         </div>
       </div>
     </ReportSection>
