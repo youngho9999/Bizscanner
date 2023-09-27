@@ -1,20 +1,57 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchState } from './SearchContext';
+import axios from '@/api/index';
 import { Modal } from '@/components/Modal';
 import Button from '@/components/Button';
 import { RecommendationIndicator } from './RecommendationIndicator';
 import StoreIcon from '@/assets/icons/local_convenience_store.svg';
 
 function JobRecommendation({ isOpen, onClose }) {
+  const [jobRecommendation, setJobRecommendation] = useState({
+    jcategoryCode: '',
+    averageNetProfitByJcategory: 0,
+    averageSalesAmountRateByJcategory: '',
+    recommendedNetProfitByJcategory: 0,
+    recommendedCareaSalesAmountRateByJcategory: '',
+    closeRate: '',
+  });
+
+  const { careaCode } = useSearchState();
+
   const warning =
     '해당 정보는 추정 데이터를 기반으로 하고 있어 정확하지 않을 수 있기에 사용자의 책임하에 활용하시기 바랍니다.';
-  const Job = '한식음식점';
+
+  const fetchData = async () => {
+    const {
+      data: {
+        jcategoryCode,
+        averageNetProfitByJcategory,
+        averageSalesAmountRateByJcategory,
+        recommendedNetProfitByJcategory,
+        recommendedCareaSalesAmountRateByJcategory,
+        closeRate,
+      },
+    } = await axios.get(`/jcategory-recommend/${careaCode}`);
+    setJobRecommendation({
+      jcategoryCode: jcategoryCode,
+      averageNetProfitByJcategory: averageNetProfitByJcategory,
+      averageSalesAmountRateByJcategory: averageSalesAmountRateByJcategory,
+      recommendedNetProfitByJcategory: recommendedNetProfitByJcategory,
+      recommendedCareaSalesAmountRateByJcategory: recommendedCareaSalesAmountRateByJcategory,
+      closeRate: closeRate,
+    });
+  };
 
   const onClickClose = () => {
-    console.log('click')
+    console.log('click');
     onClose();
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <Modal isOpen={isOpen}>
@@ -26,36 +63,36 @@ function JobRecommendation({ isOpen, onClose }) {
             <div className="text-sm text-center text-red-600">{warning}</div>
             <div className="flex flex-row justify-center my-3">
               <StoreIcon className="mr-1 fill-primary" style={{ width: '30px', height: '30px' }} />
-              <p className="text-xl">{Job}</p>
+              <p className="text-xl">{jobRecommendation.jcategoryCode}</p>
             </div>
             <div className="flex flex-row justify-center w-[900px] h-[340px] bg-white mt-3 rounded-large">
               <RecommendationIndicator>
                 <RecommendationIndicator.Title>평균 매출액</RecommendationIndicator.Title>
                 <RecommendationIndicator.Container className="text-white bg-primary">
                   <p>추천 업종</p>
-                  <p>XXXXX 원</p>
+                  <p>{jobRecommendation.recommendedNetProfitByJcategory} 원</p>
                 </RecommendationIndicator.Container>
                 <RecommendationIndicator.Container className="bg-background">
                   <p>전체 업종</p>
-                  <p>XXXXX 원</p>
+                  <p>{jobRecommendation.averageNetProfitByJcategory} 원</p>
                 </RecommendationIndicator.Container>
               </RecommendationIndicator>
               <RecommendationIndicator>
                 <RecommendationIndicator.Title>평균 매출액 변화율</RecommendationIndicator.Title>
                 <RecommendationIndicator.Container className="text-white bg-primary">
                   <p>추천 업종</p>
-                  <p>XX %</p>
+                  <p>{jobRecommendation.recommendedCareaSalesAmountRateByJcategory} %</p>
                 </RecommendationIndicator.Container>
                 <RecommendationIndicator.Container className="bg-background">
                   <p>전체 업종</p>
-                  <p>XX %</p>
+                  <p>{jobRecommendation.averageSalesAmountRateByJcategory} %</p>
                 </RecommendationIndicator.Container>
               </RecommendationIndicator>
               <RecommendationIndicator>
                 <RecommendationIndicator.Title>폐업률</RecommendationIndicator.Title>
                 <RecommendationIndicator.Container className="text-white bg-primary">
                   <p>추천 업종</p>
-                  <p>XX %</p>
+                  <p>{jobRecommendation.closeRate} %</p>
                 </RecommendationIndicator.Container>
               </RecommendationIndicator>
             </div>
