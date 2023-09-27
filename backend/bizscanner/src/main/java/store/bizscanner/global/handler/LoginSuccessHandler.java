@@ -7,7 +7,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import store.bizscanner.global.config.jwt.JwtService;
-import store.bizscanner.repository.MemberRepository;
 import store.bizscanner.service.RefreshTokenService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final JwtService jwtService;
-    private final MemberRepository memberRepository;
     private final RefreshTokenService refreshTokenService;
 
     @Value("${jwt.access.expiration}")
@@ -35,11 +33,6 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
         refreshTokenService.saveOrUpdateRefreshToken(email, refreshToken);
 
-        memberRepository.findByEmail(email)
-                .ifPresent(user -> {
-                    user.updateRefreshToken(refreshToken);
-                    memberRepository.saveAndFlush(user);
-                });
         log.info("로그인에 성공하였습니다. 이메일 : {}", email);
         log.info("로그인에 성공하였습니다. AccessToken : {}", accessToken);
         log.info("발급된 AccessToken 만료 기간 : {}", accessTokenExpiration);

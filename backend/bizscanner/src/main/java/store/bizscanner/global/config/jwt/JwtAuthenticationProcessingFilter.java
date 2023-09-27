@@ -12,6 +12,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import store.bizscanner.entity.Member;
 import store.bizscanner.global.util.PasswordUtil;
 import store.bizscanner.repository.MemberRepository;
+import store.bizscanner.repository.RefreshTokenRepository;
+import store.bizscanner.service.RefreshTokenService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -40,6 +42,8 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final MemberRepository memberRepository;
+    private final RefreshTokenService refreshTokenService;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 
@@ -82,12 +86,15 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
      *  그 후 JwtService.sendAccessTokenAndRefreshToken()으로 응답 헤더에 보내기
      */
     public void checkRefreshTokenAndReIssueAccessToken(HttpServletResponse response, String refreshToken) {
-        memberRepository.findByRefreshToken(refreshToken)
-                .ifPresent(member -> {
-                    String reIssuedRefreshToken = reIssueRefreshToken(member);
-                    jwtService.sendAccessAndRefreshToken(response, jwtService.createAccessToken(member.getEmail()),
+        refreshTokenRepository.findByRefreshToken(refreshToken)
+                .ifPresent(currRefreshToken -> {
+                    memberRepository.findByEmail(currRefreshToken.getEmail()).ifPresent(member -> {
+                        String reIssuedRefreshToken = reIssueRefreshToken(member);
+                        jwtService.sendAccessAndRefreshToken(response, jwtService.createAccessToken(member.getEmail()),
                             reIssuedRefreshToken);
+                    });
                 });
+
     }
 
     /**
@@ -97,8 +104,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
      */
     private String reIssueRefreshToken(Member member) {
         String reIssuedRefreshToken = jwtService.createRefreshToken();
-        member.updateRefreshToken(reIssuedRefreshToken);
-        memberRepository.saveAndFlush(member);
+        refreshTokenService.saveOrUpdateRefreshToken(member.getEmail(), reIssuedRefreshToken);
         return reIssuedRefreshToken;
     }
 

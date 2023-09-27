@@ -25,6 +25,7 @@ import store.bizscanner.global.oauth2.handler.OAuth2LoginFailureHandler;
 import store.bizscanner.global.oauth2.handler.OAuth2LoginSuccessHandler;
 import store.bizscanner.global.oauth2.service.CustomOAuth2UserService;
 import store.bizscanner.repository.MemberRepository;
+import store.bizscanner.repository.RefreshTokenRepository;
 import store.bizscanner.service.LoginService;
 import store.bizscanner.service.RefreshTokenService;
 
@@ -41,6 +42,7 @@ public class SecurityConfig {
     private final JwtService jwtService;
     private final MemberRepository memberRepository;
     private final RefreshTokenService refreshTokenService;
+    private final RefreshTokenRepository refreshTokenRepository;
     private final ObjectMapper objectMapper;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
     private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
@@ -111,7 +113,7 @@ public class SecurityConfig {
      */
     @Bean
     public LoginSuccessHandler loginSuccessHandler() {
-        return new LoginSuccessHandler(jwtService, memberRepository, refreshTokenService);
+        return new LoginSuccessHandler(jwtService, refreshTokenService);
     }
 
     /**
@@ -140,7 +142,7 @@ public class SecurityConfig {
 
     @Bean
     public JwtAuthenticationProcessingFilter jwtAuthenticationProcessingFilter() {
-        JwtAuthenticationProcessingFilter jwtAuthenticationFilter = new JwtAuthenticationProcessingFilter(jwtService, memberRepository);
+        JwtAuthenticationProcessingFilter jwtAuthenticationFilter = new JwtAuthenticationProcessingFilter(jwtService, memberRepository, refreshTokenService, refreshTokenRepository);
         return jwtAuthenticationFilter;
     }
 }
