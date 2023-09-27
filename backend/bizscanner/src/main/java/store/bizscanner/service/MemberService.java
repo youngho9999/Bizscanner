@@ -23,11 +23,11 @@ public class MemberService {
     public void signUp(MemberSignupRequest memberSignUpRequest) throws Exception {
 
         if (memberRepository.findByEmail(memberSignUpRequest.getEmail()).isPresent()) {
-            throw new Exception("이미 존재하는 이메일입니다.");
+            throw new CustomException(ErrorCode.EMAIL_ALREADY_EXISTS);
         }
 
         if (memberRepository.findByNickname(memberSignUpRequest.getNickname()).isPresent()) {
-            throw new Exception("이미 존재하는 닉네임입니다.");
+            throw new CustomException(ErrorCode.NICKNAME_ALREADY_EXISTS);
         }
 
         Member member = Member.builder()
