@@ -18,14 +18,10 @@ public class RefreshTokenService {
     @Transactional
     public void saveOrUpdateRefreshToken(String email, String refreshToken) {
 
-        Optional<RefreshToken> currRefreshToken = refreshTokenRepository.findByEmail(email);
-
-        if (currRefreshToken.isPresent()) {
-            currRefreshToken.get().setRefreshToken(refreshToken);
-
-        } else {
-            refreshTokenRepository.save(new RefreshToken(email, refreshToken));
-        }
+        refreshTokenRepository.findByEmail(email).ifPresentOrElse(
+                token -> token.setRefreshToken(refreshToken),
+                () -> refreshTokenRepository.save(new RefreshToken(email, refreshToken))
+        );
     }
 
 }
