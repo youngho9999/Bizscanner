@@ -12,9 +12,7 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const labels = ['2022년 1분기', '2022년 2분기', '2022년 3분기', '2022년 4분기', '2023년 1분기'];
-
-function BarGraph({ graphData, title }) {
+function BarGraph({ graphData, title, config }) {
   const options = {
     responsive: true,
     plugins: {
@@ -29,7 +27,7 @@ function BarGraph({ graphData, title }) {
   };
 
   const data = {
-    labels,
+    labels: config.labels,
     datasets: [
       {
         label: '점포수',
