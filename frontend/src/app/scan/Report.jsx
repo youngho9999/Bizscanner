@@ -19,7 +19,7 @@ function Report() {
             <ReportSummary />
             <ReportStoreCount />
           </main>
-          <aside className="h-full w-[400px]"></aside>
+          <aside className="h-full w-[300px]"></aside>
         </div>
       </div>
     </div>
