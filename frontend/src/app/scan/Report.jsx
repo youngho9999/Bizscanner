@@ -4,6 +4,11 @@ import Tab from './Tab';
 import LocationIcon from '@/assets/icons/location_on.svg';
 import ReportSummary from './ReportSummary';
 import ReportStoreCount from './ReportStoreCount';
+import ReportOpenStore from './ReportOpenStore';
+import ReportCloseStore from './ReportCloseStore';
+import ReportSales from './ReportSales';
+import ReportSalesCount from './ReportSalesCount';
+import ReportFloatingPopulation from './RepoartFloatingPopulation';
 
 function Report() {
   return (
@@ -18,6 +23,11 @@ function Report() {
           <main className="flex flex-col flex-grow max-h-full gap-8 overflow-y-auto">
             <ReportSummary />
             <ReportStoreCount />
+            <ReportOpenStore />
+            <ReportCloseStore />
+            <ReportSales />
+            <ReportSalesCount />
+            <ReportFloatingPopulation />
           </main>
           <aside className="h-full w-[300px]"></aside>
         </div>
