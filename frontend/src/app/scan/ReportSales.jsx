@@ -23,11 +23,11 @@ import {
 } from '@/utils/diff';
 
 const radioButtons = [
-  { key: 'QUATER', text: '분기별 매출' },
-  { key: 'DAY', text: '요일별 매출' },
-  { key: 'GENDER', text: '성별 매출' },
-  { key: 'TIME', text: '시간대별 매출' },
-  { key: 'AGE', text: '연령대별 매출' },
+  { key: 'QUATER', text: '분기별' },
+  { key: 'DAY', text: '요일별' },
+  { key: 'GENDER', text: '성별' },
+  { key: 'TIME', text: '시간대별' },
+  { key: 'AGE', text: '연령대별' },
 ];
 
 function ReportSales() {
@@ -95,7 +95,7 @@ function ReportSales() {
   }, []);
 
   return (
-    <ReportSection title="매출 현황">
+    <ReportSection title="매출액">
       <SummaryText>{`해당 상권에서 매출은 전년 동분기 대비 ${getLastYearDiff(
         salesInfo.quarterlySalesAmountResponses,
       )}원 ${getLastYearDiffText(
