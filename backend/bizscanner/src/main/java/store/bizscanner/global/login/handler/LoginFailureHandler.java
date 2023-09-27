@@ -1,4 +1,4 @@
-package store.bizscanner.global.handler;
+package store.bizscanner.global.login.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;

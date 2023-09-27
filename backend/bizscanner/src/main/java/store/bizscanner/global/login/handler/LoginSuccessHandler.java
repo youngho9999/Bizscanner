@@ -1,4 +1,4 @@
-package store.bizscanner.global.handler;
+package store.bizscanner.global.login.handler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import store.bizscanner.global.config.jwt.JwtService;
+import store.bizscanner.global.jwt.JwtService;
 import store.bizscanner.service.RefreshTokenService;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package store.bizscanner.service;
+package store.bizscanner.global.login.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

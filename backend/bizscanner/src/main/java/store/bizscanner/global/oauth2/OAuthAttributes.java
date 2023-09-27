@@ -3,7 +3,6 @@ package store.bizscanner.global.oauth2;
 import lombok.Builder;
 import lombok.Getter;
 import store.bizscanner.entity.Member;
-import store.bizscanner.entity.SocialType;
 import store.bizscanner.entity.enums.Role;
 import store.bizscanner.global.oauth2.userinfo.GoogleOAuth2UserInfo;
 import store.bizscanner.global.oauth2.userinfo.KakaoOAuth2UserInfo;
@@ -11,7 +10,6 @@ import store.bizscanner.global.oauth2.userinfo.NaverOAuth2UserInfo;
 import store.bizscanner.global.oauth2.userinfo.OAuth2UserInfo;
 
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * 각 소셜에서 받아오는 데이터가 다르므로

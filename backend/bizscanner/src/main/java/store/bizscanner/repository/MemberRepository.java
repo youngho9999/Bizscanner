@@ -2,7 +2,7 @@ package store.bizscanner.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import store.bizscanner.entity.Member;
-import store.bizscanner.entity.SocialType;
+import store.bizscanner.global.oauth2.SocialType;
 
 import java.util.Optional;
 

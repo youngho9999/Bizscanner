@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import store.bizscanner.entity.Member;
-import store.bizscanner.entity.SocialType;
+import store.bizscanner.global.oauth2.SocialType;
 import store.bizscanner.global.oauth2.CustomOAuth2User;
 import store.bizscanner.global.oauth2.OAuthAttributes;
 import store.bizscanner.repository.MemberRepository;

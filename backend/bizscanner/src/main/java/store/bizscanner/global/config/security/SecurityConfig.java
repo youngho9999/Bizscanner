@@ -16,17 +16,17 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
-import store.bizscanner.global.config.jwt.JwtAuthenticationProcessingFilter;
-import store.bizscanner.global.config.jwt.JwtService;
-import store.bizscanner.global.filter.CustomJsonUsernamePasswordAuthenticationFilter;
-import store.bizscanner.global.handler.LoginFailureHandler;
-import store.bizscanner.global.handler.LoginSuccessHandler;
+import store.bizscanner.global.jwt.JwtAuthenticationProcessingFilter;
+import store.bizscanner.global.jwt.JwtService;
+import store.bizscanner.global.login.filter.CustomJsonUsernamePasswordAuthenticationFilter;
+import store.bizscanner.global.login.handler.LoginFailureHandler;
+import store.bizscanner.global.login.handler.LoginSuccessHandler;
 import store.bizscanner.global.oauth2.handler.OAuth2LoginFailureHandler;
 import store.bizscanner.global.oauth2.handler.OAuth2LoginSuccessHandler;
 import store.bizscanner.global.oauth2.service.CustomOAuth2UserService;
 import store.bizscanner.repository.MemberRepository;
 import store.bizscanner.repository.RefreshTokenRepository;
-import store.bizscanner.service.LoginService;
+import store.bizscanner.global.login.service.LoginService;
 import store.bizscanner.service.RefreshTokenService;
 
 /**

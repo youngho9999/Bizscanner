@@ -1,4 +1,4 @@
-package store.bizscanner.global.filter;
+package store.bizscanner.global.login.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationServiceException;

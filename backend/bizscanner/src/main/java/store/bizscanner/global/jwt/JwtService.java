@@ -1,4 +1,4 @@
-package store.bizscanner.global.config.jwt;
+package store.bizscanner.global.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

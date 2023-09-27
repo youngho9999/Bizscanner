@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import store.bizscanner.global.config.jwt.JwtService;
+import store.bizscanner.global.jwt.JwtService;
 import store.bizscanner.global.oauth2.CustomOAuth2User;
 import store.bizscanner.repository.MemberRepository;
 import store.bizscanner.service.RefreshTokenService;

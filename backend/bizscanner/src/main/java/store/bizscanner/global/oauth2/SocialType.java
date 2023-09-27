@@ -1,4 +1,4 @@
-package store.bizscanner.entity;
+package store.bizscanner.global.oauth2;
 
 public enum SocialType {
     KAKAO, NAVER, GOOGLE

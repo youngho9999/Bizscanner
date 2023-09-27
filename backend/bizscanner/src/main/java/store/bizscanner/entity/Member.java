@@ -3,9 +3,9 @@ package store.bizscanner.entity;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import store.bizscanner.entity.enums.Role;
+import store.bizscanner.global.oauth2.SocialType;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -32,7 +32,7 @@ public class Member extends BaseTime {
     private Role role;
 
     @Enumerated(EnumType.STRING)
-    private SocialType  socialType;
+    private SocialType socialType;
 
     private String socialId; // 로그인한 소셜 타입의 식별자 값 (일반 로그인인 경우 null)
 
