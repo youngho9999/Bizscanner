@@ -21,7 +21,6 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'SET_SIGUNGU':
-      console.log(action);
       return {
         ...state,
         sigunguCode: action.sigunguCode,
@@ -38,7 +37,6 @@ function reducer(state, action) {
       };
     
     case 'SET_CAREA':
-      console.log(action);
       return {
         ...state,
         careaCode: action.careaCode,
@@ -53,7 +51,6 @@ function reducer(state, action) {
       };
 
     case 'SET_JCATEGORY':
-      console.log(action);
     return {
       ...state,
       jcategoryCode: action.jcategoryCode,

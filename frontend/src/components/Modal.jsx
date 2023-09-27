@@ -2,7 +2,6 @@ import classnames from 'classnames';
 import ReactDOM from 'react-dom';
 
 function ModalMain({ children, isOpen }) {
-  console.log(isOpen);
   if (!isOpen) {
     return null;
   }

@@ -35,17 +35,16 @@ function JobRecommendation({ isOpen, onClose }) {
       },
     } = await axios.get(`/jcategory-recommend/${careaCode}`);
     setJobRecommendation({
-      jcategoryCode: jcategoryCode,
-      averageNetProfitByJcategory: averageNetProfitByJcategory,
-      averageSalesAmountRateByJcategory: averageSalesAmountRateByJcategory,
-      recommendedNetProfitByJcategory: recommendedNetProfitByJcategory,
-      recommendedCareaSalesAmountRateByJcategory: recommendedCareaSalesAmountRateByJcategory,
-      closeRate: closeRate,
+      jcategoryCode,
+      averageNetProfitByJcategory,
+      averageSalesAmountRateByJcategory,
+      recommendedNetProfitByJcategory,
+      recommendedCareaSalesAmountRateByJcategory,
+      closeRate,
     });
   };
 
   const onClickClose = () => {
-    console.log('click');
     onClose();
   };
 

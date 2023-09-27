@@ -23,7 +23,6 @@ function CDistrictRecommendation({ isOpen, onClose }) {
   const CDistrict = '강남 마이스 관광특구';
 
   const onClickClose = () => {
-    console.log('click')
     onClose();
   };
 
