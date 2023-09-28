@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 function InputMain({ children, className }) {
   return (
-    <div className={classnames('w-full h-full bg-transparent', className)}>
+    <div className={classnames('bg-transparent', className)}>
       <div className="flex flex-col px-5 py-1">{children}</div>
     </div>
   );
