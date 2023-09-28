@@ -36,9 +36,9 @@ function JobRecommendation({ isOpen, onClose }) {
     } = await axios.get(`/jcategory-recommend/${careaCode}`);
     setJobRecommendation({
       jcategoryCode,
-      averageNetProfitByJcategory,
+      averageNetProfitByJcategory: averageNetProfitByJcategory.toLocaleString('ko-KR'),
       averageSalesAmountRateByJcategory,
-      recommendedNetProfitByJcategory,
+      recommendedNetProfitByJcategory: recommendedNetProfitByJcategory.toLocaleString('ko-KR'),
       recommendedCareaSalesAmountRateByJcategory,
       closeRate,
     });
@@ -54,7 +54,7 @@ function JobRecommendation({ isOpen, onClose }) {
 
   return (
     <Modal isOpen={isOpen}>
-      <Modal.Dimmed onClick={onClickClose}>
+      <Modal.Dimmed>
         <Modal.Container className="bg-background" width="1000px" height="90vh">
           <Modal.Close onClick={onClickClose} />
           <div className="flex flex-col items-center">
