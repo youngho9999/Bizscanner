@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReportSection from './ReportSection';
 import { useSearchState } from './SearchContext';
 import axios from '@/api/index';
+import { Age, Day, Gender, Time } from './constant';
 
 function IndicatorSection({ title, children }) {
   return (
@@ -58,17 +59,17 @@ function ReportSummary() {
           <Indicator title="폐업 점포수" value={bestJob?.bestCloseStoreCountJcategory} />
         </IndicatorSection>
         <IndicatorSection title="BEST 매출">
-          <Indicator title="성별" value={bestSales?.bestSalesGender} />
-          <Indicator title="연령대" value={bestSales?.bestSalesAge} />
-          <Indicator title="요일" value={bestSales?.bestSalesDay} />
-          <Indicator title="시간대" value={bestSales?.bestSalesTime} />
+          <Indicator title="성별" value={Gender[bestSales?.bestSalesGender]} />
+          <Indicator title="연령대" value={Age[bestSales?.bestSalesAge]} />
+          <Indicator title="요일" value={Day[bestSales?.bestSalesDay]} />
+          <Indicator title="시간대" value={Time[bestSales?.bestSalesTime]} />
           <Indicator title="업종" value={bestSales?.bestJcategoryCode} />
         </IndicatorSection>
         <IndicatorSection title="BEST 유동인구">
-          <Indicator title="성별" value={bestFloatingPopulation?.bestPopulationGender} />
-          <Indicator title="연령대" value={bestFloatingPopulation?.bestPopulationAge} />
-          <Indicator title="요일" value={bestFloatingPopulation?.bestPopulationDay} />
-          <Indicator title="시간대" value={bestFloatingPopulation?.bestPopulationTime} />
+          <Indicator title="성별" value={Gender[bestFloatingPopulation?.bestPopulationGender]} />
+          <Indicator title="연령대" value={Age[bestFloatingPopulation?.bestPopulationAge]} />
+          <Indicator title="요일" value={Day[bestFloatingPopulation?.bestPopulationDay]} />
+          <Indicator title="시간대" value={Time[bestFloatingPopulation?.bestPopulationTime]} />
         </IndicatorSection>
       </div>
     </ReportSection>
