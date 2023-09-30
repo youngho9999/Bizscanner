@@ -14,11 +14,16 @@ import { useSearchState } from './SearchContext';
 import CloseIcon from '@/assets/icons/close.svg';
 
 function Report({ onClose }) {
+  const [tabIdx, setTabIdx] = useState(0);
+
   const { jcategoryName, careaName } = useSearchState();
+  const onClickTab = (idx) => {
+    setTabIdx(idx);
+  };
 
   return createPortal(
     <div className="absolute top-0 left-0 z-30 flex w-[100vw] h-[100vh] bg-background">
-      <Tab />
+      <Tab onClickTab={onClickTab} tab={tabIdx} />
       <div className="flex flex-col flex-grow p-8">
         <div className="flex items-center justify-between mb-8 text-4xl font-bold">
           <div className="flex items-center">

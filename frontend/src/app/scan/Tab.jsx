@@ -28,12 +28,18 @@ const tabMenu = [
   { title: '임대료', icon: RealEstateIcon },
 ];
 
-function Tab() {
+function Tab({ onClickTab, tab }) {
   return (
     <div className="bg-primary h-full w-[300px] p-3">
       <Logo className="mt-5 mb-9 fill-white" />
-      {tabMenu.map(({ title, icon }) => (
-        <TabButton Icon={icon} title={title} key={title} />
+      {tabMenu.map(({ title, icon }, idx) => (
+        <TabButton
+          Icon={icon}
+          title={title}
+          key={title}
+          onClick={() => onClickTab(idx)}
+          isSelected={tab === idx}
+        />
       ))}
     </div>
   );
