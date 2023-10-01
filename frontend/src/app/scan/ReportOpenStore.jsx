@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import ReportSection from './ReportSection';
 import SummaryText from './SummaryText';
 import axios from '@/api/index';
@@ -12,7 +12,7 @@ import {
 import Bar from '@/components/Graph/BarGraph';
 import { quaterConfig } from '@/components/Graph/constants';
 
-function ReportOpenStore() {
+const ReportOpenStore = forwardRef(function ReportOpenStore({}, ref) {
   const [openStoreInfo, setOpenStoreInfo] = useState([]);
   const { careaCode, jcategoryCode } = useSearchState();
 
@@ -26,7 +26,7 @@ function ReportOpenStore() {
     fetchOpenStoreInfo();
   }, []);
   return (
-    <ReportSection title="개업 현황">
+    <ReportSection title="개업 현황" ref={ref}>
       <SummaryText>{`해당 상권에서 개업한 점포수는 전년 동분기 대비 ${getLastYearDiff(
         openStoreInfo,
       )}개 ${getLastYearDiffText(openStoreInfo)} 하였으며, 전분기 대비 ${getPrevQuaterDiff(
@@ -39,6 +39,6 @@ function ReportOpenStore() {
       </div>
     </ReportSection>
   );
-}
+});
 
 export default ReportOpenStore;

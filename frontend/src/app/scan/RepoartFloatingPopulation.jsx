@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import axios from '@/api/index';
 import { useSearchState } from './SearchContext';
 import AreaGraph from '@/components/Graph/AreaGraph';
@@ -32,7 +32,7 @@ const radioButtons = [
   { key: 'GENDER_AGE', text: '성별, 연령별' },
 ];
 
-function ReportFloatingPopulation() {
+const ReportFloatingPopulation = forwardRef(function ReportFloatingPopulation({}, ref) {
   const [floatPopulationInfo, setFloatPopulationInfo] = useState({
     quarterlyPopulation: [],
     dayPopulation: [],
@@ -113,7 +113,7 @@ function ReportFloatingPopulation() {
   }, []);
 
   return (
-    <ReportSection title="유동인구">
+    <ReportSection title="유동인구" ref={ref}>
       <SummaryText>{`해당 상권에서 유동인구는 전년 동분기 대비 ${getLastYearDiff(
         floatPopulationInfo.quarterlyPopulation,
       )}원 ${getLastYearDiffText(
@@ -138,6 +138,6 @@ function ReportFloatingPopulation() {
       </div>
     </ReportSection>
   );
-}
+});
 
 export default ReportFloatingPopulation;

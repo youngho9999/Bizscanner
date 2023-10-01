@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import axios from '@/api/index';
 import { useSearchState } from './SearchContext';
 import AreaGraph from '@/components/Graph/AreaGraph';
@@ -30,7 +30,7 @@ const radioButtons = [
   { key: 'AGE', text: '연령대별' },
 ];
 
-function ReportSales() {
+const ReportSales = forwardRef(function ReportSales({}, ref) {
   const [salesInfo, setSalesInfo] = useState({
     quarterlySalesAmountResponses: [],
     daySalesAmountResponses: [],
@@ -95,7 +95,7 @@ function ReportSales() {
   }, []);
 
   return (
-    <ReportSection title="매출액">
+    <ReportSection title="매출액" ref={ref}>
       <SummaryText>{`해당 상권에서 매출은 전년 동분기 대비 ${getLastYearDiff(
         salesInfo.quarterlySalesAmountResponses,
       )}원 ${getLastYearDiffText(
@@ -120,6 +120,6 @@ function ReportSales() {
       </div>
     </ReportSection>
   );
-}
+});
 
 export default ReportSales;

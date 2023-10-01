@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import ReportSection from './ReportSection';
 import SummaryText from './SummaryText';
 import axios from '@/api/index';
@@ -12,7 +12,7 @@ import {
 import Bar from '@/components/Graph/BarGraph';
 import { quaterConfig } from '@/components/Graph/constants';
 
-function ReportCloseStore() {
+const ReportCloseStore = forwardRef(function ReportCloseStore({}, ref) {
   const [closeStoreInfo, setCloseStoreInfo] = useState([]);
   const { careaCode, jcategoryCode } = useSearchState();
 
@@ -27,7 +27,7 @@ function ReportCloseStore() {
   }, []);
 
   return (
-    <ReportSection title="폐업 현황">
+    <ReportSection title="폐업 현황" ref={ref}>
       <SummaryText>{`해당 상권에서 폐업한 점포수는 전년 동분기 대비 ${getLastYearDiff(
         closeStoreInfo,
       )}개 ${getLastYearDiffText(closeStoreInfo)} 하였으며, 전분기 대비 ${getPrevQuaterDiff(
@@ -40,6 +40,6 @@ function ReportCloseStore() {
       </div>
     </ReportSection>
   );
-}
+});
 
 export default ReportCloseStore;

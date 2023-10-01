@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import ReportSection from './ReportSection';
 import { useSearchState } from './SearchContext';
 import axios from '@/api/index';
@@ -22,7 +22,7 @@ function Indicator({ title, value }) {
   );
 }
 
-function ReportSummary() {
+const ReportSummary = forwardRef(function ReportSummary({}, ref) {
   const [bestJob, setBestJob] = useState();
   const [bestSales, setBestSales] = useState();
   const [bestFloatingPopulation, setBestFloatingPopulation] = useState();
@@ -51,7 +51,7 @@ function ReportSummary() {
   }, []);
 
   return (
-    <ReportSection title="간략분석">
+    <ReportSection title="간략분석" ref={ref}>
       <div className="flex gap-3">
         <IndicatorSection title="BEST 업종">
           <Indicator title="점포수" value={bestJob?.bestStoreCountJcategory} />
@@ -74,6 +74,5 @@ function ReportSummary() {
       </div>
     </ReportSection>
   );
-}
-
+});
 export default ReportSummary;

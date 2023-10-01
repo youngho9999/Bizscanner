@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import ReportSection from './ReportSection';
 import SummaryText from './SummaryText';
 import { useSearchState } from './SearchContext';
@@ -12,7 +12,7 @@ import {
 } from '@/utils/diff';
 import { quaterConfig } from '@/components/Graph/constants';
 
-function ReportStoreCount() {
+const ReportStoreCount = forwardRef(function ReportStoreCount({}, ref) {
   const [storeCountInfo, setStoreCountInfo] = useState();
   const { careaCode, jcategoryCode } = useSearchState();
 
@@ -26,7 +26,7 @@ function ReportStoreCount() {
   }, []);
 
   return (
-    <ReportSection title="점포수">
+    <ReportSection title="점포수" ref={ref}>
       <SummaryText>
         {storeCountInfo &&
           `해당 상권에서 운영 중인 한식 점포수 전년 동분기 대비 ${getLastYearDiff(
@@ -43,6 +43,6 @@ function ReportStoreCount() {
       </div>
     </ReportSection>
   );
-}
+});
 
 export default ReportStoreCount;

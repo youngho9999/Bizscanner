@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import ReportSection from './ReportSection';
 import SummaryText from './SummaryText';
 import axios from '@/api/index';
@@ -12,7 +12,7 @@ import {
 import { quaterConfig } from '@/components/Graph/constants';
 import LineGraph from '@/components/Graph/LineGraph';
 
-function ReportSalesCount() {
+const ReportSalesCount = forwardRef(function ReportSalesCount({}, ref) {
   const [salesCountInfo, setSalesCountInfo] = useState([]);
   const { careaCode, jcategoryCode } = useSearchState();
 
@@ -29,7 +29,7 @@ function ReportSalesCount() {
   }, []);
 
   return (
-    <ReportSection title="매출건수">
+    <ReportSection title="매출건수" ref={ref}>
       <SummaryText>{`해당 상권에서 매출 건수는 전년 동분기 대비 ${getLastYearDiff(
         salesCountInfo,
       )}개 ${getLastYearDiffText(salesCountInfo)} 하였으며, 전분기 대비 ${getPrevQuaterDiff(
@@ -42,6 +42,5 @@ function ReportSalesCount() {
       </div>
     </ReportSection>
   );
-}
-
+});
 export default ReportSalesCount;
