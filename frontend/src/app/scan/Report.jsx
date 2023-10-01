@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Tab from './Tab';
 import LocationIcon from '@/assets/icons/location_on.svg';
 import ReportSummary from './ReportSummary';
@@ -17,8 +17,29 @@ function Report({ onClose }) {
   const [tabIdx, setTabIdx] = useState(0);
 
   const { jcategoryName, careaName } = useSearchState();
+
+  const mainRef = useRef();
+  const summaryRef = useRef();
+  const storecountRef = useRef();
+  const openStoreRef = useRef();
+  const closeStoreRef = useRef();
+  const salesRef = useRef();
+  const salesCountRef = useRef();
+  const floatPopulationRef = useRef();
+
+  const sectionList = [
+    summaryRef,
+    storecountRef,
+    openStoreRef,
+    closeStoreRef,
+    salesRef,
+    salesCountRef,
+    floatPopulationRef,
+  ];
+
   const onClickTab = (idx) => {
     setTabIdx(idx);
+    mainRef.current?.scrollTo({ top: sectionList[idx].current.offsetTop, behavior: 'smooth' });
   };
 
   return createPortal(
@@ -35,14 +56,17 @@ function Report({ onClose }) {
           </button>
         </div>
         <div className="flex flex-grow gap-8 overflow-y-auto">
-          <main className="flex flex-col flex-grow max-h-full gap-8 overflow-y-auto">
-            <ReportSummary />
-            <ReportStoreCount />
-            <ReportOpenStore />
-            <ReportCloseStore />
-            <ReportSales />
-            <ReportSalesCount />
-            <ReportFloatingPopulation />
+          <main
+            ref={mainRef}
+            className="relative flex flex-col flex-grow max-h-full gap-8 overflow-y-auto"
+          >
+            <ReportSummary ref={summaryRef} />
+            <ReportStoreCount ref={storecountRef} />
+            <ReportOpenStore ref={openStoreRef} />
+            <ReportCloseStore ref={closeStoreRef} />
+            <ReportSales ref={salesRef} />
+            <ReportSalesCount ref={salesCountRef} />
+            <ReportFloatingPopulation ref={floatPopulationRef} />
           </main>
           <aside className="h-full w-[300px]"></aside>
         </div>
