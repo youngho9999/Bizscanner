@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Tab from './Tab';
 import LocationIcon from '@/assets/icons/location_on.svg';
 import ReportSummary from './ReportSummary';
@@ -37,8 +37,24 @@ function Report({ onClose }) {
     floatPopulationRef,
   ];
 
+  useEffect(() => {
+    mainRef.current.addEventListener('scroll', () => {
+      const top = mainRef.current.scrollTop + window.innerHeight / 2;
+      for (let i = 0; i < sectionList.length; i++) {
+        const $curEl = sectionList[i].current;
+        if ($curEl.offsetTop <= top && top <= $curEl.offsetTop + $curEl.clientHeight) {
+          setTabIdx(i);
+          break;
+        }
+      }
+
+      return () => {};
+    });
+  }, []);
+
   const onClickTab = (idx) => {
     setTabIdx(idx);
+    console.log(window.clientHeight);
     mainRef.current?.scrollTo({ top: sectionList[idx].current.offsetTop, behavior: 'smooth' });
   };
 
