@@ -14,6 +14,7 @@ import { useSearchState } from './SearchContext';
 import CloseIcon from '@/assets/icons/close.svg';
 import ReportConsumptionTrend from './ReportConsumptionTrend';
 import ReportCareaChange from './ReportCareaChange';
+import ReportRent from './ReportRent';
 
 function Report({ onClose }) {
   const [tabIdx, setTabIdx] = useState(0);
@@ -30,6 +31,7 @@ function Report({ onClose }) {
   const floatPopulationRef = useRef();
   const comsumptionRef = useRef();
   const careaChangeRef = useRef();
+  const rentRef = useRef();
 
   const sectionList = [
     summaryRef,
@@ -41,6 +43,7 @@ function Report({ onClose }) {
     floatPopulationRef,
     comsumptionRef,
     careaChangeRef,
+    rentRef,
   ];
 
   useEffect(() => {
@@ -91,6 +94,7 @@ function Report({ onClose }) {
             <ReportFloatingPopulation ref={floatPopulationRef} />
             <ReportConsumptionTrend ref={comsumptionRef} />
             <ReportCareaChange ref={careaChangeRef} />
+            <ReportRent ref={rentRef} />
           </main>
           <aside className="h-full w-[300px]"></aside>
         </div>
