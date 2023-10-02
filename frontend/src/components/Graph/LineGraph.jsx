@@ -13,7 +13,7 @@ import { Line } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-function LineGraph({ graphData, title, config }) {
+function LineGraph({ graphData, title, config, dataLabel }) {
   const options = {
     responsive: true,
     plugins: {
@@ -31,7 +31,7 @@ function LineGraph({ graphData, title, config }) {
     labels: config.labels,
     datasets: [
       {
-        label: 'Dataset 1',
+        label: dataLabel,
         data: graphData,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',

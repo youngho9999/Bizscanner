@@ -12,7 +12,7 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-function BarGraph({ graphData, title, config }) {
+function BarGraph({ graphData, title, config, dataLabel }) {
   const options = {
     responsive: true,
     plugins: {
@@ -30,7 +30,7 @@ function BarGraph({ graphData, title, config }) {
     labels: config.labels,
     datasets: [
       {
-        label: '점포수',
+        label: dataLabel,
         data: graphData,
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },

@@ -23,7 +23,7 @@ ChartJS.register(
   Filler,
 );
 
-function AreaGraph({ graphData, title, labels }) {
+function AreaGraph({ graphData, title, labels, dataLabel }) {
   const options = {
     responsive: true,
     plugins: {
@@ -41,7 +41,7 @@ function AreaGraph({ graphData, title, labels }) {
     labels,
     datasets: [
       {
-        label: 'Dataset 1',
+        label: dataLabel,
         data: graphData,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
