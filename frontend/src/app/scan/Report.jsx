@@ -12,6 +12,7 @@ import ReportFloatingPopulation from './RepoartFloatingPopulation';
 import { createPortal } from 'react-dom';
 import { useSearchState } from './SearchContext';
 import CloseIcon from '@/assets/icons/close.svg';
+import ReportConsumptionTrend from './ReportConsumptionTrend';
 
 function Report({ onClose }) {
   const [tabIdx, setTabIdx] = useState(0);
@@ -26,6 +27,7 @@ function Report({ onClose }) {
   const salesRef = useRef();
   const salesCountRef = useRef();
   const floatPopulationRef = useRef();
+  const comsumptionRef = useRef();
 
   const sectionList = [
     summaryRef,
@@ -35,6 +37,7 @@ function Report({ onClose }) {
     salesRef,
     salesCountRef,
     floatPopulationRef,
+    comsumptionRef,
   ];
 
   useEffect(() => {
@@ -83,6 +86,7 @@ function Report({ onClose }) {
             <ReportSales ref={salesRef} />
             <ReportSalesCount ref={salesCountRef} />
             <ReportFloatingPopulation ref={floatPopulationRef} />
+            <ReportConsumptionTrend ref={comsumptionRef} />
           </main>
           <aside className="h-full w-[300px]"></aside>
         </div>
