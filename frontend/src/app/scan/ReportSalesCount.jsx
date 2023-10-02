@@ -37,7 +37,12 @@ const ReportSalesCount = forwardRef(function ReportSalesCount({}, ref) {
       )}개 ${getPrevQuaterDiffText(salesCountInfo)}하였습니다.`}</SummaryText>
       <div className="flex items-center justify-center">
         <div className="w-3/4">
-          <LineGraph graphData={salesCountInfo} title="매출건수" config={quaterConfig} />
+          <LineGraph
+            graphData={salesCountInfo}
+            title="매출건수"
+            config={quaterConfig}
+            dataLabel="매출건수 (개)"
+          />
         </div>
       </div>
     </ReportSection>

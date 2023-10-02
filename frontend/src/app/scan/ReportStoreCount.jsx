@@ -38,7 +38,12 @@ const ReportStoreCount = forwardRef(function ReportStoreCount({}, ref) {
       </SummaryText>
       <div className="flex items-center justify-center">
         <div className="w-3/4">
-          <Bar graphData={storeCountInfo} title="점포수" config={quaterConfig} />
+          <Bar
+            graphData={storeCountInfo}
+            title="점포수"
+            config={quaterConfig}
+            dataLabel="점포수 (개)"
+          />
         </div>
       </div>
     </ReportSection>

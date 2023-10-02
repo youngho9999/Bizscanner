@@ -34,7 +34,12 @@ const ReportOpenStore = forwardRef(function ReportOpenStore({}, ref) {
       )}개 ${getPrevQuaterDiffText(openStoreInfo)}하였습니다.`}</SummaryText>
       <div className="flex items-center justify-center">
         <div className="w-3/4">
-          <Bar graphData={openStoreInfo} title="개업 현황" config={quaterConfig} />
+          <Bar
+            graphData={openStoreInfo}
+            title="개업 현황"
+            config={quaterConfig}
+            dataLabel="점포수 (개)"
+          />
         </div>
       </div>
     </ReportSection>

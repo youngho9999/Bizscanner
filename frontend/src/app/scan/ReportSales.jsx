@@ -30,6 +30,8 @@ const radioButtons = [
   { key: 'AGE', text: '연령대별' },
 ];
 
+const dataLabel = '매출액 (원)';
+
 const ReportSales = forwardRef(function ReportSales({}, ref) {
   const [salesInfo, setSalesInfo] = useState({
     quarterlySalesAmountResponses: [],
@@ -47,6 +49,7 @@ const ReportSales = forwardRef(function ReportSales({}, ref) {
         graphData={salesInfo.quarterlySalesAmountResponses}
         title="분기별 매출"
         config={quaterConfig}
+        dataLabel={dataLabel}
       />
     ),
     DAY: (
@@ -54,6 +57,7 @@ const ReportSales = forwardRef(function ReportSales({}, ref) {
         graphData={salesInfo.daySalesAmountResponses}
         title="요일별 매출"
         config={dayConfig}
+        dataLabel={dataLabel}
       />
     ),
     TIME: (
@@ -61,6 +65,7 @@ const ReportSales = forwardRef(function ReportSales({}, ref) {
         title="시간대별 매출"
         graphData={salesInfo.timeSalesAmountResponses}
         labels={timeLabel}
+        dataLabel={dataLabel}
       />
     ),
     GENDER: (
@@ -68,6 +73,7 @@ const ReportSales = forwardRef(function ReportSales({}, ref) {
         title="성별 매출"
         graphData={salesInfo.genderSalesAmountResponses}
         config={genderConfig}
+        dataLabel
       />
     ),
     AGE: (
@@ -75,6 +81,7 @@ const ReportSales = forwardRef(function ReportSales({}, ref) {
         title="연령대별 매출"
         graphData={salesInfo.ageSalesAmountResponses}
         config={ageConfig}
+        dataLabel={dataLabel}
       />
     ),
   };

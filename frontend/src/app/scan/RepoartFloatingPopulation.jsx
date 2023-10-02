@@ -32,6 +32,8 @@ const radioButtons = [
   { key: 'GENDER_AGE', text: '성별, 연령별' },
 ];
 
+const dataLabel = '인구수 (명)';
+
 const ReportFloatingPopulation = forwardRef(function ReportFloatingPopulation({}, ref) {
   const [floatPopulationInfo, setFloatPopulationInfo] = useState({
     quarterlyPopulation: [],
@@ -51,6 +53,7 @@ const ReportFloatingPopulation = forwardRef(function ReportFloatingPopulation({}
         graphData={floatPopulationInfo.quarterlyPopulation}
         title="분기별 유동인구"
         config={quaterConfig}
+        dataLabel={dataLabel}
       />
     ),
     DAY: (
@@ -58,6 +61,7 @@ const ReportFloatingPopulation = forwardRef(function ReportFloatingPopulation({}
         graphData={floatPopulationInfo.dayPopulation}
         title="요일별 유동인구"
         config={dayConfig}
+        dataLabel={dataLabel}
       />
     ),
     TIME: (
@@ -65,6 +69,7 @@ const ReportFloatingPopulation = forwardRef(function ReportFloatingPopulation({}
         title="시간대별 유동인구"
         graphData={floatPopulationInfo.timePopulation}
         labels={timeLabel}
+        dataLabel={dataLabel}
       />
     ),
     GENDER: (
@@ -72,6 +77,7 @@ const ReportFloatingPopulation = forwardRef(function ReportFloatingPopulation({}
         title="성별 유동인구"
         graphData={floatPopulationInfo.genderPopulation}
         config={genderConfig}
+        dataLabel={dataLabel}
       />
     ),
     AGE: (
@@ -79,6 +85,7 @@ const ReportFloatingPopulation = forwardRef(function ReportFloatingPopulation({}
         title="연령대별 유동인구"
         graphData={floatPopulationInfo.agePopulation}
         config={ageConfig}
+        dataLabel={dataLabel}
       />
     ),
     GENDER_AGE: (
@@ -89,6 +96,7 @@ const ReportFloatingPopulation = forwardRef(function ReportFloatingPopulation({}
         firstLabel="여성"
         secondLabel="남성"
         config={ageConfig}
+        dataLabel={dataLabel}
       />
     ),
   };
@@ -97,7 +105,7 @@ const ReportFloatingPopulation = forwardRef(function ReportFloatingPopulation({}
 
   const fetchSalesInfo = async () => {
     const { data } = await axios.get(`/report/population/${careaCode}`);
-    console.log(data);
+
     setFloatPopulationInfo((prev) => ({
       ...data,
       quarterlyPopulation: data.quarterlyPopulation.map(({ totalPopulation }) => totalPopulation),
