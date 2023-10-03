@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import Selection from './SearchSelection';
 import PlaceSelection from './PlaceSelection';
-import { SearchProvider } from './SearchContext';
 import JobSelection from './JobSelection';
 import BizSelection from './BizSelection';
 import BackIcon from '@/assets/icons/undo.svg';
