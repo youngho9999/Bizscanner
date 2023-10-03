@@ -1,9 +1,9 @@
 'use client';
 import Script from 'next/script';
-import { useEffect, useRef } from 'react';
 import polyData from '../../../public/영역 통합.json';
 import centerData from '../../../public/영역 통합 중심 좌표.json';
 import { useSearchState } from './SearchContext';
+import React, { useEffect, useRef } from 'react';
 
 function Map() {
   const mapRef = useRef(null);
@@ -82,4 +82,4 @@ function Map() {
   );
 }
 
-export default Map;
+export default React.memo(Map);
