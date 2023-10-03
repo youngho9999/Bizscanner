@@ -42,16 +42,14 @@ function Controller() {
   };
 
   return (
-    <SearchProvider>
-      <div className="absolute z-10 p-5 bg-white left-4 rounded-medium top-1/2 translate-y-[-50%]">
-        {searchType.cur !== 'INIT' ? (
-          <button onClick={onClickPrev}>
-            <BackIcon width="48" height="48" />
-          </button>
-        ) : null}
-        <CurStage onChangeStage={onChangeStage} mode={searchType.mode} />
-      </div>
-    </SearchProvider>
+    <div className="absolute z-10 p-5 bg-white left-4 rounded-medium top-1/2 translate-y-[-50%]">
+      {searchType.cur !== 'INIT' ? (
+        <button onClick={onClickPrev}>
+          <BackIcon width="48" height="48" />
+        </button>
+      ) : null}
+      <CurStage onChangeStage={onChangeStage} mode={searchType.mode} />
+    </div>
   );
 }
 
