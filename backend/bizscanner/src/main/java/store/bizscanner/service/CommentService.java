@@ -7,11 +7,9 @@ import store.bizscanner.dto.request.CommentRequest;
 import store.bizscanner.dto.response.comment.CommentListResponse;
 import store.bizscanner.dto.response.comment.CommentResponse;
 import store.bizscanner.entity.Comment;
-import store.bizscanner.entity.Member;
 import store.bizscanner.global.exception.CustomException;
 import store.bizscanner.global.exception.ErrorCode;
 import store.bizscanner.repository.CommentRepository;
-import store.bizscanner.repository.MemberRepository;
 
 import java.util.stream.Collectors;
 
