@@ -19,6 +19,8 @@ module.exports = {
         outline: '#E5E5E5',
         dim: 'rgba(0, 0, 0, 0.40)',
         underline: '#F3F4F6',
+        hover: '#162C72',
+        kakao: '#FAE100',
       },
       borderRadius: {
         small: '10px',
