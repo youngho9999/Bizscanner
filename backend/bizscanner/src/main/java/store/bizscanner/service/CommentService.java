@@ -51,6 +51,7 @@ public class CommentService {
         return new CommentListResponse(
                 commentRepository.findByCareaCode(careaCode).stream()
                         .map(comment -> new CommentResponse(
+                                comment.getId(),
                                 comment.getMember().getNickname(),
                                 comment.getContents(),
                                 comment.getModifiedDate()))
@@ -95,6 +96,7 @@ public class CommentService {
         return new CommentListResponse(
                 commentRepository.findByMember(member).stream()
                         .map(comment -> new CommentResponse(
+                                comment.getId(),
                                 comment.getMember().getNickname(),
                                 comment.getContents(),
                                 comment.getModifiedDate()))
