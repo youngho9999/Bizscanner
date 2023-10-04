@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     /**
      * 코멘트 생성
@@ -31,14 +31,11 @@ public class CommentService {
      */
     @Transactional
     public Comment createComment(CommentRequest commentRequest, String email) {
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() ->new CustomException(ErrorCode.MEMBER_NOT_FOUND));
-
         return commentRepository.save(Comment.builder()
                         .careaCode(commentRequest.getCareaCode())
                         .jcategoryCode(commentRequest.getJcategoryCode())
                         .contents(commentRequest.getContents())
-                        .member(member)
+                        .member(memberService.findByEmail(email))
                 .build());
     }
 
@@ -90,11 +87,8 @@ public class CommentService {
      * @return
      */
     public CommentListResponse getMyComment(String email) {
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() ->new CustomException(ErrorCode.MEMBER_NOT_FOUND));
-
         return new CommentListResponse(
-                commentRepository.findByMember(member).stream()
+                commentRepository.findByMember(memberService.findByEmail(email)).stream()
                         .map(comment -> new CommentResponse(
                                 comment.getId(),
                                 comment.getMember().getNickname(),
