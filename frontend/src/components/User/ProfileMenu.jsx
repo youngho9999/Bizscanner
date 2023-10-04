@@ -1,6 +1,14 @@
+import { logout } from '@/redux/userSlice';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 function ProfileMenu() {
+  const dispatch = useDispatch();
+
+  const onClickLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <div className="absolute py-4 top-16 right-7 bg-background w-[370px] rounded-small shadow-lg z-50">
       <div className="mb-4 text-center">ssafy@ssafy.com</div>
@@ -28,7 +36,9 @@ function ProfileMenu() {
       <div>
         <button className="w-full p-2 hover:bg-outline">닉네임 변경</button>
         <button className="w-full p-2 hover:bg-outline">마이 레포트</button>
-        <button className="w-full p-2 hover:bg-outline">로그아웃</button>
+        <button className="w-full p-2 hover:bg-outline" onClick={onClickLogout}>
+          로그아웃
+        </button>
       </div>
     </div>
   );
