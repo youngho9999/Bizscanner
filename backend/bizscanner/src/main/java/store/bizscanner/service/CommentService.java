@@ -11,6 +11,7 @@ import store.bizscanner.entity.Member;
 import store.bizscanner.global.exception.CustomException;
 import store.bizscanner.global.exception.ErrorCode;
 import store.bizscanner.repository.CommentRepository;
+import store.bizscanner.repository.MemberRepository;
 
 import java.util.stream.Collectors;
 
@@ -19,9 +20,20 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
+    private final MemberRepository memberRepository;
 
+    /**
+     * 코멘트 생성
+     * 로그인 필수
+     * @param commentRequest
+     * @param email
+     * @return comment
+     */
     @Transactional
-    public Comment createComment(CommentRequest commentRequest, Member member) {
+    public Comment createComment(CommentRequest commentRequest, String email) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() ->new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+
         return commentRepository.save(Comment.builder()
                         .careaCode(commentRequest.getCareaCode())
                         .jcategoryCode(commentRequest.getJcategoryCode())
@@ -30,6 +42,11 @@ public class CommentService {
                 .build());
     }
 
+    /**
+     * 코멘트 조회
+     * @param careaCode
+     * @return commentList
+     */
     public CommentListResponse getComment(String careaCode) {
         return new CommentListResponse(
                 commentRepository.findByCareaCode(careaCode).stream()
@@ -40,19 +57,41 @@ public class CommentService {
                         .collect(Collectors.toList()));
     }
 
+    /**
+     * 코멘트 수정
+     * 로그인 필수 & 로그인 유저와 코멘트 작성자가 다를 경우 Exception
+     * @param commentRequest
+     * @param commentId
+     * @param email
+     * @return
+     */
     @Transactional
-    public Comment updateComment(CommentRequest commentRequest, Long commentId) {
-        return commentRepository.findById(commentId)
-                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND))
-                .update(commentRequest.getContents());
+    public Comment updateComment(CommentRequest commentRequest, Long commentId, String email) {
+        return commentWriterValid(commentId, email).update(commentRequest.getContents());
     }
 
+    /**
+     * 코멘트 삭제
+     * 로그인 필수 & 로그인 유저와 코멘트 작성자가 다를 경우 Exception
+     * @param commentId
+     * @param email
+     */
     @Transactional
-    public void deleteComment(Long commentId) {
+    public void deleteComment(Long commentId, String email) {
+        commentWriterValid(commentId, email);
+
         commentRepository.deleteById(commentId);
     }
 
-    public CommentListResponse getMyComment(Member member) {
+    /**
+     * 자신이 작성한 코멘트 조회
+     * @param email
+     * @return
+     */
+    public CommentListResponse getMyComment(String email) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() ->new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+
         return new CommentListResponse(
                 commentRepository.findByMember(member).stream()
                         .map(comment -> new CommentResponse(
@@ -61,5 +100,22 @@ public class CommentService {
                                 comment.getModifiedDate()))
                         .collect(Collectors.toList())
         );
+    }
+
+    /**
+     * 코멘트 ID 와 이메일을 이용해 작성자가 맞는지 검증하는 메소드
+     * @param commentId
+     * @param email
+     * @return comment
+     */
+    public Comment commentWriterValid (Long commentId, String email) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
+
+        if(!comment.getMember().getEmail().equals(email)) {
+            throw new CustomException(ErrorCode.MEMBER_NOT_WRITER);
+        }
+
+        return comment;
     }
 }
