@@ -7,7 +7,7 @@ import BizSelection from './BizSelection';
 import BackIcon from '@/assets/icons/undo.svg';
 import CDistrictSelection from './CDistrictSelection';
 import Button from '@/components/Button';
-import { useSearchDispatch, useSearchState } from './SearchContext';
+import { useSearchDispatch } from './SearchContext';
 
 const Stage = {
   INIT: Selection,
@@ -19,7 +19,6 @@ const Stage = {
 
 function Controller() {
   const dispatch = useSearchDispatch();
-  const state = useSearchState();
 
   const [searchType, setSearchType] = useState({
     mode: '',
