@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import store.bizscanner.dto.request.CommentRequest;
 import store.bizscanner.dto.response.comment.CommentListResponse;
-import store.bizscanner.entity.Member;
+import store.bizscanner.global.login.handler.LoginSuccessHandler;
 import store.bizscanner.service.CommentService;
+
+import org.springframework.security.core.Authentication;
 
 import javax.validation.Valid;
 
@@ -17,12 +19,11 @@ import javax.validation.Valid;
 @CrossOrigin("*")
 public class CommentController {
     private final CommentService commentService;
+    private final LoginSuccessHandler loginSuccessHandler;
 
     @PostMapping
-    public ResponseEntity<Void> createComment(@Valid @RequestBody CommentRequest commentRequest) {
-        Member member = new Member();
-
-        commentService.createComment(commentRequest, member);
+    public ResponseEntity<Void> createComment(@Valid @RequestBody CommentRequest commentRequest, Authentication authentication) {
+        commentService.createComment(commentRequest, loginSuccessHandler.extractUsername(authentication));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -32,23 +33,21 @@ public class CommentController {
     }
 
     @PatchMapping("/{commentId}")
-    public ResponseEntity<Void> updateComment(@Valid @RequestBody CommentRequest commentRequest, @PathVariable Long commentId) {
-        commentService.updateComment(commentRequest, commentId);
+    public ResponseEntity<Void> updateComment(@Valid @RequestBody CommentRequest commentRequest, @PathVariable Long commentId, Authentication authentication) {
+        commentService.updateComment(commentRequest, commentId, loginSuccessHandler.extractUsername(authentication));
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
-        commentService.deleteComment(commentId);
+    public ResponseEntity<Void> deleteComment(@PathVariable Long commentId, Authentication authentication) {
+        commentService.deleteComment(commentId, loginSuccessHandler.extractUsername(authentication));
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/my")
-    public ResponseEntity<CommentListResponse> getComment() {
-        Member member = new Member();
-
-        return new ResponseEntity<>(commentService.getMyComment(member), HttpStatus.OK);
+    public ResponseEntity<CommentListResponse> getComment(Authentication authentication) {
+        return new ResponseEntity<>(commentService.getMyComment(loginSuccessHandler.extractUsername(authentication)), HttpStatus.OK);
     }
 }
