@@ -31,7 +31,7 @@ public class CareaService {
     }
 
     /**
-     * 상권 리스트 API
+     * 동별 상권 리스트 API
      * @param dong 동코드
      * @return 행정동에 포함 된 상권 리스트
      *
@@ -42,6 +42,11 @@ public class CareaService {
     public DongResponse findByDong(String dong) {
         //해당 동에 있는 상권영역을 불러온다.
         List<Carea> dongCareas = careaRepository.findByDong(dong);
+
+        //동 내에 상권이 없을 경우
+        if(dongCareas.isEmpty()) {
+            throw new CustomException(ErrorCode.AREA_NOT_FOUND);
+        }
 
         List<DongInfoResponse> dongInfoResponseList = new ArrayList<>();
 
