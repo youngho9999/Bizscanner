@@ -29,7 +29,7 @@ const ReportRent = forwardRef(function ReportRend({}, ref) {
         <>
           <div className="mb-5">
             <div className="mb-4 text-lg font-bold">통상 임대료</div>
-            {rent.rentAmount}(원 / m<sup>2</sup>)
+            {rent.rentAmount.toLocaleString('ko-kr')}(원 / m<sup>2</sup>)
           </div>
           <div className="mb-5">
             <div className="mb-4 text-lg font-bold">통상 임대료 증감율</div>
@@ -37,19 +37,19 @@ const ReportRent = forwardRef(function ReportRend({}, ref) {
           </div>
           <div className="mb-5">
             <div className="mb-4 text-lg font-bold">보증금</div>
-            {rent.depositAmount}(원 / m<sup>2</sup>)
+            {rent.depositAmount.toLocaleString('ko-kr')}(원 / m<sup>2</sup>)
           </div>
           <div className="mb-5">
             <div className="mb-4 text-lg font-bold">월세</div>
-            {rent.monthlyAmount}(원 / m<sup>2</sup>)
+            {rent.monthlyAmount.toLocaleString('ko-kr')}(원 / m<sup>2</sup>)
           </div>
           <div className="mb-5">
             <div className="mb-4 text-lg font-bold">공용관리비</div>
-            {rent.maintenanceAmount}(원 / m<sup>2</sup>)
+            {rent.maintenanceAmount.toLocaleString('ko-kr')}(원 / m<sup>2</sup>)
           </div>
           <div className="mb-5">
             <div className="mb-4 text-lg font-bold">초기투자비</div>
-            {rent.firstInvestmentAmount}(원 / m<sup>2</sup>)
+            {rent.firstInvestmentAmount.toLocaleString('ko-kr')}(원 / m<sup>2</sup>)
           </div>
         </>
       ) : (

@@ -27,8 +27,10 @@ const ReportConsumptionTrend = forwardRef(function ReportConsumptionTrend({}, re
         <>
           <SummaryText>
             해당 상권의 전체 소비금액은{' '}
-            <HighlightingText>{consumptionTrend.totalExpenditure}원</HighlightingText>이며 소득
-            분위는
+            <HighlightingText>
+              {consumptionTrend.totalExpenditure.toLocaleString('ko-kr')}원
+            </HighlightingText>
+            이며 소득 분위는{' '}
             <HighlightingText>{consumptionTrend.earningDecile}분위</HighlightingText> 입니다.
           </SummaryText>
           <div className="flex items-center justify-center">
