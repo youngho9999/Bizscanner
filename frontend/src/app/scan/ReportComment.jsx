@@ -37,7 +37,7 @@ function ReportComment() {
     // fetchComments();
   }, []);
   return (
-    <ReportSection title="코멘트" className="h-[60vh] ">
+    <ReportSection title="코멘트" className="h-full">
       <div className="overflow-auto h-[80%] scrollbar-hide mb-4">
         <ReportCommentItem nickName="닉네임 1" content="상권 정말 좋아요!" />
         <ReportCommentItem nickName="닉네임 1" content="상권 정말 좋아요!" />
