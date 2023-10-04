@@ -61,6 +61,8 @@ function ReportComment() {
   const [comments, setComments] = useState([]);
   const { careaCode } = useSearchState();
 
+  const commentsContainerRef = useRef(null);
+
   const fetchComments = async () => {
     const {
       data: { commentResponseList },
@@ -71,9 +73,17 @@ function ReportComment() {
   useEffect(() => {
     fetchComments();
   }, []);
+
+  useEffect(() => {
+    commentsContainerRef.current.scrollTo({
+      top: commentsContainerRef.current.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [comments]);
+
   return (
     <ReportSection title="코멘트" className="h-full">
-      <div className="overflow-auto h-[80%] scrollbar-hide mb-4">
+      <div className="overflow-auto h-[80%] scrollbar-hide mb-4" ref={commentsContainerRef}>
         {comments.length &&
           comments.map(({ nickname, contents }) => (
             <ReportCommentItem nickName={nickname} contents={contents} />
