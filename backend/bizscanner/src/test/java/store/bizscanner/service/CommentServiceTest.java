@@ -44,7 +44,7 @@ class CommentServiceTest {
         Mockito.when(commentRepository.save(any())).thenReturn(comment);
 
         // when
-        Comment result = commentService.createComment(commentRequest, member);
+        Comment result = commentService.createComment(commentRequest, member.getEmail());
 
         // then
         assertThat(result.getContents()).isEqualTo(contents);
