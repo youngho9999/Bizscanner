@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import store.bizscanner.dto.response.jcategoryrecommend.CodeAreaPolygonAndCenterResponse;
 import store.bizscanner.dto.response.jcategoryrecommend.DongInfoResponse;
 import store.bizscanner.dto.response.jcategoryrecommend.DongResponse;
 import store.bizscanner.entity.Carea;
@@ -11,6 +12,8 @@ import store.bizscanner.global.exception.CustomException;
 import store.bizscanner.global.exception.ErrorCode;
 import store.bizscanner.repository.CareaRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CareaService {
     private final CareaRepository careaRepository;
-
+    private final CodeCoordinateService codeCoordinateService;
     /**
      * 다른 서비스에서 carea를 사용하기 위해 호출하는 메소드
      * @param careaCode
@@ -30,7 +33,7 @@ public class CareaService {
 
     /**
      * 상권 리스트 API
-     * @param dong
+     * @param dong 동코드
      * @return 행정동에 포함 된 상권 리스트
      *
      * Cacheable
@@ -38,8 +41,18 @@ public class CareaService {
      */
     @Cacheable(value = "dong_carea", key = "#dong")
     public DongResponse findByDong(String dong) {
-        return new DongResponse(careaRepository.findByDong(dong).stream()
-                        .map(DongInfoResponse::new)
-                        .collect(Collectors.toList()));
+        //해당 동에 있는 상권영역을 불러온다.
+        List<Carea> dongCareas = careaRepository.findByDong(dong);
+
+        List<DongInfoResponse> dongInfoResponseList = new ArrayList<>();
+
+        //상권 영역별 polygon 과 중심값 좌표를 불러온다
+        for(Carea carea : dongCareas) {
+            CodeAreaPolygonAndCenterResponse polygonAndCenter = codeCoordinateService.getCodeAreaPolygonAndCenter(carea.getCareaCode());
+            DongInfoResponse response = new DongInfoResponse(carea, polygonAndCenter);
+            dongInfoResponseList.add(response);
+        }
+
+        return new DongResponse(dongInfoResponseList);
     }
 }

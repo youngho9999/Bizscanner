@@ -19,6 +19,7 @@ public class CodeCoordinateService {
     private final CodeCenterCoordinateRepository codeCenterCoordinateRepository;
     private final CodeCoordinateRepository codeCoordinateRepository;
 
+
     /**
      * 영역 중앙좌표와, 폴리곤 좌표 찾는 메소드
      * @param code 구, 동, 상권 코드
