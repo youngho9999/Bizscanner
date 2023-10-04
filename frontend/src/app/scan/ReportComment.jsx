@@ -24,7 +24,10 @@ function ReportCommentItem({ nickName, contents, deleteComment, commentId }) {
   );
 }
 
-const CommentInput = forwardRef(function CommentInput({ placeholder, registerComment }, ref) {
+const CommentInput = forwardRef(function CommentInput(
+  { placeholder, registerComment, disabled },
+  ref,
+) {
   const inputRef = useRef(null);
 
   const onInputEnter = (e) => {
@@ -48,10 +51,12 @@ const CommentInput = forwardRef(function CommentInput({ placeholder, registerCom
         className="h-full grow outline-0"
         ref={inputRef}
         onKeyUp={onInputEnter}
+        disabled={disabled}
       />
       <button
         className="relative flex items-center w-8 h-8 p-1 ml-1 rounded-full bg-primary"
         onClick={onClickButton}
+        disabled={disabled}
       >
         <SendIcon width="22" className="absolute right-[6px]" />
       </button>
@@ -62,7 +67,7 @@ const CommentInput = forwardRef(function CommentInput({ placeholder, registerCom
 function ReportComment() {
   const [comments, setComments] = useState([]);
   const { careaCode, jcategoryCode } = useSearchState();
-
+  const { isLogin } = useSelector((state) => state.user);
   const commentsContainerRef = useRef(null);
 
   const fetchComments = async () => {
@@ -96,7 +101,7 @@ function ReportComment() {
   return (
     <ReportSection title="코멘트" className="h-full">
       <div className="overflow-auto h-[80%] scrollbar-hide mb-4" ref={commentsContainerRef}>
-        {comments.length &&
+        {comments &&
           comments.map(({ nickname, contents, commentId }) => (
             <ReportCommentItem
               nickName={nickname}
@@ -106,7 +111,11 @@ function ReportComment() {
             />
           ))}
       </div>
-      <CommentInput placeholder="댓글 추가" registerComment={registerComment} />
+      <CommentInput
+        placeholder={isLogin ? '댓글 추가' : '로그인이 필요해요'}
+        disabled={!isLogin}
+        registerComment={registerComment}
+      />
     </ReportSection>
   );
 }
