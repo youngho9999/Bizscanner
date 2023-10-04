@@ -3,40 +3,42 @@ import ReportSection from './ReportSection';
 import SendIcon from '@/assets/icons/Send.svg';
 import axios from '@/api/index';
 import { useSearchState } from './SearchContext';
+import CloseIcon from '@/assets/icons/close.svg';
+import { useSelector } from 'react-redux';
 
-function ReportCommentItem({ nickName, contents }) {
+function ReportCommentItem({ nickName, contents, deleteComment, commentId }) {
+  const { nickname: myNickName } = useSelector((state) => state.user);
+
   return (
     <div className="py-4 border-b border-black">
-      <div className="text-xl font-bold">{nickName}</div>
+      <div className="flex items-center justify-between text-xl font-bold">
+        <div className="grow">{nickName}</div>{' '}
+        {nickName === myNickName && (
+          <button className="mr-2" onClick={() => deleteComment(commentId)}>
+            <CloseIcon height="20" width="20" />
+          </button>
+        )}
+      </div>
       <div>{contents}</div>
     </div>
   );
 }
 
-const CommentInput = forwardRef(function CommentInput({ placeholder, fetchComments }, ref) {
-  const { careaCode, jcategoryCode } = useSearchState();
+const CommentInput = forwardRef(function CommentInput({ placeholder, registerComment }, ref) {
   const inputRef = useRef(null);
-
-  const registerComments = async () => {
-    const value = inputRef.current.value;
-
-    await axios.post(`/comment`, {
-      careaCode,
-      jcategoryCode,
-      contents: value,
-    });
-
-    fetchComments();
-
-    inputRef.current.value = '';
-  };
 
   const onInputEnter = (e) => {
     if (e.keyCode !== 13) {
       return;
     }
 
-    registerComments();
+    registerComment(inputRef.current.value);
+    inputRef.current.value = '';
+  };
+
+  const onClickButton = (e) => {
+    registerComment(inputRef.current.value);
+    inputRef.current.value = '';
   };
 
   return (
@@ -49,7 +51,7 @@ const CommentInput = forwardRef(function CommentInput({ placeholder, fetchCommen
       />
       <button
         className="relative flex items-center w-8 h-8 p-1 ml-1 rounded-full bg-primary"
-        onClick={() => registerComments()}
+        onClick={onClickButton}
       >
         <SendIcon width="22" className="absolute right-[6px]" />
       </button>
@@ -59,7 +61,7 @@ const CommentInput = forwardRef(function CommentInput({ placeholder, fetchCommen
 
 function ReportComment() {
   const [comments, setComments] = useState([]);
-  const { careaCode } = useSearchState();
+  const { careaCode, jcategoryCode } = useSearchState();
 
   const commentsContainerRef = useRef(null);
 
@@ -67,6 +69,7 @@ function ReportComment() {
     const {
       data: { commentResponseList },
     } = await axios.get(`/comment/${careaCode}`);
+
     setComments(commentResponseList);
   };
 
@@ -74,22 +77,36 @@ function ReportComment() {
     fetchComments();
   }, []);
 
-  useEffect(() => {
-    commentsContainerRef.current.scrollTo({
-      top: commentsContainerRef.current.scrollHeight,
-      behavior: 'smooth',
+  const deleteComment = async (commentId) => {
+    await axios.delete(`/comment/${commentId}`);
+
+    await fetchComments();
+  };
+
+  const registerComment = async (contents) => {
+    await axios.post(`/comment`, {
+      careaCode,
+      jcategoryCode,
+      contents,
     });
-  }, [comments]);
+
+    fetchComments();
+  };
 
   return (
     <ReportSection title="코멘트" className="h-full">
       <div className="overflow-auto h-[80%] scrollbar-hide mb-4" ref={commentsContainerRef}>
         {comments.length &&
-          comments.map(({ nickname, contents }) => (
-            <ReportCommentItem nickName={nickname} contents={contents} />
+          comments.map(({ nickname, contents, commentId }) => (
+            <ReportCommentItem
+              nickName={nickname}
+              contents={contents}
+              commentId={commentId}
+              deleteComment={deleteComment}
+            />
           ))}
       </div>
-      <CommentInput placeholder="댓글 추가" fetchComments={fetchComments} />
+      <CommentInput placeholder="댓글 추가" registerComment={registerComment} />
     </ReportSection>
   );
 }
