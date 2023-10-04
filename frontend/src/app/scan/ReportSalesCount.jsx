@@ -12,6 +12,7 @@ import {
 import { quaterConfig } from '@/components/Graph/constants';
 import LineGraph from '@/components/Graph/LineGraph';
 import DataNotFound from './DataNotFound';
+import HighlightingText from '@/components/HighlightingText';
 
 const ReportSalesCount = forwardRef(function ReportSalesCount({}, ref) {
   const [salesCountInfo, setSalesCountInfo] = useState([]);
@@ -33,11 +34,17 @@ const ReportSalesCount = forwardRef(function ReportSalesCount({}, ref) {
     <ReportSection title="매출건수" ref={ref}>
       {salesCountInfo.length ? (
         <>
-          <SummaryText>{`해당 상권에서 매출 건수는 전년 동분기 대비 ${getLastYearDiff(
-            salesCountInfo,
-          )}개 ${getLastYearDiffText(salesCountInfo)} 하였으며, 전분기 대비 ${getPrevQuaterDiff(
-            salesCountInfo,
-          )}개 ${getPrevQuaterDiffText(salesCountInfo)}하였습니다.`}</SummaryText>
+          <SummaryText>
+            해당 상권에서 매출 건수는 전년 동분기 대비{' '}
+            <HighlightingText>
+              {getLastYearDiff(salesCountInfo)}개 {getLastYearDiffText(salesCountInfo)}
+            </HighlightingText>{' '}
+            하였으며, 전분기 대비{' '}
+            <HighlightingText>
+              {getPrevQuaterDiff(salesCountInfo)}개 {getPrevQuaterDiffText(salesCountInfo)}
+            </HighlightingText>
+            하였습니다.
+          </SummaryText>
           <div className="flex items-center justify-center">
             <div className="w-3/4">
               <LineGraph

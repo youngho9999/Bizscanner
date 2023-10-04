@@ -5,6 +5,7 @@ import axios from '@/api/index';
 import { useSearchState } from './SearchContext';
 import { CareaChangeDesc } from './constant';
 import DataNotFound from './DataNotFound';
+import HighlightingText from '@/components/HighlightingText';
 
 const ReportCareaChange = forwardRef(function ReportCareaChange({}, ref) {
   const [careaChange, setCareaChange] = useState({ careaChange: '', careaChangeName: '' });
@@ -24,7 +25,8 @@ const ReportCareaChange = forwardRef(function ReportCareaChange({}, ref) {
       {careaChange.careaChange ? (
         <>
           <SummaryText>
-            {`해당 상권의 변화 지표는 ${careaChange.careaChangeName}입니다. `}
+            해당 상권의 변화 지표는{' '}
+            <HighlightingText>{careaChange.careaChangeName}</HighlightingText>입니다.
             {`${CareaChangeDesc[careaChange.careaChange]}입니다.`}
           </SummaryText>
         </>
