@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function ProfileMenu() {
+function ProfileMenu({ onClickEditNickname }) {
+  const onClick = () => {
+    onClickEditNickname();
+  };
+
   return (
     <div className="absolute py-4 top-16 right-7 bg-background w-[370px] rounded-small shadow-lg z-50">
       <div className="mb-4 text-center">ssafy@ssafy.com</div>
@@ -26,7 +30,9 @@ function ProfileMenu() {
         <div className="text-lg text-center">안녕하세요. GS님</div>
       </div>
       <div>
-        <button className="w-full p-2 hover:bg-outline">닉네임 변경</button>
+        <button className="w-full p-2 hover:bg-outline" onClick={onClick}>
+          닉네임 변경
+        </button>
         <button className="w-full p-2 hover:bg-outline">마이 레포트</button>
         <button className="w-full p-2 hover:bg-outline">로그아웃</button>
       </div>
