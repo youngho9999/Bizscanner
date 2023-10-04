@@ -19,6 +19,11 @@ public class CodeCoordinateService {
     private final CodeCenterCoordinateRepository codeCenterCoordinateRepository;
     private final CodeCoordinateRepository codeCoordinateRepository;
 
+    /**
+     * 영역 중앙좌표와, 폴리곤 좌표 찾는 메소드
+     * @param code 구, 동, 상권 코드
+     * @return 영역 중앙 좌표, 영역 폴리곤 좌표
+     */
     public CodeAreaPolygonAndCenterResponse getCodeAreaPolygonAndCenter(String code) {
         //해당 영역 중심 위도,경도
         CodeCenterCoordinate center = codeCenterCoordinateRepository.findById(code)
