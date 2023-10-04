@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import ProfileMenu from './ProfileMenu';
 import EditNickname from './EditNickname';
+import { convertNickName } from '@/utils/nickname';
+import { useSelector } from 'react-redux';
 
 function Profile() {
   const [showMenu, setMenu] = useState(false);
@@ -31,7 +33,7 @@ function Profile() {
             bottom: '0.2em',
           }}
         >
-          gs
+          {convertNickName(nickname)}
         </span>
       </button>
       {showMenu && <ProfileMenu onClickEditNickname={onClickEditNickname} onCloseMenu={() => setMenu(false)} />}
