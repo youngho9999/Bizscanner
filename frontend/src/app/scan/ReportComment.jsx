@@ -15,9 +15,9 @@ function ReportCommentItem({ nickName, contents }) {
 
 const CommentInput = forwardRef(function CommentInput({ placeholder, fetchComments }, ref) {
   const { careaCode, jcategoryCode } = useSearchState();
-
   const inputRef = useRef(null);
-  const onClickSendComment = async () => {
+
+  const registerComments = async () => {
     const value = inputRef.current.value;
 
     await axios.post(`/comment`, {
@@ -31,12 +31,25 @@ const CommentInput = forwardRef(function CommentInput({ placeholder, fetchCommen
     inputRef.current.value = '';
   };
 
+  const onInputEnter = (e) => {
+    if (e.keyCode !== 13) {
+      return;
+    }
+
+    registerComments();
+  };
+
   return (
     <div className="flex items-center h-12 px-4 overflow-hidden border rounded-full border-outline">
-      <input placeholder={placeholder} className="h-full grow outline-0" ref={inputRef} />
+      <input
+        placeholder={placeholder}
+        className="h-full grow outline-0"
+        ref={inputRef}
+        onKeyUp={onInputEnter}
+      />
       <button
         className="relative flex items-center w-8 h-8 p-1 ml-1 rounded-full bg-primary"
-        onClick={onClickSendComment}
+        onClick={() => registerComments()}
       >
         <SendIcon width="22" className="absolute right-[6px]" />
       </button>
