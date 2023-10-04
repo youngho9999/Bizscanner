@@ -1,4 +1,5 @@
 import { logout } from '@/redux/userSlice';
+import { convertNickName } from '@/utils/nickname';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -6,19 +7,6 @@ function ProfileMenu() {
   const dispatch = useDispatch();
   const { nickname, email } = useSelector((state) => state.user);
 
-  const convertNickName = () => {
-    if (nickname.length <= 1) {
-      return nickname;
-    }
-
-    const check = /[a-zA-Z]/;
-
-    if (check.test(nickname)) {
-      return nickname[0] + nickname[1];
-    }
-
-    return nickname[0];
-  };
   const onClickLogout = () => {
     dispatch(logout());
   };
@@ -40,7 +28,7 @@ function ProfileMenu() {
               bottom: '0.2em',
             }}
           >
-            {convertNickName()}
+            {convertNickName(nickname)}
           </span>
         </div>
       </div>
