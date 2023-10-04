@@ -1,7 +1,5 @@
 'use client';
 import Script from 'next/script';
-import polyData from '../../../public/영역 통합.json';
-import centerData from '../../../public/영역 통합 중심 좌표.json';
 import { useSearchState } from './SearchContext';
 import React, { useEffect, useRef } from 'react';
 
