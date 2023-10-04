@@ -63,6 +63,7 @@ function reducer(state, action) {
         ...state,
         mapCoordinates: action.mapCoordinates,
         mapZoom: action.mapZoom,
+        mapCenter: action.mapCenter ?? state.mapCenter,
       };
 
     case 'SET_BIZ':

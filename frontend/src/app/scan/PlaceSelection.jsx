@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ControllerTitle from './ControllerTitle';
 import { Dropdown } from '@/components/Dropdown';
 import sigunguData from '../../../public/시군구.json';
@@ -71,6 +71,20 @@ function PlaceSelection({ onChangeStage, mode }) {
   const toggleCDistrictRecommendation = () => {
     setShowRecommend(!showRecommend);
   };
+
+  const init = async () => {
+    const { data } = await axios.get(`/jcategory-recommend/area/${sigunguCode}`);
+    dispatch({
+      type: 'SET_MAP',
+      mapCoordinates: [data.polygonCoordinates],
+      mapCenter: [data.centerLongitude, data.centerLatitude],
+      mapZoom: 13,
+    });
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
 
   return (
     <div>
