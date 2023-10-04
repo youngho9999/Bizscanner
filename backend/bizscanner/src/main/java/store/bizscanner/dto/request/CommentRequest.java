@@ -17,6 +17,6 @@ public class CommentRequest {
     @NotNull
     private String jcategoryCode;
 
-    @Size(min = 2, max = 300)
+    @NotNull @Size(min = 2, max = 300)
     private String contents;
 }
