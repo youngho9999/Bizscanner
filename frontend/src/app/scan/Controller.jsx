@@ -63,7 +63,7 @@ function Controller() {
             <BackIcon width="48" height="48" />
           </button>
           <Button
-            className="text-white bg-disabled rounded-medium"
+            className="text-white bg-disabled rounded-medium hover:bg-primary"
             width="30%"
             onClick={onClickStart}
           >
