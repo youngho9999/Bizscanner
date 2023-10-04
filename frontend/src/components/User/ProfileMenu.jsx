@@ -1,15 +1,15 @@
 import { logout } from '@/redux/userSlice';
 import { convertNickName } from '@/utils/nickname';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function ProfileMenu({ onClickEditNickname }) {
-  const onClick = () => {
-    onClickEditNickname();
-  };
-
   const dispatch = useDispatch();
   const { nickname, email } = useSelector((state) => state.user);
+
+  const onClickEdit = () => {
+    onClickEditNickname();
+  };
 
   const onClickLogout = () => {
     dispatch(logout());
@@ -40,7 +40,7 @@ function ProfileMenu({ onClickEditNickname }) {
         <div className="text-lg text-center">안녕하세요. {nickname}님</div>
       </div>
       <div>
-        <button className="w-full p-2 hover:bg-outline" onClick={onClick}>
+        <button className="w-full p-2 hover:bg-outline" onClick={onClickEdit}>
           닉네임 변경
         </button>
         <button className="w-full p-2 hover:bg-outline">마이 레포트</button>

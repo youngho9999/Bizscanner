@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 function Profile() {
   const [showMenu, setMenu] = useState(false);
   const [showEditNickname, setShowEditNickname] = useState(false);
+  const { nickname } = useSelector((state) => state.user);
 
   const onClick = () => {
     setMenu((prev) => !prev);
@@ -16,7 +17,7 @@ function Profile() {
   const onClickEditNickname = () => {
     setShowEditNickname((prev) => !prev);
     setMenu((prev) => !prev);
-  }
+  };
 
   return (
     <div>
@@ -36,7 +37,9 @@ function Profile() {
           {convertNickName(nickname)}
         </span>
       </button>
-      {showMenu && <ProfileMenu onClickEditNickname={onClickEditNickname} onCloseMenu={() => setMenu(false)} />}
+      {showMenu && (
+        <ProfileMenu onClickEditNickname={onClickEditNickname} onCloseMenu={() => setMenu(false)} />
+      )}
       {showEditNickname && (
         <EditNickname isOpen={showEditNickname} onClose={() => setShowEditNickname(false)} />
       )}
