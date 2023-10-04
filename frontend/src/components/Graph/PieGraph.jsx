@@ -23,7 +23,6 @@ function PieGraph({ graphData, title, config }) {
     labels: config.labels,
     datasets: [
       {
-        label: '# of Votes',
         data: graphData,
         backgroundColor: config.backgroundColor,
         borderColor: config.borderColor,
