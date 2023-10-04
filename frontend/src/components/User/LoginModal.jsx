@@ -6,13 +6,11 @@ import Button from '../Button';
 
 function LoginModal({ isOpen, onClose }) {
   const onClickKakakoLogin = () => {
-    const kakaoAuthUrl = `${process.env.NEXT_PUBLIC_API}/oauth2/authorization/kakao`; // Kakao 로그인 HTTPS URL
-    window.location.href = kakaoAuthUrl;
+    const kakaoAuthUrl = `${process.env.NEXT_PUBLIC_API}/oauth2/authorization/kakao`;
   };
 
   const onClickGoogleLogin = () => {
-    const googleAuthUrl = `${process.env.NEXT_PUBLIC_API}/oauth2/authorization/google`; // Kakao 로그인 HTTPS URL
-    window.location.href = googleAuthUrl;
+    const googleAuthUrl = `${process.env.NEXT_PUBLIC_API}/oauth2/authorization/google`;
   };
 
   return (
