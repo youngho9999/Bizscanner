@@ -17,7 +17,14 @@ function CDistrictSelection({ onChangeStage, mode }) {
     const {
       data: { dongInfoResponseList },
     } = await axios.get(`/jcategory-recommend/dong/${dongCode}`);
+
     setCDistricts(dongInfoResponseList);
+
+    dispatch({
+      type: 'SET_MAP',
+      mapCoordinates: dongInfoResponseList.map(({ polygonCoordinates }) => polygonCoordinates),
+      mapZoom: 17,
+    });
   };
 
   const onClickCDistrict = ({ careaCode, careaName }) => {
@@ -26,6 +33,7 @@ function CDistrictSelection({ onChangeStage, mode }) {
       careaCode,
       careaName,
     });
+
     if (mode === searchMode.PLACE) {
       onChangeStage({ cur: 'BIZ' });
       return;
