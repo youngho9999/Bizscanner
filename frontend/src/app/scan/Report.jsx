@@ -21,13 +21,13 @@ import axios from '@/api/index';
 import { useSelector } from 'react-redux';
 import ReportComment from './ReportComment';
 
-function Report({ onClose }) {
+function Report({ onClose, jcategoryName, jcategoryCode, careaName, careaCode }) {
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const [tabIdx, setTabIdx] = useState(0);
   const [isScrapped, setIsScrapped] = useState(false);
 
-  const { jcategoryName, jcategoryCode, careaName, careaCode } = useSearchState();
+  // const { jcategoryName, jcategoryCode, careaName, careaCode } = useSearchState();
 
   const mainRef = useRef();
   const summaryRef = useRef();
@@ -86,12 +86,12 @@ function Report({ onClose }) {
           careaCode,
           jcategoryCode,
         });
-        setIsScrapped((prev) => !prev)
+        setIsScrapped((prev) => !prev);
       } else {
         alert('이미 저장된 리포트입니다.');
       }
     } else {
-      alert('로그인을 해주세요.')
+      alert('로그인을 해주세요.');
     }
   };
 
