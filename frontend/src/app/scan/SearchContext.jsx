@@ -54,8 +54,8 @@ function reducer(state, action) {
         careaName: action.careaName,
         mapSelected: action.careaCode,
         mapCenter: action.mapCenter,
-        mapCoordinates: action.mapCoordinates,
-        mapZoom: action.mapZoom,
+        mapCoordinates: action.mapCoordinates ?? state.mapCoordinates,
+        mapZoom: action.mapZoom ?? state.mapZoom,
       };
 
     case 'SET_MAP':
