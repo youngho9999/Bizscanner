@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ControllerTitle from './ControllerTitle';
 import { Dropdown } from '@/components/Dropdown';
 import sigunguData from '../../../public/시군구.json';
@@ -10,6 +10,7 @@ import NextButton from './NextButton';
 import { searchMode } from './constant';
 import CDistrictRecommendation from './CDistrictRecommendation';
 import InvestInput from './InvestInput';
+import axios from '@/api/index';
 
 function PlaceSelection({ onChangeStage, mode }) {
   const [showRecommend, setShowRecommend] = useState(false);
@@ -24,21 +25,40 @@ function PlaceSelection({ onChangeStage, mode }) {
   const sigungu = sigunguData['sigungu'];
   const dong = dongData;
 
-  const onSelectSigungu = ({ code, name }) => {
+  const onSelectSigungu = async ({ code, name }) => {
+    const { data } = await axios.get(`/jcategory-recommend/area/${code}`);
+
     dispatch({
       type: 'SET_SIGUNGU',
       sigunguCode: code,
       sigunguName: name,
-      dongCode: dong[code][0].code,
-      dongName: dong[code][0].name,
+      dongCode: 0,
+      dongName: '',
+      mapCoordinates: [data.polygonCoordinates],
+      mapCenter: [data.centerLongitude, data.centerLatitude],
+      mapZoom: 13,
     });
   };
 
-  const onSelectDong = ({ code, name }) => {
-    dispatch({ type: 'SET_DONG', dongCode: code, dongName: name });
+  const onSelectDong = async ({ code, name }) => {
+    const { data } = await axios.get(`/jcategory-recommend/area/${code}`);
+
+    dispatch({
+      type: 'SET_DONG',
+      dongCode: code,
+      dongName: name,
+      mapCoordinates: [data.polygonCoordinates],
+      mapCenter: [data.centerLongitude, data.centerLatitude],
+      mapZoom: 15,
+    });
   };
 
   const onClickNext = () => {
+    if (!dongName) {
+      alert('동을 선택해주세요!');
+      return;
+    }
+
     onChangeStage({ cur: 'CDISTRICT' });
   };
 
@@ -46,7 +66,7 @@ function PlaceSelection({ onChangeStage, mode }) {
     setShowInput(true);
   };
 
-  const updateInvestmentData = ( firstInvestmentAmount, storeArea ) => {
+  const updateInvestmentData = (firstInvestmentAmount, storeArea) => {
     setInvestmentData({
       firstInvestmentAmount,
       storeArea,
@@ -55,7 +75,21 @@ function PlaceSelection({ onChangeStage, mode }) {
 
   const toggleCDistrictRecommendation = () => {
     setShowRecommend(!showRecommend);
-  }
+  };
+
+  const init = async () => {
+    const { data } = await axios.get(`/jcategory-recommend/area/${sigunguCode}`);
+    dispatch({
+      type: 'INIT_PLACE',
+      mapCoordinates: [data.polygonCoordinates],
+      mapCenter: [data.centerLongitude, data.centerLatitude],
+      mapZoom: 13,
+    });
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
 
   return (
     <div>
@@ -83,7 +117,7 @@ function PlaceSelection({ onChangeStage, mode }) {
       <Dropdown>
         <Dropdown.Container className="w-72 mb-28">
           <Dropdown.Label>행정동</Dropdown.Label>
-          <Dropdown.Trigger>{dongName}</Dropdown.Trigger>
+          <Dropdown.Trigger>{dongName || '동을 선택해주세요'}</Dropdown.Trigger>
           <Dropdown.OptionContainer>
             {dong[sigunguCode].map(({ code, name }) => (
               <Dropdown.Option id={code} code={code} name={name} onSelect={onSelectDong} key={code}>

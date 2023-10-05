@@ -6,8 +6,8 @@ const SearchStateContext = createContext(null);
 const SearchDispatchContext = createContext(null);
 
 const initialState = {
-  dongCode: 11110515,
-  dongName: '청운효자동',
+  dongCode: 0,
+  dongName: '',
   sigunguCode: 11110,
   sigunguName: '종로구',
   careaCode: '',
@@ -17,6 +17,8 @@ const initialState = {
   jcategoryCode: '',
   jcategoryName: '',
   mapSelected: '',
+  mapCenter: null,
+  mapCoordinates: null,
 };
 
 function reducer(state, action) {
@@ -26,9 +28,12 @@ function reducer(state, action) {
         ...state,
         sigunguCode: action.sigunguCode,
         sigunguName: action.sigunguName,
-        dongCode: action.sigunguName,
+        dongCode: action.dongCode,
         dongName: action.dongName,
         mapSelected: action.sigunguCode,
+        mapCenter: action.mapCenter,
+        mapCoordinates: action.mapCoordinates,
+        mapZoom: action.mapZoom,
       };
 
     case 'SET_DONG':
@@ -37,6 +42,9 @@ function reducer(state, action) {
         dongCode: action.dongCode,
         dongName: action.dongName,
         mapSelected: action.dongCode,
+        mapCenter: action.mapCenter,
+        mapCoordinates: action.mapCoordinates,
+        mapZoom: action.mapZoom,
       };
 
     case 'SET_CAREA':
@@ -45,6 +53,19 @@ function reducer(state, action) {
         careaCode: action.careaCode,
         careaName: action.careaName,
         mapSelected: action.careaCode,
+        mapCenter: action.mapCenter,
+        mapCoordinates: action.mapCoordinates ?? state.mapCoordinates,
+        mapZoom: action.mapZoom ?? state.mapZoom,
+      };
+
+    case 'INIT_PLACE':
+      return {
+        ...state,
+        mapCoordinates: action.mapCoordinates,
+        mapZoom: action.mapZoom,
+        mapCenter: action.mapCenter ?? state.mapCenter,
+        dongName: '',
+        dongCode: 0,
       };
 
     case 'SET_BIZ':

@@ -19,6 +19,7 @@ import ReportCareaChange from './ReportCareaChange';
 import ReportRent from './ReportRent';
 import axios from '@/api/index';
 import { useSelector } from 'react-redux';
+import ReportComment from './ReportComment';
 
 function Report({ onClose }) {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -95,7 +96,7 @@ function Report({ onClose }) {
   };
 
   return createPortal(
-    <div className="absolute top-0 left-0 z-30 flex w-[100vw] h-[100vh] bg-background">
+    <div className="absolute top-0 left-0 z-50 flex w-[100vw] h-[100vh] bg-background">
       <Tab onClickTab={onClickTab} tab={tabIdx} />
       <div className="flex flex-col flex-grow p-8">
         <div className="flex items-center justify-between mb-8 text-4xl font-bold">
@@ -134,7 +135,9 @@ function Report({ onClose }) {
             <ReportCareaChange ref={careaChangeRef} />
             <ReportRent ref={rentRef} />
           </main>
-          <aside className="h-full w-[300px]"></aside>
+          <aside className="h-full w-[350px]">
+            <ReportComment />
+          </aside>
         </div>
       </div>
     </div>,
