@@ -2,16 +2,24 @@ import { Card } from '@/components/Card';
 import React, { useState } from 'react';
 import DeleteCheck from './DeleteCheck';
 import jcodedata from '../../../public/jcategorycode.json';
+import Report from '../scan/Report';
 
 function MyReportCard({ careaCode, careaName, jcategoryCode, createdAt, fetchScrapList }) {
   const [showDeleteCheck, setShowDeleteCheck] = useState(false);
+  const [showReport, setShowReport] = useState(false);
 
   const createdDate = new Date(createdAt);
   const onClickDelete = () => {
     setShowDeleteCheck(true);
   };
 
-  const onClickDetail = () => {};
+  const onClickDetail = () => {
+    setShowReport(true);
+  };
+
+  const onCloseReport = () => {
+    setShowReport(false);
+  };
 
   return (
     <>
@@ -31,6 +39,15 @@ function MyReportCard({ careaCode, careaName, jcategoryCode, createdAt, fetchScr
           careaCode={careaCode}
           jcategoryCode={jcategoryCode}
           fetchData={fetchScrapList}
+        />
+      )}
+      {showReport && (
+        <Report
+          onClose={onCloseReport}
+          careaCode={careaCode}
+          careaName={careaName}
+          jcategoryCode={jcategoryCode}
+          jcategoryName={jcodedata[jcategoryCode].name}
         />
       )}
     </>
