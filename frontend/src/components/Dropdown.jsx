@@ -93,7 +93,7 @@ function DropdownOptionContainer({ children }) {
 
   return (
     isOpen && (
-      <div className="absolute z-30 w-full mt-2 overflow-hidden overflow-y-scroll bg-white h-44 rounded-small text-disabled shadow-dropdown">
+      <div className="absolute z-30 w-full mt-2 overflow-hidden overflow-y-scroll bg-white h-60 rounded-small text-disabled shadow-dropdown">
         {children}
       </div>
     )
