@@ -90,7 +90,7 @@ function CDistrictRecommendation({ isOpen, onClose, investmentData }) {
         <Modal.Container className="bg-background" width="1000px" height="90vh">
           <Modal.Close onClick={onClickClose} />
           <div className="flex flex-col items-center h-full">
-            <Modal.Title>추천 상권</Modal.Title>
+            <Modal.Title className="mb-2">추천 상권</Modal.Title>
             <div className="text-sm text-center text-red-600">{warning}</div>
             {noRecommend ? (
               <div className="flex flex-row items-center justify-center w-full mt-3 bg-white h-4/5 rounded-large">
@@ -98,12 +98,12 @@ function CDistrictRecommendation({ isOpen, onClose, investmentData }) {
               </div>
             ) : (
               <>
-                <div className="flex flex-row justify-center my-3">
+                <div className="flex flex-row items-center justify-center my-3">
                   <LocationIcon
                     className="mr-1 fill-primary"
-                    style={{ width: '30px', height: '30px' }}
+                    style={{ width: '44px', height: '44px' }}
                   />
-                  <p className="text-xl">{cDistrictRecommendation.careaName}</p>
+                  <p className="text-4xl font-bold">{cDistrictRecommendation.careaName}</p>
                 </div>
                 <div className="flex flex-row justify-center w-full mt-3 bg-white h-3/5 rounded-large">
                   <RecommendationIndicator>
@@ -117,6 +117,9 @@ function CDistrictRecommendation({ isOpen, onClose, investmentData }) {
                       <p>{cDistrictRecommendation.averageNetProfitByJcategory} 원</p>
                     </RecommendationIndicator.Container>
                   </RecommendationIndicator>
+                  <div className="flex flex-col items-center justify-center h-full">
+                    <div className="border-2 border-r border-black h-3/4"></div>
+                  </div>
                   <RecommendationIndicator>
                     <RecommendationIndicator.Title>
                       평균 매출액 변화율
@@ -130,6 +133,9 @@ function CDistrictRecommendation({ isOpen, onClose, investmentData }) {
                       <p>{cDistrictRecommendation.averageSalesAmountRateByJcategory} %</p>
                     </RecommendationIndicator.Container>
                   </RecommendationIndicator>
+                  <div className="flex flex-col items-center justify-center h-full">
+                    <div className="border-2 border-r border-black h-3/4"></div>
+                  </div>
                   <RecommendationIndicator>
                     <RecommendationIndicator.Title>평균 유동인구</RecommendationIndicator.Title>
                     <RecommendationIndicator.Container className="text-white bg-primary">
@@ -141,6 +147,9 @@ function CDistrictRecommendation({ isOpen, onClose, investmentData }) {
                       <p>{cDistrictRecommendation.averageTotalPopulation} 명</p>
                     </RecommendationIndicator.Container>
                   </RecommendationIndicator>
+                  <div className="flex flex-col items-center justify-center h-full">
+                    <div className="border-2 border-r border-black h-3/4"></div>
+                  </div>
                   <RecommendationIndicator>
                     <RecommendationIndicator.Title>상권 변화지표</RecommendationIndicator.Title>
                     <RecommendationIndicator.Container className="text-white bg-primary">

@@ -9,7 +9,6 @@ import { RecommendationIndicator } from './RecommendationIndicator';
 import StoreIcon from '@/assets/icons/local_convenience_store.svg';
 import jcodedata from '../../../public/jcategorycode.json';
 
-
 function JobRecommendation({ isOpen, onClose }) {
   const [jobRecommendation, setJobRecommendation] = useState({
     jcategoryName: '',
@@ -62,11 +61,11 @@ function JobRecommendation({ isOpen, onClose }) {
         <Modal.Container className="bg-background" width="1000px" height="90vh">
           <Modal.Close onClick={onClickClose} />
           <div className="flex flex-col items-center h-full">
-            <Modal.Title>추천 업종</Modal.Title>
+            <Modal.Title className="mb-2">추천 업종</Modal.Title>
             <div className="text-sm text-center text-red-600">{warning}</div>
-            <div className="flex flex-row justify-center my-3">
-              <StoreIcon className="mr-1 fill-primary" style={{ width: '30px', height: '30px' }} />
-              <p className="text-xl">{jobRecommendation.jcategoryName}</p>
+            <div className="flex flex-row items-center justify-center my-3">
+              <StoreIcon className="mr-1 fill-primary" style={{ width: '44px', height: '44px' }} />
+              <p className="text-4xl font-bold">{jobRecommendation.jcategoryName}</p>
             </div>
             <div className="flex flex-row justify-center w-full mt-3 bg-white h-3/5 rounded-large">
               <RecommendationIndicator>
@@ -80,6 +79,9 @@ function JobRecommendation({ isOpen, onClose }) {
                   <p>{jobRecommendation.averageNetProfitByJcategory} 원</p>
                 </RecommendationIndicator.Container>
               </RecommendationIndicator>
+              <div className="flex flex-col items-center justify-center h-full mx-3">
+                <div className="border-2 border-r border-black h-3/4"></div>
+              </div>
               <RecommendationIndicator>
                 <RecommendationIndicator.Title>평균 매출액 변화율</RecommendationIndicator.Title>
                 <RecommendationIndicator.Container className="text-white bg-primary">
@@ -91,6 +93,9 @@ function JobRecommendation({ isOpen, onClose }) {
                   <p>{jobRecommendation.averageSalesAmountRateByJcategory} %</p>
                 </RecommendationIndicator.Container>
               </RecommendationIndicator>
+              <div className="flex flex-col items-center justify-center h-full mx-3">
+                <div className="border-2 border-r border-black h-3/4"></div>
+              </div>
               <RecommendationIndicator>
                 <RecommendationIndicator.Title>폐업률</RecommendationIndicator.Title>
                 <RecommendationIndicator.Container className="text-white bg-primary">
