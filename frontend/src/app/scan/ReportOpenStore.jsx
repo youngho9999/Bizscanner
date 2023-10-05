@@ -25,8 +25,6 @@ const ReportOpenStore = forwardRef(function ReportOpenStore({}, ref) {
     setOpenStoreInfo(quarterlyOpenStore);
   };
 
-  console.log(openStoreInfo);
-
   useEffect(() => {
     fetchOpenStoreInfo();
   }, []);
