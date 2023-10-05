@@ -10,7 +10,6 @@ import ReportSales from './ReportSales';
 import ReportSalesCount from './ReportSalesCount';
 import ReportFloatingPopulation from './RepoartFloatingPopulation';
 import { createPortal } from 'react-dom';
-import { useSearchState } from './SearchContext';
 import CloseIcon from '@/assets/icons/close.svg';
 import SaveIcon from '@/assets/icons/save.svg';
 import SavedIcon from '@/assets/icons/saved.svg';
@@ -26,8 +25,6 @@ function Report({ onClose, jcategoryName, jcategoryCode, careaName, careaCode })
 
   const [tabIdx, setTabIdx] = useState(0);
   const [isScrapped, setIsScrapped] = useState(false);
-
-  // const { jcategoryName, jcategoryCode, careaName, careaCode } = useSearchState();
 
   const mainRef = useRef();
   const summaryRef = useRef();
@@ -124,16 +121,32 @@ function Report({ onClose, jcategoryName, jcategoryCode, careaName, careaCode })
             ref={mainRef}
             className="relative flex flex-col flex-grow max-h-full gap-8 overflow-y-auto"
           >
-            <ReportSummary ref={summaryRef} />
-            <ReportStoreCount ref={storecountRef} />
-            <ReportOpenStore ref={openStoreRef} />
-            <ReportCloseStore ref={closeStoreRef} />
-            <ReportSales ref={salesRef} />
-            <ReportSalesCount ref={salesCountRef} />
-            <ReportFloatingPopulation ref={floatPopulationRef} />
-            <ReportConsumptionTrend ref={comsumptionRef} />
-            <ReportCareaChange ref={careaChangeRef} />
-            <ReportRent ref={rentRef} />
+            <ReportSummary ref={summaryRef} careaCode={careaCode} />
+            <ReportStoreCount
+              ref={storecountRef}
+              careaCode={careaCode}
+              jcategoryCode={jcategoryCode}
+            />
+            <ReportOpenStore
+              ref={openStoreRef}
+              careaCode={careaCode}
+              jcategoryCode={jcategoryCode}
+            />
+            <ReportCloseStore
+              ref={closeStoreRef}
+              careaCode={careaCode}
+              jcategoryCode={jcategoryCode}
+            />
+            <ReportSales ref={salesRef} careaCode={careaCode} jcategoryCode={jcategoryCode} />
+            <ReportSalesCount
+              ref={salesCountRef}
+              careaCode={careaCode}
+              jcategoryCode={jcategoryCode}
+            />
+            <ReportFloatingPopulation ref={floatPopulationRef} careaCode={careaCode} />
+            <ReportConsumptionTrend ref={comsumptionRef} careaCode={careaCode} />
+            <ReportCareaChange ref={careaChangeRef} careaCode={careaCode} />
+            <ReportRent ref={rentRef} careaCode={careaCode} />
           </main>
           <aside className="h-full w-[350px]">
             <ReportComment />
