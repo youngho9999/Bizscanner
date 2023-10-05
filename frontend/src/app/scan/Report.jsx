@@ -149,7 +149,7 @@ function Report({ onClose, jcategoryName, jcategoryCode, careaName, careaCode })
             <ReportRent ref={rentRef} careaCode={careaCode} />
           </main>
           <aside className="h-full w-[350px]">
-            <ReportComment />
+            <ReportComment careaCode={careaCode} jcategoryCode={jcategoryCode} />
           </aside>
         </div>
       </div>
