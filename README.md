@@ -75,6 +75,7 @@
 - 동종 업계 점포 수, 개업 현황, 폐업 현황, 매출액, 매출 건수, 유동인구, 소비 트렌드, 상권변화 지표, 임대료 정보를 제공
 - 다른 사용자들과 의견을 공유할 수 있는 코멘트 기능 제공
 - 제공받은 레포트를 저장할 수 있도록 스크랩 기능 제공
+
 <br/>
 
 **2️⃣ 사용자 정보를 바탕으로 상권 혹은 업종 추천**
@@ -83,21 +84,25 @@
 
 - 사용자로부터 초기 투자금, 희망 면적을 입력 받아 알맞은 상권 혹은 업종을 추천
 - 추천 상권 혹은 업종의 추정 순이익, 평균 매출액 변화율, 평균 유동인구, 상권 변화지표를 서울 전체 평균 상권 혹은 업종과 비교하여 추천 근거를 제공한다.
+
 <br>
 
 ## ⚙ 기술 스택
 
 [![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1696857006687?alt=media&token=044fbb55-d7de-4aed-8368-c7d9b6a0b871)](https://github.com/msdio/stackticon)
 
+<br>
 
 ## ⚒ 시스템 아키텍쳐
 
 ![infra2 drawio](https://github.com/youngho9999/hopractice/assets/108070719/1973a3a7-6735-46b6-bba3-cd03fb1048e6)
+
 <br>
 
 ## 💾 ERD
 
 ![image](https://github.com/youngho9999/hopractice/assets/108070719/400aefef-c863-415b-a169-806fe42968ed)
+
 <br>
 
 ## 🧩 API 명세서
