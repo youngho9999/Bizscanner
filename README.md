@@ -95,22 +95,16 @@
 
 ## ⚒ 시스템 아키텍쳐
 
-![infra2 drawio](https://github.com/youngho9999/hopractice/assets/108070719/1973a3a7-6735-46b6-bba3-cd03fb1048e6)
+![infra2 drawio](https://github.com/user-attachments/assets/8c5e621f-0ec1-4e39-b57b-30aaf32d5536)
 
 <br>
 
 ## 💾 ERD
 
-![image](https://github.com/youngho9999/hopractice/assets/108070719/400aefef-c863-415b-a169-806fe42968ed)
+![Untitled (2)](https://github.com/user-attachments/assets/d5a50c02-2008-4dd0-a76b-922e4022951d)
 
 <br>
 
 ## 🧩 API 명세서
 
 ![Animation2](https://github.com/Bizscanner/Bizscanner/assets/57997390/5d1b40b1-574d-45f0-ab9f-9a46f6265f38)
-
-<br>
-
-## 📌 기능 명세서
-
-![기능명세서1](https://github.com/youngho9999/hopractice/assets/108070719/10179618-0c1a-48f3-8ef8-ffd1acfe7f88)
